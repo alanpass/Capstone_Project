@@ -1,0 +1,8 @@
+Flask
+flask-cors
+firebase-admin
+requests
+urllib3
+python-dateutil
+pytz
+gunicorn
