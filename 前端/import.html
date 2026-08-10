@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<meta charset="UTF-8" />
+<title>匯入 Firestore：plants</title>
+<body style="font-family: system-ui, Arial; max-width: 800px; margin: 32px auto;">
+  <h1>匯入 Firestore（plants）</h1>
+
+  <details>
+    <summary>（可選）先登入後再匯入，若你的 Firestore 規則較嚴</summary>
+    <div style="margin: 8px 0;">
+      <input id="email" placeholder="email（可留空）" style="padding:6px; width:260px;">
+      <input id="password" type="password" placeholder="password（可留空）" style="padding:6px; width:260px;">
+      <button id="loginBtn">登入</button>
+    </div>
+  </details>
+
+  <div style="margin:16px 0;">
+    <button id="run" style="padding:8px 14px; font-size:16px;">開始匯入 plant_care_firestore.json</button>
+  </div>
+
+  <div id="bar" style="height:10px; background:#eee; border-radius:6px; overflow:hidden;">
+    <div id="barIn" style="height:100%; width:0%; background:#4caf50;"></div>
+  </div>
+  <p id="status" style="margin-top:8px;">尚未開始</p>
+  <pre id="log" style="white-space:pre-wrap; background:#0b0b0b; color:#ddd; padding:12px; border-radius:8px; max-height:300px; overflow:auto;"></pre>
+
+  <script type="module">
+    // 使用你專案的共用初始化
+    import { db } from './common.js';
+    import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
+    import { doc, setDoc } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
+
+    const auth = getAuth();
+    const $ = (id) => document.getElementById(id);
+    const log = (s) => { $('log').textContent += s + "\n"; };
+    const setProgress = (pct) => { $('barIn').style.width = pct + "%"; };
+
+    $('loginBtn')?.addEventListener('click', async () => {
+      const email = $('email').value.trim();
+      const password = $('password').value;
+      if (!email || !password) { alert('留空=不登入（測試模式可直接匯入）'); return; }
+      try {
+        await signInWithEmailAndPassword(auth, email, password);
+        alert('登入成功');
+      } catch (e) {
+        alert('登入失敗：' + (e.message || e));
+      }
+    });
+
+    $('run').addEventListener('click', async () => {
+      try {
+        $('status').textContent = '讀取檔案中…';
+        const res = await fetch('./plant_images_for_firestore.json');
+        if (!res.ok) throw new Error('找不到 plant_care_firestore.json（請確認檔案與 import.html 在同一資料夾）');
+        const items = await res.json(); // [{ _collection, _docId, ...fields }]
+        const total = items.length;
+        let ok = 0, fail = 0;
+
+        $('status').textContent = `開始匯入，共 ${total} 筆`;
+        for (let i = 0; i < items.length; i++) {
+          const it = items[i];
+          const { _collection = 'plants', _docId, ...data } = it;
+          if (!_docId) { fail++; log(`❌ 第 ${i+1} 筆缺 _docId，略過`); continue; }
+
+          try {
+            await setDoc(doc(db, _collection, String(_docId)), data, { merge: true });
+            ok++;
+          } catch (e) {
+            fail++;
+            log(`❌ 第 ${i+1} 筆 ${_docId} 失敗：${e.message || e}`);
+          }
+
+          if ((i + 1) % 10 === 0 || i === items.length - 1) {
+            const pct = Math.round(((i + 1) / total) * 100);
+            setProgress(pct);
+            $('status').textContent = `進度 ${pct}%（成功 ${ok}、失敗 ${fail}）`;
+          }
+        }
+
+        log(`🎉 匯入完成：成功 ${ok}、失敗 ${fail}`);
+        $('status').textContent = `完成（成功 ${ok}、失敗 ${fail}）`;
+        setProgress(100);
+      } catch (e) {
+        log('❌ 例外：' + (e.message || e));
+        $('status').textContent = '發生錯誤';
+      }
+    });
+  </script>
+</body>
+</html>

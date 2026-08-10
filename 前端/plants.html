@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <title>植物清單｜園藝智能助理</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500&family=Noto+Serif+TC:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+
+  <style>
+    /* --- 基礎設定 --- */
+    :root {
+      --primary-color: #2F4F4F; /* 更深邃的墨綠色，增加對比 */
+      --accent-color: #8FBC8F; /* 柔和的鼠尾草綠 */
+      --light-bg: #F9F8F6; /* 溫暖的米白 */
+      --text-dark: #333;
+      --card-radius: 16px;
+      --shadow: 0 10px 30px rgba(0,0,0,0.08);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Noto Sans TC', sans-serif;
+      background-color: var(--light-bg);
+      color: var(--text-dark);
+      width: 100%;
+      min-height: 100vh;
+      line-height: 1.6;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* 背景紋理 */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background-image: url("image/backgroud.jpg");
+      background-size: cover;
+      background-position: center;
+      opacity: 0.15; /* 稍微加強紋理 */
+      z-index: -5;
+      filter: grayscale(20%); /* 降低紋理彩度，讓前景更突出 */
+    }
+
+    /* --- 動態背景：飄落的葉子 (新增亮點) --- */
+    .falling-leaf {
+      position: fixed;
+      top: -10%;
+      z-index: -2;
+      opacity: 0.2;
+      color: var(--primary-color);
+      animation: fall linear infinite;
+      pointer-events: none;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(-10vh) rotate(0deg) translateX(0); opacity: 0; }
+      20% { opacity: 0.3; }
+      100% { transform: translateY(110vh) rotate(360deg) translateX(50px); opacity: 0; }
+    }
+
+    /* 不同葉子的參數 */
+    .l1 { left: 10%; font-size: 30px; animation-duration: 15s; animation-delay: 0s; }
+    .l2 { left: 30%; font-size: 20px; animation-duration: 20s; animation-delay: 5s; }
+    .l3 { left: 70%; font-size: 40px; animation-duration: 18s; animation-delay: 2s; }
+    .l4 { left: 90%; font-size: 25px; animation-duration: 22s; animation-delay: 8s; }
+
+    /* --- Header 導覽列 --- */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 40px;
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    }
+
+    .logo-container {
+      display: flex; align-items: center; text-decoration: none;
+      color: var(--primary-color);
+    }
+
+    .logo { width: 45px; height: 45px; border-radius: 50%; object-fit: cover; }
+    
+    .logo-text {
+      font-family: 'Noto Serif TC', serif;
+      font-size: 24px; margin-left: 12px; font-weight: 700;
+      letter-spacing: 1px; color: var(--primary-color);
+    }
+
+    .nav { display: flex; gap: 30px; align-items: center; }
+
+    .nav-item {
+      text-decoration: none; color: var(--text-dark);
+      font-size: 16px; font-weight: 500; position: relative;
+      transition: color 0.3s;
+    }
+    .nav-item:hover { color: var(--primary-color); }
+
+    .login-btn {
+      background-color: var(--primary-color); color: white; border: none;
+      padding: 8px 20px; border-radius: 50px; font-size: 15px;
+      cursor: pointer; transition: all 0.3s ease;
+    }
+    .login-btn:hover {
+      background-color: #1a3333; transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(47, 79, 79, 0.3);
+    }
+
+    /* --- Hero Banner (解決單調感的關鍵) --- */
+    .hero-banner {
+      width: 100%;
+      height: 280px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: -40px; /* 讓內容稍微往上蓋住 Banner */
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      /* 這裡使用您的 image/bigplant.jpg，如果沒有，請用 placeholder */
+      background-image: url("image/bigplant.jpg"); 
+      background-size: cover;
+      background-position: center 60%; /* 調整圖片重心 */
+      filter: brightness(0.6); /* 變暗一點，讓文字突出 */
+      z-index: 1;
+    }
+
+    .hero-text {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      color: white;
+      animation: fadeIn 1s ease-out;
+    }
+
+    .hero-title {
+      font-family: 'Noto Serif TC', serif;
+      font-size: 42px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      margin-bottom: 10px;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    }
+
+    .hero-subtitle {
+      font-size: 18px;
+      font-weight: 300;
+      letter-spacing: 1px;
+      opacity: 0.9;
+    }
+
+    /* --- Main Content --- */
+    main {
+      max-width: 1200px;
+      margin: 0 auto 60px auto; /* 上方邊距歸零，因為要疊加 */
+      padding: 0 30px;
+      position: relative;
+      z-index: 10;
+    }
+
+    .wrap {
+      /* 這裡不用設背景，讓它透視 */
+    }
+
+    /* --- Toolbar 篩選列 --- */
+    .toolbar {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-bottom: 40px;
+      background: white;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.06); /* 提升浮起感 */
+      border: 1px solid rgba(0,0,0,0.02);
+      transform: translateY(0);
+      transition: transform 0.3s;
+    }
+    
+    /* 讓 Toolbar 稍微往上蓋住 Banner，製造層次感 */
+    .toolbar { margin-top: 0; } 
+
+    .toolbar input, .toolbar select {
+      background: #F5F7F6;
+      color: var(--text-dark);
+      border: 1px solid #E0E0E0;
+      border-radius: 8px;
+      padding: 12px 16px;
+      font-size: 15px;
+      outline: none;
+      transition: all 0.3s;
+    }
+
+    .toolbar input:focus, .toolbar select:focus {
+      border-color: var(--primary-color);
+      background: white;
+      box-shadow: 0 0 0 3px rgba(47, 79, 79, 0.1);
+    }
+
+    .toolbar input { flex: 1; min-width: 200px; }
+
+    .toolbar button {
+      background: var(--primary-color);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 12px 20px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.3s;
+    }
+    .toolbar button:hover {
+      background: #1a3333;
+    }
+
+    /* --- Grid & Cards --- */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 30px;
+    }
+    
+    .card {
+      background: white;
+      border-radius: var(--card-radius);
+      padding: 15px; /* 稍微減少內距，讓圖片大一點 */
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* 更有彈性的動畫 */
+      border: 1px solid rgba(0,0,0,0.03);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* 卡片懸浮效果 - 讓它「跳」起來 */
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(47, 79, 79, 0.15);
+    }
+    
+    /* 圖片容器 */
+  /* 圖片容器 */
+    .thumb {
+      display: block; /* 新增這一行：讓連結變成區塊元素 */
+      width: 100%;
+      /* 建議使用上一題提到的 aspect-ratio 讓圖片比例更完美 */
+      aspect-ratio: 16 / 9; 
+      /* height: 200px;  <-- 建議拿掉這行 */
+      
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 15px;
+      position: relative;
+      cursor: pointer; /* 讓滑鼠移過去變成手指形狀 */
+    }
+
+    /* 讓圖片連結的名稱若是被點擊，不要有底線 */
+    a.name-link {
+      text-decoration: none;
+    }
+    
+    a.name-link:hover .name {
+      color: var(--accent-color); /* 滑鼠移過去名稱變色 */
+    }
+
+    .thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+
+    /* 圖片懸浮放大 */
+    .card:hover .thumb img {
+      transform: scale(1.1);
+    }
+
+    /* 圖片上的光澤效果 (Shine Effect) */
+    .thumb::after {
+      content: '';
+      position: absolute;
+      top: 0; left: -100%;
+      width: 50%; height: 100%;
+      background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.3) 100%);
+      transform: skewX(-25deg);
+      transition: .7s;
+    }
+    .card:hover .thumb::after {
+      left: 200%;
+      transition: .7s ease-in-out;
+    }
+
+    .name {
+      font-family: 'Noto Serif TC', serif;
+      font-weight: 700;
+      font-size: 20px;
+      color: var(--primary-color);
+      margin-bottom: 8px;
+    }
+
+    .badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 12px;
+    }
+
+    .badge {
+      font-size: 12px;
+      padding: 4px 10px;
+      border-radius: 6px;
+      background: #f0f4f1;
+      color: var(--primary-color);
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    .desc {
+      font-size: 14px;
+      color: #666;
+      line-height: 1.6;
+      margin-bottom: 20px;
+      flex-grow: 1;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    /* --- Plant Button --- */
+    .plant-btn {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      width: 100%;
+      padding: 14px;
+      margin-top: auto;
+      background: white;
+      color: var(--primary-color);
+      text-decoration: none;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: 600;
+      transition: all 0.3s;
+      border: 1px solid var(--primary-color);
+    }
+    
+    .plant-btn:hover {
+      background: var(--primary-color);
+      color: white;
+    }
+
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 40px;
+      color: #888;
+      font-size: 14px;
+      border-top: 1px solid #eee;
+      padding-top: 20px;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 768px) {
+      .header { flex-direction: column; padding: 15px; gap: 15px; }
+      .nav { gap: 15px; }
+      .hero-banner { height: 200px; }
+      .hero-title { font-size: 32px; }
+      .toolbar { flex-direction: column; align-items: stretch; margin-top: 20px; }
+    }
+  </style>
+</head>
+<body>
+  <i class="fas fa-leaf falling-leaf l1"></i>
+  <i class="fas fa-leaf falling-leaf l2"></i>
+  <i class="fas fa-leaf falling-leaf l3"></i>
+  <i class="fas fa-leaf falling-leaf l4"></i>
+
+  <header class="header">
+    <a href="firstpage.html" class="logo-container" aria-label="返回首頁">
+      <img src="https://placehold.co/60x60/2F4F4F/white?text=Leaf" alt="Leaf logo" class="logo" />
+      <div class="logo-text">園藝智能助理</div>
+    </a>
+    <nav class="nav">
+      <a href="new.html" class="nav-item">開始種植</a>
+      <a href="userinfor.html" class="nav-item">使用者資訊</a>
+      <a href="hardware.html" class="nav-item">感測器資訊</a>
+      <button class="login-btn" id="logoutBtn">登出</button>
+    </nav>
+  </header>
+
+  <div class="hero-banner">
+    <div class="hero-bg"></div>
+    <div class="hero-text">
+      <h1 class="hero-title">植物圖鑑</h1>
+      <div class="hero-subtitle">探索自然的奧秘，尋找您的綠色夥伴 <span id="total" class="count"></span></div>
+    </div>
+  </div>
+
+  <main>
+    <div class="wrap">
+      <div class="toolbar">
+        <input id="q" type="search" placeholder="搜尋植物名稱、關鍵字..." />
+        <select id="level">
+          <option value="">照護難度 (全部)</option>
+          <option value="高">高</option>
+          <option value="中等">中等</option>
+          <option value="低">低</option>
+        </select>
+        <select id="resi">
+          <option value="">適應力 (全部)</option>
+          <option value="高">高</option>
+          <option value="中型">中型</option>
+          <option value="低毒性">低毒性</option>
+        </select>
+        <select id="sort">
+          <option value="name-asc">名稱 (A-Z)</option>
+          <option value="name-desc">名稱 (Z-A)</option>
+        </select>
+        <button id="reload"><i class="fas fa-sync-alt"></i></button>
+        <span id="loading" class="small hidden" style="margin-left:10px;">更新中...</span>
+      </div>
+
+      <div id="list" class="grid"></div>
+
+      <div class="footer">
+        <span id="shown"></span>
+        <span class="small">Data source: Firestore /plants</span>
+      </div>
+    </div>
+  </main>
+
+  <script type="module">
+    import { db } from './common.js';
+    import { collection, getDocs } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
+    import { doLogout, requireAuth } from './common.js';
+
+    // requireAuth('login.html');
+
+    const $ = (id) => document.getElementById(id);
+    const $list = $('list'), $total = $('total'), $shown = $('shown'), $loading = $('loading');
+    const $q = $('q'), $level = $('level'), $resi = $('resi'), $sort = $('sort'), $reload = $('reload');
+    
+    $('logoutBtn').addEventListener('click', async () => {
+       try {
+         await doLogout();
+         alert('已登出');
+         location.href = 'login.html';
+       } catch (e) {
+         console.error(e);
+       }
+    });
+
+    let ALL = [];
+
+    async function fetchAll() {
+      $loading.classList.remove('hidden');
+      $reload.disabled = true;
+      $reload.innerHTML = '<i class="fas fa-spinner fa-spin"></i>'; 
+      
+      try {
+        const snap = await getDocs(collection(db, 'plants'));
+        ALL = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+        $total.textContent = `(${ALL.length})`;
+      } catch (err) {
+        console.error('讀取 Firestore /plants 失敗：', err);
+        ALL = [];
+      } finally {
+        $loading.classList.add('hidden');
+        $reload.disabled = false;
+        $reload.innerHTML = '<i class="fas fa-sync-alt"></i>';
+      }
+    }
+
+    function filterAndSort() {
+      const q = $q.value.trim().toLowerCase();
+      const levelVal = $level.value.trim();
+      const resiVal  = $resi.value.trim();
+      const s = $sort.value;
+
+      let rows = ALL.slice();
+
+      if (q) {
+        rows = rows.filter(r => {
+          const hay = [
+            r.plant_name,
+            r.description,
+            r.resilience,
+            r.care_level,
+            r.watering_schedule
+          ].filter(Boolean).join(' ').toLowerCase();
+          return hay.includes(q);
+        });
+      }
+
+      if (levelVal) {
+        rows = rows.filter(r => (r.care_level || '').toString().trim() === levelVal);
+      }
+      if (resiVal) {
+        rows = rows.filter(r => (r.resilience || '').toString().trim() === resiVal);
+      }
+
+      rows.sort((a,b) => {
+        const an = (a.plant_name || '').toLowerCase();
+        const bn = (b.plant_name || '').toLowerCase();
+        return s === 'name-desc' ? bn.localeCompare(an) : an.localeCompare(bn);
+      });
+
+      render(rows);
+    }
+
+    function render(rows) {
+      if (rows.length === 0) {
+        $list.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 60px; color: #999; font-size:18px;">
+          <i class="fas fa-leaf" style="font-size: 40px; margin-bottom: 15px; color:#ccc;"></i><br>
+          沒有找到符合的植物
+        </div>`;
+        $shown.textContent = `顯示 0 筆`;
+        return;
+      }
+
+      $list.innerHTML = rows.map(r => {
+        const id = r.id; // 取得 Firestore 的文件 ID
+        const name = r.plant_name || '(未命名)';
+        const desc = r.description || '暫無描述...';
+        const levelTxt = r.care_level || '';
+        const resiTxt  = r.resilience || '';
+        const imageVal = (r.image || '').toString().trim();
+        const imgSrc = imageVal ? `image/${imageVal}` : '';
+
+        // 圖片處理
+        const imgHtml = imgSrc
+          ? `<img src="${imgSrc}" alt="${name}" onerror="this.src='https://placehold.co/400x300/E0E0E0/999?text=Plant+Image';">`
+          : `<img src="https://placehold.co/400x300/E0E0E0/999?text=No+Image" alt="No Image">`;
+
+        // --- 設定連結網址 ---
+        // 傳遞 id 到 detail.html 頁面
+        const detailUrl = `detail.html?id=${encodeURIComponent(id)}`;
+        
+        // 原本的開始種植連結
+        const plantUrl = `new.html?plant=${encodeURIComponent(name)}`;
+
+        return `
+          <div class="card">
+            <div>
+              <a href="${detailUrl}" class="thumb">
+                ${imgHtml}
+              </a>
+
+              <a href="${detailUrl}" class="name-link">
+                <div class="name">${name}</div>
+              </a>
+
+              <div class="badges">
+                ${levelTxt ? `<span class="badge">${levelTxt}</span>` : ``}
+                ${resiTxt  ? `<span class="badge">${resiTxt}</span>` : ``}
+              </div>
+              <div class="desc">${desc}</div>
+            </div>
+            
+            <a href="${plantUrl}" class="plant-btn">
+              種植此植物 <i class="fas fa-arrow-right" style="margin-left:5px; font-size:12px;"></i>
+            </a>
+          </div>
+        `;
+      }).join('');
+      
+      $shown.textContent = `顯示 ${rows.length} 筆`;
+    }
+
+    $q.addEventListener('input', filterAndSort);
+    $level.addEventListener('change', filterAndSort);
+    $resi.addEventListener('change', filterAndSort);
+    $sort.addEventListener('change', filterAndSort);
+    $reload.addEventListener('click', async () => {
+      await fetchAll();
+      filterAndSort();
+    });
+
+    await fetchAll();
+    filterAndSort();
+  </script>
+</body>
+</html>

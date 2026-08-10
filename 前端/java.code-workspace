@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "../../../../../java"
+		},
+		{
+			"path": "../程式碼"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "java"
+	}
+}

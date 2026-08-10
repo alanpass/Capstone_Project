@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>修改資料｜園藝智能助理</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500&family=Noto+Serif+TC:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+  
+  <style>
+    /* --- 基礎變數 --- */
+    :root {
+      --primary-color: #4A6352; /* 深森林綠 */
+      --accent-color: #84A588; /* 鼠尾草綠 */
+      --light-bg: #F7F6F2; /* 米白紙質感 */
+      --text-dark: #3D3D3D;
+      --card-radius: 20px;
+      --shadow: 0 10px 30px rgba(74, 99, 82, 0.15);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Noto Sans TC', sans-serif;
+      background-color: var(--light-bg);
+      color: var(--text-dark);
+      width: 100%;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* 背景紋理 */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background-image: url("image/backgroud.jpg");
+      background-size: cover;
+      background-position: center;
+      opacity: 0.1;
+      z-index: -5;
+    }
+
+    /* 飄落葉子動畫 */
+    .falling-leaf {
+      position: fixed;
+      top: -10%;
+      z-index: -2;
+      opacity: 0.2;
+      color: var(--primary-color);
+      animation: fall linear infinite;
+      pointer-events: none;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(-10vh) rotate(0deg) translateX(0); opacity: 0; }
+      20% { opacity: 0.3; }
+      100% { transform: translateY(110vh) rotate(360deg) translateX(50px); opacity: 0; }
+    }
+    .l1 { left: 8%; font-size: 30px; animation-duration: 16s; }
+    .l2 { left: 60%; font-size: 22px; animation-duration: 20s; animation-delay: 4s; }
+    .l3 { left: 92%; font-size: 35px; animation-duration: 18s; animation-delay: 2s; }
+
+    /* --- Header --- */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+    }
+
+    .logo-container {
+      display: flex; align-items: center; text-decoration: none;
+      color: var(--primary-color); transition: opacity 0.3s;
+    }
+    .logo-container:hover { opacity: 0.8; }
+
+    .logo { width: 50px; height: 50px; border-radius: 50%; object-fit: cover; }
+    
+    .logo-text {
+      font-family: 'Noto Serif TC', serif;
+      font-size: 26px; margin-left: 15px; font-weight: 700;
+      letter-spacing: 1px; color: var(--primary-color);
+    }
+
+    .nav { display: flex; gap: 35px; align-items: center; }
+
+    .nav-item {
+      text-decoration: none; color: var(--text-dark);
+      font-size: 16px; font-weight: 500; position: relative;
+      transition: color 0.3s;
+    }
+    .nav-item:hover { color: var(--primary-color); }
+
+    /* --- Content Area --- */
+    .main-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+    }
+
+    /* 玻璃擬態卡片 */
+    .revise-card {
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(20px);
+      border-radius: var(--card-radius);
+      padding: 40px 50px;
+      width: 100%;
+      max-width: 600px;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* 頂部裝飾線 */
+    .revise-card::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 6px;
+      background: linear-gradient(90deg, var(--accent-color), var(--primary-color));
+    }
+
+    .card-title {
+      font-family: 'Noto Serif TC', serif;
+      font-size: 28px;
+      color: var(--primary-color);
+      text-align: center;
+      margin-bottom: 30px;
+      font-weight: 700;
+    }
+
+    /* 表單樣式 */
+    .form-container { width: 100%; }
+
+    .form-group { margin-bottom: 20px; text-align: left; }
+
+    .form-label {
+      display: block;
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+
+    .input-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .input-icon {
+      position: absolute;
+      left: 15px;
+      color: var(--accent-color);
+      font-size: 18px;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 15px 15px 15px 45px;
+      font-size: 16px;
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      background: #fdfdfd;
+      outline: none;
+      transition: all 0.3s;
+      color: var(--text-dark);
+    }
+
+    .form-input:focus {
+      border-color: var(--accent-color);
+      box-shadow: 0 0 0 3px rgba(132, 165, 136, 0.2);
+      background: white;
+    }
+
+    /* 禁用欄位的樣式 (Email, Password) */
+    .form-input:disabled {
+      background: #eee;
+      color: #999;
+      cursor: not-allowed;
+      border-color: #e0e0e0;
+    }
+
+    /* 按鈕 */
+    .submit-btn {
+      width: 100%;
+      background: linear-gradient(135deg, var(--accent-color), var(--primary-color));
+      color: white;
+      border: none;
+      padding: 15px;
+      border-radius: 12px;
+      font-size: 18px;
+      font-weight: 500;
+      cursor: pointer;
+      margin-top: 20px;
+      transition: all 0.3s;
+      box-shadow: 0 5px 15px rgba(74, 99, 82, 0.2);
+    }
+
+    .submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(74, 99, 82, 0.3);
+    }
+
+    .msg {
+      margin-top: 20px;
+      color: var(--primary-color);
+      font-weight: 500;
+      text-align: center;
+      min-height: 24px;
+      font-size: 14px;
+    }
+
+    @media (max-width: 768px) {
+      .header { flex-direction: column; padding: 15px; gap: 15px; }
+      .revise-card { padding: 30px 20px; }
+    }
+  </style>
+</head>
+<body>
+  <i class="fas fa-leaf falling-leaf l1"></i>
+  <i class="fas fa-leaf falling-leaf l2"></i>
+  <i class="fas fa-leaf falling-leaf l3"></i>
+
+  <header class="header">
+    <a href="firstpage.html" class="logo-container" aria-label="返回首頁">
+      <img src="https://placehold.co/60x60/4A6352/white?text=Leaf" alt="Leaf logo" class="logo" />
+      <div class="logo-text">園藝智能助理</div>
+    </a>
+    <nav class="nav">
+      <a href="new.html" class="nav-item">開始種植</a>
+      <a href="userinfor.html" class="nav-item">使用者資訊</a>
+    </nav>
+  </header>
+
+  <main class="main-content">
+    <div class="revise-card">
+      <h1 class="card-title">修改個人資料</h1>
+
+      <div class="form-container">
+        <div class="form-group">
+          <label for="name" class="form-label">姓名</label>
+          <div class="input-wrapper">
+            <i class="fas fa-user input-icon"></i>
+            <input type="text" id="name" class="form-input" placeholder="請輸入姓名" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="email" class="form-label">電子信箱 <small style="color:#999">(不可修改)</small></label>
+          <div class="input-wrapper">
+            <i class="fas fa-envelope input-icon"></i>
+            <input type="email" id="email" class="form-input" disabled />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="password" class="form-label">密碼</label>
+          <div class="input-wrapper">
+            <i class="fas fa-lock input-icon"></i>
+            <input type="text" id="password" class="form-input" placeholder="若要修改密碼，請使用登出後的「忘記密碼」功能" disabled />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="address" class="form-label">居住地址</label>
+          <div class="input-wrapper">
+            <i class="fas fa-map-marker-alt input-icon"></i>
+            <input type="text" id="address" class="form-input" placeholder="請輸入地址" />
+          </div>
+        </div>
+
+        <button class="submit-btn" id="saveBtn">儲存變更</button>
+        <div id="msg" class="msg"></div>
+      </div>
+    </div>
+  </main>
+
+  <script type="module">
+    import { requireAuth, getMyProfile, updateMyProfile } from './common.js';
+
+    const nameInput = document.getElementById('name');
+    const emailInput = document.getElementById('email');
+    const addressInput = document.getElementById('address');
+    const msg = document.getElementById('msg');
+    const saveBtn = document.getElementById('saveBtn');
+
+    // 登入保護
+    requireAuth('login.html');
+
+    // 頁面載入時，從 Firestore 載入使用者資料
+    (async () => {
+      try {
+        const data = await getMyProfile();
+        if (data) {
+          nameInput.value = data.displayName || '';
+          emailInput.value = data.email || '';
+          addressInput.value = data.address || '';
+        }
+      } catch (err) {
+        console.error(err);
+        msg.textContent = '無法載入資料，請重新登入';
+        msg.style.color = '#D9534F';
+      }
+    })();
+
+    // 點擊修改 → 更新 Firestore
+    saveBtn.addEventListener('click', async (e) => {
+      e.preventDefault();
+      msg.textContent = '';
+      const name = nameInput.value.trim();
+      const address = addressInput.value.trim();
+      
+      if (!name || !address) {
+        msg.textContent = '⚠ 請填寫所有欄位';
+        msg.style.color = '#D9534F';
+        return;
+      }
+
+      // 按鈕 Loading
+      const originalText = saveBtn.innerText;
+      saveBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> 更新中...';
+      saveBtn.disabled = true;
+
+      try {
+        await updateMyProfile({ displayName: name, address });
+        msg.innerHTML = '<i class="fas fa-check-circle"></i> 資料已成功更新！';
+        msg.style.color = 'var(--primary-color)';
+      } catch (err) {
+        console.error(err);
+        msg.textContent = err.message || '❌ 更新失敗，請稍後再試';
+        msg.style.color = '#D9534F';
+      } finally {
+        saveBtn.innerText = originalText;
+        saveBtn.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>
