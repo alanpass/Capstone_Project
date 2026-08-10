@@ -1,0 +1,497 @@
+[
+  {
+    "_collection": "plants",
+    "_docId": "1",
+    "image": "plant_1.bin"
+  },
+  {
+    "_collection": "plants",
+    "_docId": "2",
+    "image": "plant_2.bin"
+  },
+  {
+    "_collection": "plants",
+    "_docId": "3",
+    "image": "plant_3.bin"
+  },
+  {
+    "_collection": "plants",
+    "_docId": "4",
+    "image": "plant_4.bin"
+  },
+  {
+    "_collection": "plants",
+    "_docId": "5",
+    "image": "plant_5.bin"
+  },
+  {
+    "_collection": "plants",
+    "_docId": "6",
+    "image": "plant_6.bin"
+  },
+  {
+    "_collection": "plants",
+    "_docId": "7",
+    "image": "plant_7.bin"
+  },
+  {
+    "_collection": "plants",
+    "_docId": "8",
+    "image": "plant_8.bin"
+  },
+  {
+    "_collection": "plants",
+    "_docId": "9",
+    "image": "plant_9.bin"
+  },
+  {
+    "_collection": "plants",
+    "_docId": "10",
+    "image": "plant_10.bin"
+  },
+  {
+    "_collection": "plants",
+    "_docId": "12",
+    "image": "plant_12.bin"
+  },
+  {
+    "_collection": "plants",
+    "_docId": "13",
+    "image": "plant_13.bin"
+  },
+  {
+    "_collection": "plants",
+    "_docId": "14",
+    "image": "plant_14.bin"
+  },
+  {
+    "_collection": "plants",
+    "_docId": "15",
+    "image": "plant_15.bin"
+  },
+  {
+    "_collection": "plants",
+    "_docId": "16",
+    "image": "plant_16.bin"
+  },
+  {
+    "_collection": "plants",
+    "_docId": "17",
+    "image": "plant_17.bin"
+  },
+  {
+    "_collection": "plants",
+    "_docId": "18",
+    "image": "plant_18.bin"
+  },
+  {
+    "_collection": "plants",
+    "_docId": "19",
+    "image": "plant_19.bin"
+  },
+  {
+    "_collection": "plants",
+    "_docId": "20",
+    "image": "plant_20.bin"
+  },
+  {
+    "_collection": "plants",
+    "_docId": "21",
+    "image": "plant_21.bin"
+  },
+  {
+    "_collection": "plants",
+    "_docId": "22",
+    "image": "plant_22.bin"
+  },
+  {
+    "_collection": "plants",
+    "_docId": "23",
+    "image": "plant_23.bin"
+  },
+  {
+    "_collection": "plants",
+    "_docId": "24",
+    "image": "plant_24.bin"
+  },
+  {
+    "_collection": "plants",
+    "_docId": "25",
+    "image": "plant_25.bin"
+  },
+  {
+    "_collection": "plants",
+    "_docId": "26",
+    "image": "plant_26.bin"
+  },
+  {
+    "_collection": "plants",
+    "_docId": "27",
+    "image": "plant_27.bin"
+  },
+  {
+    "_collection": "plants",
+    "_docId": "28",
+    "image": "plant_28.bin"
+  },
+  {
+    "_collection": "plants",
+    "_docId": "29",
+    "image": "plant_29.bin"
+  },
+  {
+    "_collection": "plants",
+    "_docId": "30",
+    "image": "plant_30.bin"
+  },
+  {
+    "_collection": "plants",
+    "_docId": "31",
+    "image": "plant_31.bin"
+  },
+  {
+    "_collection": "plants",
+    "_docId": "32",
+    "image": "plant_32.bin"
+  },
+  {
+    "_collection": "plants",
+    "_docId": "33",
+    "image": "plant_33.bin"
+  },
+  {
+    "_collection": "plants",
+    "_docId": "34",
+    "image": "plant_34.bin"
+  },
+  {
+    "_collection": "plants",
+    "_docId": "35",
+    "image": "plant_35.bin"
+  },
+  {
+    "_collection": "plants",
+    "_docId": "36",
+    "image": "plant_36.bin"
+  },
+  {
+    "_collection": "plants",
+    "_docId": "37",
+    "image": "plant_37.bin"
+  },
+  {
+    "_collection": "plants",
+    "_docId": "38",
+    "image": "plant_38.bin"
+  },
+  {
+    "_collection": "plants",
+    "_docId": "39",
+    "image": "plant_39.bin"
+  },
+  {
+    "_collection": "plants",
+    "_docId": "40",
+    "image": "plant_40.bin"
+  },
+  {
+    "_collection": "plants",
+    "_docId": "41",
+    "image": "plant_41.bin"
+  },
+  {
+    "_collection": "plants",
+    "_docId": "42",
+    "image": "plant_42.bin"
+  },
+  {
+    "_collection": "plants",
+    "_docId": "43",
+    "image": "plant_43.bin"
+  },
+  {
+    "_collection": "plants",
+    "_docId": "44",
+    "image": "plant_44.bin"
+  },
+  {
+    "_collection": "plants",
+    "_docId": "45",
+    "image": "plant_45.bin"
+  },
+  {
+    "_collection": "plants",
+    "_docId": "46",
+    "image": "plant_46.bin"
+  },
+  {
+    "_collection": "plants",
+    "_docId": "48",
+    "image": "plant_48.bin"
+  },
+  {
+    "_collection": "plants",
+    "_docId": "49",
+    "image": "plant_49.bin"
+  },
+  {
+    "_collection": "plants",
+    "_docId": "50",
+    "image": "plant_50.bin"
+  },
+  {
+    "_collection": "plants",
+    "_docId": "51",
+    "image": "plant_51.bin"
+  },
+  {
+    "_collection": "plants",
+    "_docId": "52",
+    "image": "plant_52.bin"
+  },
+  {
+    "_collection": "plants",
+    "_docId": "53",
+    "image": "plant_53.bin"
+  },
+  {
+    "_collection": "plants",
+    "_docId": "54",
+    "image": "plant_54.bin"
+  },
+  {
+    "_collection": "plants",
+    "_docId": "55",
+    "image": "plant_55.bin"
+  },
+  {
+    "_collection": "plants",
+    "_docId": "56",
+    "image": "plant_56.bin"
+  },
+  {
+    "_collection": "plants",
+    "_docId": "57",
+    "image": "plant_57.bin"
+  },
+  {
+    "_collection": "plants",
+    "_docId": "58",
+    "image": "plant_58.bin"
+  },
+  {
+    "_collection": "plants",
+    "_docId": "59",
+    "image": "plant_59.bin"
+  },
+  {
+    "_collection": "plants",
+    "_docId": "60",
+    "image": "plant_60.bin"
+  },
+  {
+    "_collection": "plants",
+    "_docId": "61",
+    "image": "plant_61.bin"
+  },
+  {
+    "_collection": "plants",
+    "_docId": "62",
+    "image": "plant_62.bin"
+  },
+  {
+    "_collection": "plants",
+    "_docId": "63",
+    "image": "plant_63.bin"
+  },
+  {
+    "_collection": "plants",
+    "_docId": "64",
+    "image": "plant_64.bin"
+  },
+  {
+    "_collection": "plants",
+    "_docId": "65",
+    "image": "plant_65.bin"
+  },
+  {
+    "_collection": "plants",
+    "_docId": "66",
+    "image": "plant_66.bin"
+  },
+  {
+    "_collection": "plants",
+    "_docId": "67",
+    "image": "plant_67.bin"
+  },
+  {
+    "_collection": "plants",
+    "_docId": "68",
+    "image": "plant_68.bin"
+  },
+  {
+    "_collection": "plants",
+    "_docId": "69",
+    "image": "plant_69.bin"
+  },
+  {
+    "_collection": "plants",
+    "_docId": "70",
+    "image": "plant_70.bin"
+  },
+  {
+    "_collection": "plants",
+    "_docId": "71",
+    "image": "plant_71.bin"
+  },
+  {
+    "_collection": "plants",
+    "_docId": "72",
+    "image": "plant_72.bin"
+  },
+  {
+    "_collection": "plants",
+    "_docId": "73",
+    "image": "plant_73.bin"
+  },
+  {
+    "_collection": "plants",
+    "_docId": "74",
+    "image": "plant_74.bin"
+  },
+  {
+    "_collection": "plants",
+    "_docId": "75",
+    "image": "plant_75.bin"
+  },
+  {
+    "_collection": "plants",
+    "_docId": "76",
+    "image": "plant_76.bin"
+  },
+  {
+    "_collection": "plants",
+    "_docId": "77",
+    "image": "plant_77.bin"
+  },
+  {
+    "_collection": "plants",
+    "_docId": "78",
+    "image": "plant_78.bin"
+  },
+  {
+    "_collection": "plants",
+    "_docId": "79",
+    "image": "plant_79.bin"
+  },
+  {
+    "_collection": "plants",
+    "_docId": "80",
+    "image": "plant_80.bin"
+  },
+  {
+    "_collection": "plants",
+    "_docId": "81",
+    "image": "plant_81.bin"
+  },
+  {
+    "_collection": "plants",
+    "_docId": "82",
+    "image": "plant_82.bin"
+  },
+  {
+    "_collection": "plants",
+    "_docId": "83",
+    "image": "plant_83.bin"
+  },
+  {
+    "_collection": "plants",
+    "_docId": "84",
+    "image": "plant_84.bin"
+  },
+  {
+    "_collection": "plants",
+    "_docId": "85",
+    "image": "plant_85.bin"
+  },
+  {
+    "_collection": "plants",
+    "_docId": "86",
+    "image": "plant_86.bin"
+  },
+  {
+    "_collection": "plants",
+    "_docId": "87",
+    "image": "plant_87.bin"
+  },
+  {
+    "_collection": "plants",
+    "_docId": "88",
+    "image": "plant_88.bin"
+  },
+  {
+    "_collection": "plants",
+    "_docId": "89",
+    "image": "plant_89.bin"
+  },
+  {
+    "_collection": "plants",
+    "_docId": "90",
+    "image": "plant_90.bin"
+  },
+  {
+    "_collection": "plants",
+    "_docId": "91",
+    "image": "plant_91.bin"
+  },
+  {
+    "_collection": "plants",
+    "_docId": "92",
+    "image": "plant_92.bin"
+  },
+  {
+    "_collection": "plants",
+    "_docId": "93",
+    "image": "plant_93.bin"
+  },
+  {
+    "_collection": "plants",
+    "_docId": "94",
+    "image": "plant_94.bin"
+  },
+  {
+    "_collection": "plants",
+    "_docId": "95",
+    "image": "plant_95.bin"
+  },
+  {
+    "_collection": "plants",
+    "_docId": "96",
+    "image": "plant_96.bin"
+  },
+  {
+    "_collection": "plants",
+    "_docId": "97",
+    "image": "plant_97.bin"
+  },
+  {
+    "_collection": "plants",
+    "_docId": "98",
+    "image": "plant_98.bin"
+  },
+  {
+    "_collection": "plants",
+    "_docId": "99",
+    "image": "plant_99.bin"
+  },
+  {
+    "_collection": "plants",
+    "_docId": "100",
+    "image": "plant_100.bin"
+  },
+  {
+    "_collection": "plants",
+    "_docId": "101",
+    "image": "plant_101.bin"
+  }
+]
