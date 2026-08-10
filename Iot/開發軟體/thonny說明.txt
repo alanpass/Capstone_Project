@@ -1,0 +1,11 @@
+燒錄 MicroPython 韌體:ESP32_GENERIC-20210902-v1.17.bin
+
+首先，在電腦端需安裝 Thonny。Thonny 是一套專為 Python 與 MicroPython 設計的輕量化 IDE，介面直覺，內建套件管理與序列埠（Serial）通訊功能，能直接與 ESP32 板子互動。安裝完成後，建議重新啟動電腦或至少重新啟動 Thonny，以確保 USB 裝置與直譯器設定能正常辨識。
+
+接著，需為 ESP32 燒錄 MicroPython 韌體。MicroPython 是 Python 3 的精簡版本，專為微控制器環境設計，其核心以 C 語言實作並高度最佳化，使其能在記憶體與效能受限的硬體上執行。使用者可至 MicroPython 官方網站下載對應 ESP32 型號的韌體檔案。燒錄時，ESP32 需透過 USB 連接至電腦，並進入可寫入韌體的模式（不同板子方式略有差異）。完成韌體燒錄後，ESP32 即具備執行 MicroPython 程式的能力。
+
+在硬體準備完成後，需於 Thonny 中設定直譯器。使用者可於 Thonny 的設定選單中，將直譯器選擇為「MicroPython（ESP32）」並指定正確的連接埠（COM Port）。若設定正確，Thonny 的下方互動視窗（Shell）將可直接顯示 ESP32 的即時回應，代表已成功與開發板建立連線。
+
+完成連線後，即可開始進行程式開發與測試。使用者可在 Thonny 編輯 Python 程式碼，並直接執行至 ESP32。常見的第一個測試為 LED 閃爍程式，透過 machine.Pin 模組控制 ESP32 的 GPIO 腳位，讓 LED 以固定時間間隔亮滅。當程式成功執行並觀察到實體 LED 正常反應，即可確認整體開發環境建置完成。
+
+此外，在 MicroPython 環境中，ESP32 內部具備檔案系統，使用者可透過 Thonny 將程式儲存至板子中。一般而言，main.py 會在開機後自動執行，而 boot.py 則負責系統啟動時的初始化設定。透過此機制，可實現裝置上電後自動執行指定功能，符合嵌入式系統實務應用需求。

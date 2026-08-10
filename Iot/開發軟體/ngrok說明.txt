@@ -1,0 +1,6 @@
+開啟ngrok.exe後輸入:
+ngrok authtoken 2zuV3XsOutLM4qZy89jRL0nVsLT_4vk1gPNrH2Cna1ChZLUrZ
+ngrok http --scheme=http 5000
+
+獲取 當前ngrok 伺服器的公開網址:
+(例)http://76c41074e397.ngrok-free.app
