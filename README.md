@@ -101,7 +101,7 @@ python -m http.server 5500 --directory frontend
 測試（需要 Node.js 20+）：
 
 ```bash
-node --test tests/
+node --test "tests/*.test.mjs"
 ```
 
 ## 重構重點
