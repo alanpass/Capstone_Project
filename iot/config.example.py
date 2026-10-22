@@ -5,8 +5,8 @@ WIFI_SSID = "your-wifi"
 WIFI_PASSWORD = "your-wifi-password"
 
 # Supabase 專案（與 frontend/assets/js/config.js 相同，屬於公開設定）
-SUPABASE_URL = "https://xxxxxxxx.supabase.co"
-SUPABASE_KEY = "sb_publishable_xxxxxxxx"
+SUPABASE_URL = "https://pgxfytfwpgyyyklpzwcn.supabase.co"
+SUPABASE_KEY = "sb_publishable_xn72aTtTth-NPPEKGFJ0NA_bOHBl_BM"
 
 # 網站「個人資料」頁的裝置權杖：裝置用它上傳數據並讀取你設定的門檻值
 DEVICE_TOKEN = "00000000-0000-0000-0000-000000000000"

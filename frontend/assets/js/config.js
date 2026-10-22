@@ -1,8 +1,8 @@
 // 前端設定。Supabase 的 Project URL 與 Publishable key 本來就是公開的，
 // 資料安全由資料庫的 Row Level Security 保護（見 supabase/schema.sql）。
 // 取得位置：Supabase Dashboard → Project Settings → API Keys / Data API
-export const SUPABASE_URL = "";
-export const SUPABASE_PUBLISHABLE_KEY = "";
+export const SUPABASE_URL = "https://pgxfytfwpgyyyklpzwcn.supabase.co";
+export const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_xn72aTtTth-NPPEKGFJ0NA_bOHBl_BM";
 
 export const isConfigured = Boolean(SUPABASE_URL && SUPABASE_PUBLISHABLE_KEY);
 
