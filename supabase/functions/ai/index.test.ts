@@ -1,6 +1,6 @@
 // deno test --allow-env supabase/functions/ai/index.test.ts
 Deno.env.set("AI_FUNCTION_TEST", "1");
-const { buildRequest, callGemini, HttpError } = await import("./index.ts");
+const { buildRequest, callGemini, HttpError, publishableKey } = await import("./index.ts");
 
 function assertEquals(actual: unknown, expected: unknown) {
   if (JSON.stringify(actual) !== JSON.stringify(expected)) {
@@ -58,4 +58,15 @@ Deno.test("callGemini：解析 JSON、處理限流與缺金鑰", async () => {
   await assertRejects(() => callGemini("hi", {}, limited), 429);
   const garbage = (async () => new Response(JSON.stringify({ candidates: [{ content: { parts: [{ text: "not json" }] } }] }))) as typeof fetch;
   await assertRejects(() => callGemini("hi", {}, garbage), 502);
+});
+
+Deno.test("publishableKey：優先使用新版 SUPABASE_PUBLISHABLE_KEYS，否則用舊版 anon key", async () => {
+  Deno.env.set("SUPABASE_PUBLISHABLE_KEYS", JSON.stringify({ default: "sb_publishable_new" }));
+  Deno.env.set("SUPABASE_ANON_KEY", "legacy");
+  assertEquals(publishableKey(), "sb_publishable_new");
+  Deno.env.set("SUPABASE_PUBLISHABLE_KEYS", "not json");
+  assertEquals(publishableKey(), "legacy");
+  Deno.env.delete("SUPABASE_PUBLISHABLE_KEYS");
+  Deno.env.delete("SUPABASE_ANON_KEY");
+  await assertRejects(() => publishableKey(), 500);
 });

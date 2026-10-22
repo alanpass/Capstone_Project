@@ -98,12 +98,12 @@ flowchart LR
 
 ### 3. 部署 AI（Edge Function）
 1. 到 https://aistudio.google.com/apikey 建立 Gemini API 金鑰。
-2. Supabase **Edge Functions → Secrets**：新增 `GEMINI_API_KEY` = 你的金鑰。
+2. Supabase **Edge Functions → Secrets**：Key 填 `GEMINI_API_KEY`、Value 填你的金鑰 → Save。
 3. **Edge Functions → Deploy a new function → Via Editor**：名稱填 `ai`，貼上 [`supabase/functions/ai/index.ts`](supabase/functions/ai/index.ts) 全部內容 → Deploy。
-4. 在函式的 **Details / Settings** 關閉「Verify JWT with legacy secret」（程式內已自行驗證登入狀態，支援新版金鑰）。
+4. 在函式的 **Details** 頁，若有「Verify JWT / Enforce JWT verification」選項請關閉（程式內已自行驗證登入狀態，也支援新版金鑰）。
 
 ### 4. 連接網站
-1. Supabase **Project Settings → Data API** 複製 Project URL；**API Keys** 複製 Publishable key（`sb_publishable_` 開頭）。
+1. 專案頁上方按 **Connect**（或 **Project Settings → API Keys**），複製 Project URL 與 Publishable key（`sb_publishable_` 開頭）。
 2. 填入 [`frontend/assets/js/config.js`](frontend/assets/js/config.js) 的 `SUPABASE_URL`、`SUPABASE_PUBLISHABLE_KEY`，推送到 GitHub 即自動部署。
    這兩個值本來就是公開的，資料安全由 RLS 保護；**絕對不要**填 `service_role` / secret key。
 
@@ -121,7 +121,7 @@ flowchart LR
 
 ```bash
 python -m http.server 5500 --directory frontend   # 開啟 http://localhost:5500
-deno task test                                     # 前端邏輯 + Edge Function + 資料庫 RLS，共 14 項
+deno task test                                     # 前端邏輯 + Edge Function + 資料庫 RLS，共 15 項
 ```
 
 ## 重構重點
@@ -131,4 +131,4 @@ deno task test                                     # 前端邏輯 + Edge Functio
 - **IoT**：感測數據存在自己的資料庫，網站自行繪製折線圖；土壤濕度在裝置端換算成百分比，與網站門檻意義一致；資料保留 90 天並有防洪限制。
 - **修正**：種植天數依使用者當地日期計算；土壤濕度原始值原本一律被截成 100%；註冊地址欄位原本讀不到；部分損毀的植物圖片。
 - **效能**：同一天的 AI 指南會快取；圖片由 13 MB 壓縮為約 2.5 MB（WebP）；植物百科為靜態 JSON。
-- **品質**：14 項自動化測試（含在 PostgreSQL 中實際驗證 RLS），GitHub Actions 每次推送自動執行。
+- **品質**：15 項自動化測試（含在 PostgreSQL 中實際驗證 RLS），GitHub Actions 每次推送自動執行。

@@ -158,15 +158,27 @@ export function buildRequest(body: Record<string, unknown>): { task: string; pro
   throw new HttpError(400, "未知的任務類型");
 }
 
+/** 新版平台注入 SUPABASE_PUBLISHABLE_KEYS（JSON）；舊版只有 SUPABASE_ANON_KEY（預計 2026 年底淘汰）。 */
+export function publishableKey(): string {
+  try {
+    const keys = JSON.parse(Deno.env.get("SUPABASE_PUBLISHABLE_KEYS") ?? "{}");
+    const key = keys.default ?? Object.values(keys)[0];
+    if (typeof key === "string" && key) return key;
+  } catch {
+    // 格式不符時改用舊版金鑰
+  }
+  const legacy = Deno.env.get("SUPABASE_ANON_KEY");
+  if (!legacy) throw new HttpError(500, "找不到 Supabase 金鑰環境變數");
+  return legacy;
+}
+
 export async function handle(req: Request): Promise<Response> {
   if (req.method === "OPTIONS") return new Response("ok", { headers: CORS });
   if (req.method !== "POST") return json({ error: "只接受 POST" }, 405);
   try {
-    const supabase = createClient(
-      Deno.env.get("SUPABASE_URL")!,
-      Deno.env.get("SUPABASE_ANON_KEY") ?? Deno.env.get("SUPABASE_PUBLISHABLE_KEY")!,
-      { global: { headers: { Authorization: req.headers.get("Authorization") ?? "" } } },
-    );
+    const supabase = createClient(Deno.env.get("SUPABASE_URL")!, publishableKey(), {
+      global: { headers: { Authorization: req.headers.get("Authorization") ?? "" } },
+    });
     const { data: { user } } = await supabase.auth.getUser();
     if (!user) throw new HttpError(401, "請先登入");
 
