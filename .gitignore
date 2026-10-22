@@ -1,0 +1,26 @@
+# ---- 機密檔案：絕對不要提交 ----
+.env
+*.env
+!.env.example
+secrets/
+*firebase-adminsdk*.json
+*service-account*.json
+second-metrics-*.json
+iot/config.py
+
+# ---- Python ----
+__pycache__/
+*.pyc
+.venv/
+venv/
+.pytest_cache/
+
+# ---- Firebase / 編輯器 ----
+.firebase/
+firebase-debug*.log
+.vscode/
+.idea/
+*.code-workspace
+.DS_Store
+Thumbs.db
+~$*

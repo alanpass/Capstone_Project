@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>註冊｜園藝智能助理</title>
+  <meta name="description" content="園藝智能助理：結合 AI 種植規劃、植物百科與 IoT 環境監測的智慧園藝平台。">
+  <link rel="icon" href="assets/img/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;700&display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="assets/css/app.css">
+</head>
+<body>
+<main>
+  <div class="card narrow">
+    <div class="page-head" style="text-align:center"><h1>建立帳號</h1><p>開始你的智慧園藝生活</p></div>
+    <div id="msg" class="hidden" role="alert"></div>
+    <form id="form" novalidate>
+      <div class="field"><label for="name">姓名</label><input class="input" id="name" autocomplete="name" maxlength="30" required></div>
+      <div class="field"><label for="email">Email</label><input class="input" id="email" type="email" autocomplete="email" required></div>
+      <div class="field"><label for="password">密碼</label>
+        <div class="input-group"><input class="input" id="password" type="password" autocomplete="new-password" minlength="6" required>
+          <button type="button" data-toggle="password" aria-label="顯示密碼"><i class="fa-regular fa-eye"></i></button></div>
+        <span class="hint">至少 6 個字元</span></div>
+      <div class="field"><label for="address">居住地址</label><input class="input" id="address" autocomplete="street-address" maxlength="100" placeholder="例如：高雄市楠梓區" required>
+        <span class="hint">用來查詢當地天氣，讓 AI 建議更貼近你的環境</span></div>
+      <button class="btn block" id="submit" type="submit"><i class="fa-solid fa-user-plus"></i> 註冊</button>
+    </form>
+    <div class="form-links"><span></span><a href="login.html">已有帳號？登入</a></div>
+  </div>
+</main>
+<script type="module" src="assets/js/pages/register.js"></script>
+</body>
+</html>

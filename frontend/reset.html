@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>重設密碼｜園藝智能助理</title>
+  <meta name="description" content="園藝智能助理：結合 AI 種植規劃、植物百科與 IoT 環境監測的智慧園藝平台。">
+  <link rel="icon" href="assets/img/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;700&display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="assets/css/app.css">
+</head>
+<body>
+<main>
+  <div class="card narrow">
+    <div class="page-head" style="text-align:center"><h1>重設密碼</h1><p id="who">驗證連結中…</p></div>
+    <div id="msg" class="hidden" role="alert"></div>
+    <form id="form" class="hidden" novalidate>
+      <div class="field"><label for="password">新密碼</label><input class="input" id="password" type="password" autocomplete="new-password" minlength="6" required></div>
+      <div class="field"><label for="confirm">確認新密碼</label><input class="input" id="confirm" type="password" autocomplete="new-password" minlength="6" required></div>
+      <button class="btn block" id="submit" type="submit"><i class="fa-solid fa-key"></i> 更新密碼</button>
+    </form>
+    <div class="form-links"><a href="login.html">← 返回登入</a></div>
+  </div>
+</main>
+<script type="module" src="assets/js/pages/reset.js"></script>
+</body>
+</html>

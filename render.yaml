@@ -1,0 +1,32 @@
+# Render Blueprint：Dashboard → New → Blueprint，選擇此 repo 即可建立後端服務。
+# 標記 sync: false 的變數需在 Render 後台手動填入（不會寫進 Git）。
+services:
+  - type: web
+    name: plantai-api
+    runtime: python
+    rootDir: backend
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn wsgi:app --workers 2 --timeout 90
+    healthCheckPath: /api/health
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.13.1"
+      - key: FIREBASE_CREDENTIALS_JSON
+        sync: false
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: GEMINI_MODEL
+        value: gemini-2.5-flash
+      - key: CWA_API_KEY
+        sync: false
+      - key: THINGSPEAK_CHANNEL_ID
+        value: "3013983"
+      - key: THINGSPEAK_READ_KEY
+        sync: false
+      - key: DEVICE_API_KEY
+        generateValue: true
+      - key: ALLOWED_ORIGINS
+        value: https://alanpass.github.io,https://plantai-cac82.web.app,https://plantai-cac82.firebaseapp.com
+      - key: APP_TIMEZONE
+        value: Asia/Taipei

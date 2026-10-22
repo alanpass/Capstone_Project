@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>植物百科｜園藝智能助理</title>
+  <meta name="description" content="園藝智能助理：結合 AI 種植規劃、植物百科與 IoT 環境監測的智慧園藝平台。">
+  <link rel="icon" href="assets/img/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;700&display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="assets/css/app.css">
+</head>
+<body>
+<main>
+  <div class="page-head"><h1>植物百科 <span id="total" class="badge"></span></h1><p>搜尋適合你的綠色夥伴，點選卡片查看完整照護資訊。</p></div>
+  <div class="toolbar card" style="padding:16px">
+    <div class="field search" style="margin:0"><label for="q">搜尋</label><input class="input" id="q" type="search" placeholder="名稱、特性、澆水方式…"></div>
+    <div class="field" style="margin:0"><label for="level">照護等級</label><select class="input" id="level"><option value="">全部</option></select></div>
+    <div class="field" style="margin:0"><label for="sun">日照需求</label><select class="input" id="sun"><option value="">全部</option></select></div>
+    <div class="field" style="margin:0"><label for="sort">排序</label><select class="input" id="sort">
+      <option value="id">預設</option><option value="name">名稱 A→Z</option><option value="name-desc">名稱 Z→A</option></select></div>
+    <div id="shown" style="padding-bottom:12px;color:var(--muted);font-size:.9rem"></div>
+  </div>
+  <div id="list" class="grid grid-3"></div>
+</main>
+<script type="module" src="assets/js/pages/plants.js"></script>
+</body>
+</html>

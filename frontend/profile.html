@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>個人資料｜園藝智能助理</title>
+  <meta name="description" content="園藝智能助理：結合 AI 種植規劃、植物百科與 IoT 環境監測的智慧園藝平台。">
+  <link rel="icon" href="assets/img/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;700&display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="assets/css/app.css">
+</head>
+<body>
+<main>
+  <div class="page-head"><h1>個人資料</h1><p>地址會用來查詢當地天氣預報。</p></div>
+  <div class="card" style="max-width:640px">
+    <div id="msg" class="hidden" role="alert"></div>
+    <form id="form" novalidate>
+      <div class="field"><label for="email">Email</label><input class="input" id="email" disabled></div>
+      <div class="field"><label for="name">姓名</label><input class="input" id="name" maxlength="30" required></div>
+      <div class="field"><label for="address">居住地址</label><input class="input" id="address" maxlength="100" placeholder="例如：高雄市楠梓區"></div>
+      <div class="row"><button class="btn" id="submit" type="submit"><i class="fa-solid fa-floppy-disk"></i> 儲存變更</button>
+        <a class="btn ghost" href="forgot.html">變更密碼</a></div>
+    </form>
+  </div>
+  <div class="card" style="max-width:640px;margin-top:20px">
+    <h2><i class="fa-solid fa-microchip"></i> 裝置綁定資訊</h2>
+    <p style="color:var(--muted)">把下面的使用者 ID 填到 ESP32 的 <code>config.py</code>（<code>USER_UID</code>），裝置就會讀取你在「自動控制」頁設定的門檻值。</p>
+    <div class="row" style="margin-top:12px"><code id="uid" style="background:var(--paper);padding:8px 12px;border-radius:8px;word-break:break-all"></code>
+      <button class="btn secondary sm" id="copyUid"><i class="fa-regular fa-copy"></i> 複製</button></div>
+  </div>
+</main>
+<script type="module" src="assets/js/pages/profile.js"></script>
+</body>
+</html>

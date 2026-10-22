@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>主控台｜園藝智能助理</title>
+  <meta name="description" content="園藝智能助理：結合 AI 種植規劃、植物百科與 IoT 環境監測的智慧園藝平台。">
+  <link rel="icon" href="assets/img/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;700&display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="assets/css/app.css">
+</head>
+<body>
+<main>
+  <div class="page-head"><h1 id="greeting">你好</h1><p id="today">今天也一起照顧植物吧。</p></div>
+  <div class="grid grid-2">
+    <section class="card"><h2><i class="fa-solid fa-cloud-sun"></i> 今日天氣</h2><div id="weather"></div></section>
+    <section class="card"><h2><i class="fa-solid fa-microchip"></i> 感測器最新數值 <span class="badge live">Live</span></h2><div id="sensor"></div></section>
+  </div>
+  <section class="card" style="margin-top:20px">
+    <div class="row" style="margin-bottom:14px"><h2 style="margin:0"><i class="fa-solid fa-seedling"></i> 我的植物</h2><span class="spacer"></span>
+      <a class="btn sm" href="planner.html"><i class="fa-solid fa-plus"></i> 新增種植</a></div>
+    <div id="plants" class="grid grid-3"></div>
+  </section>
+</main>
+<script type="module" src="assets/js/pages/home.js"></script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>種植規劃｜園藝智能助理</title>
+  <meta name="description" content="園藝智能助理：結合 AI 種植規劃、植物百科與 IoT 環境監測的智慧園藝平台。">
+  <link rel="icon" href="assets/img/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;700&display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="assets/css/app.css">
+</head>
+<body>
+<main>
+  <div class="page-head"><h1>智慧種植規劃</h1><p>AI 會判斷生長週期並建立種植專案，再依天數、天氣與感測器數據給你每日照護指南。</p></div>
+  <div class="grid grid-2" style="align-items:start">
+    <section class="card">
+      <h2><i class="fa-solid fa-wand-magic-sparkles"></i> 建立新的種植專案</h2>
+      <form id="createForm" novalidate>
+        <div class="field"><label for="plantName">想種什麼？</label><input class="input" id="plantName" maxlength="40" placeholder="例如：番茄、羅勒、草莓" required>
+          <span class="hint">也可以從 <a href="plants.html">植物百科</a> 選擇後點「種植此植物」</span></div>
+        <button class="btn block" id="createBtn" type="submit"><i class="fa-solid fa-rocket"></i> 用 AI 建立規劃</button>
+      </form>
+      <div id="createMsg" class="hidden" role="alert" style="margin-top:16px"></div>
+    </section>
+    <section class="card">
+      <h2><i class="fa-solid fa-calendar-day"></i> 查看照護指南</h2>
+      <div id="picker" class="plant-picker"></div>
+      <div class="row" style="margin-top:16px">
+        <button class="btn" id="todayBtn"><i class="fa-solid fa-sun"></i> 今日指南</button>
+        <span class="spacer"></span>
+        <label for="day" class="sr-only">第幾天</label>
+        <input class="input" id="day" type="number" min="1" placeholder="第幾天" style="width:110px">
+        <button class="btn secondary" id="dayBtn"><i class="fa-solid fa-magnifying-glass"></i> 查詢</button>
+      </div>
+    </section>
+  </div>
+  <section class="card" style="margin-top:20px" id="guideCard"><div id="guide"></div></section>
+</main>
+<script type="module" src="assets/js/pages/planner.js"></script>
+</body>
+</html>
