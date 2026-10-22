@@ -8,8 +8,8 @@ import {
   signOut,
   updateProfile,
   verifyPasswordResetCode,
-} from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
-import { doc, getDoc, serverTimestamp, setDoc } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
+} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+import { doc, getDoc, serverTimestamp, setDoc } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 import { auth, db } from "./firebase.js";
 
 /** 等 Firebase 判斷完登入狀態後回傳目前使用者（未登入為 null）。 */

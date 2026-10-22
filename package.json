@@ -1,0 +1,9 @@
+{
+  "name": "plantai",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/",
+    "start": "python -m http.server 5500 --directory frontend"
+  }
+}

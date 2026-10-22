@@ -4,7 +4,7 @@
 新版把百科做成靜態檔（frontend/data/plants.json），網站載入更快，也不必開放資料庫寫入權限。
 
 用法：
-  python backend/scripts/build_plant_catalog.py <舊版前端資料夾> <新版 frontend 資料夾>
+  python tools/build_plant_catalog.py <舊版前端資料夾> <新版 frontend 資料夾>
 """
 import json
 import sys

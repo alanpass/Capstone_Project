@@ -1,6 +1,6 @@
-// 門檻值直接寫入 Firestore 的 thresholds/{uid}（Firestore 規則限制只能存取自己的文件），
-// ESP32 再透過後端 /api/device/thresholds 讀取。
-import { doc, getDoc, serverTimestamp, setDoc } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
+// 門檻值直接寫入 Firestore 的 thresholds/{uid}（Firestore 規則限制只有本人能寫入），
+// ESP32 再透過 Firestore REST API 讀取（規則允許以 uid 讀取單一文件）。
+import { doc, getDoc, serverTimestamp, setDoc } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 import { db } from "../firebase.js";
 import { requireUser } from "../session.js";
 import { busy, mountShell, showAlert } from "../ui.js";

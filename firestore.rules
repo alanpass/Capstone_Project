@@ -4,28 +4,36 @@ rules_version = '2';
 // 或使用 CLI：firebase deploy --only firestore:rules
 service cloud.firestore {
   match /databases/{database}/documents {
-    function signedIn() { return request.auth != null; }
-    function isOwner(uid) { return signedIn() && request.auth.uid == uid; }
+    function isOwner(uid) { return request.auth != null && request.auth.uid == uid; }
     function isNumber(v) { return v is int || v is float; }
 
     // 使用者基本資料：只能讀寫自己的
     match /users/{uid} {
       allow read, write: if isOwner(uid);
 
-      // 種植專案與 AI 指南快取：只能讀自己的，寫入一律經過後端（Admin SDK 不受規則限制）
+      // 種植專案：只能存取自己的，並檢查欄位
       match /plants/{plantId} {
-        allow read: if isOwner(uid);
-        allow write: if false;
+        allow read, delete: if isOwner(uid);
+        allow create, update: if isOwner(uid)
+          && request.resource.data.keys().hasOnly(['plant_name', 'summary', 'start_date', 'total_days', 'created_at'])
+          && request.resource.data.plant_name is string && request.resource.data.plant_name.size() <= 40
+          && request.resource.data.start_date is string
+          && request.resource.data.total_days is int
+          && request.resource.data.total_days >= 1 && request.resource.data.total_days <= 365;
+
+        // AI 照護指南快取
         match /guides/{guideId} {
-          allow read: if isOwner(uid);
-          allow write: if false;
+          allow read, write: if isOwner(uid);
         }
       }
     }
 
-    // ESP32 門檻值：只能讀寫自己的，並檢查欄位型別
+    // ESP32 自動控制門檻值
+    //  - 只有本人可以寫入，並檢查欄位
+    //  - 允許以 uid 讀取「單一文件」（get），讓 ESP32 不必登入即可透過 REST API 取得；
+    //    不允許 list，無法列舉其他使用者。門檻值只是溫濕度數字，不含個人資料。
     match /thresholds/{uid} {
-      allow read: if isOwner(uid);
+      allow get: if true;
       allow write: if isOwner(uid)
         && request.resource.data.keys().hasOnly(['tempMin', 'tempMax', 'humidMin', 'humidMax', 'soilMin', 'updatedAt'])
         && isNumber(request.resource.data.tempMin) && isNumber(request.resource.data.tempMax)

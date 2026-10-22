@@ -1,5 +1,5 @@
-import { api } from "../api.js";
 import { THINGSPEAK_CHANNEL_ID } from "../config.js";
+import { loadSensors } from "../sensors.js";
 import { emptyHtml, esc, fmt, loadingHtml, mountShell } from "../ui.js";
 
 await mountShell();
@@ -20,7 +20,7 @@ async function load() {
   $("latest").innerHTML = loadingHtml();
   $("table").innerHTML = "";
   try {
-    const { latest, readings } = await api("/api/sensors?results=30", { auth: false });
+    const { latest, readings } = await loadSensors(30);
     $("latest").innerHTML = latest
       ? `<div class="stats">
           <div class="stat"><div class="label"><i class="fa-solid fa-droplet"></i> 土壤濕度</div><div class="value">${fmt(latest.soil)}<small>%</small></div></div>

@@ -1,16 +1,16 @@
-import { api } from "../api.js";
+import { deletePlant, listPlants } from "../garden.js";
 import { progressCard } from "../guide.js";
 import { requireUser } from "../session.js";
 import { emptyHtml, esc, loadingHtml, mountShell, toast } from "../ui.js";
 
 await mountShell();
-await requireUser();
+const user = await requireUser();
 const list = document.getElementById("list");
 
 async function load() {
   list.innerHTML = loadingHtml();
   try {
-    const { plants } = await api("/api/garden");
+    const plants = await listPlants(user.uid);
     list.innerHTML = plants.length
       ? plants.map((p) => progressCard(p, `
           ${p.summary ? `<p style="color:var(--muted);font-size:.9rem;margin-top:12px">${esc(p.summary)}</p>` : ""}
@@ -30,7 +30,7 @@ list.addEventListener("click", async (e) => {
   if (!btn || !confirm(`確定要刪除「${btn.dataset.name}」嗎？此動作無法復原。`)) return;
   btn.disabled = true;
   try {
-    await api(`/api/garden/${encodeURIComponent(btn.dataset.delete)}`, { method: "DELETE" });
+    await deletePlant(user.uid, btn.dataset.delete);
     toast("已刪除");
     load();
   } catch (err) {

@@ -4,9 +4,9 @@
 WIFI_SSID = "your-wifi"
 WIFI_PASSWORD = "your-wifi-password"
 
-# 後端 API（Render）與裝置金鑰（需與後端環境變數 DEVICE_API_KEY 相同）
-API_BASE_URL = "https://two025-zhuan-ti.onrender.com"
-DEVICE_API_KEY = "change-me"
+# Firebase 專案（與 frontend/assets/js/config.js 相同，屬於公開設定）
+FIREBASE_PROJECT_ID = "plantai-cac82"
+FIREBASE_WEB_API_KEY = "AIzaSyAVol7FJxkR7qec_4o8ib3V9eOBwdK8g-M"
 
 # 網站「個人資料」頁顯示的使用者 ID，裝置會讀取這個使用者設定的門檻值
 USER_UID = "your-firebase-uid"
