@@ -1,22 +1,14 @@
-// 帳號相關：註冊、登入、登出、密碼重設、個人資料
-import {
-  confirmPasswordReset,
-  createUserWithEmailAndPassword,
-  onAuthStateChanged,
-  sendPasswordResetEmail,
-  signInWithEmailAndPassword,
-  signOut,
-  updateProfile,
-  verifyPasswordResetCode,
-} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
-import { doc, getDoc, serverTimestamp, setDoc } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
-import { auth, db } from "./firebase.js";
+// 帳號相關：註冊、登入、登出、密碼重設、個人資料（Supabase Auth）
+import { isConfigured } from "./config.js";
+import { supabase, unwrap } from "./supabase.js";
 
-/** 等 Firebase 判斷完登入狀態後回傳目前使用者（未登入為 null）。 */
-export function currentUser() {
-  return new Promise((resolve) => {
-    const stop = onAuthStateChanged(auth, (user) => { stop(); resolve(user); });
-  });
+const pageUrl = (page) => new URL(page, location.href).href;
+
+/** 目前登入的使用者（未登入為 null）。 */
+export async function currentUser() {
+  if (!isConfigured) return null;
+  const { data } = await supabase.auth.getSession();
+  return data.session?.user ?? null;
 }
 
 /** 需要登入的頁面使用：未登入就導向登入頁，並記住原本要去的頁面。 */
@@ -36,52 +28,60 @@ export function nextPage(fallback = "home.html") {
   return /^[\w-]+\.html(\?[\w=&%.-]*)?$/.test(next) ? next : fallback;
 }
 
+/** 註冊；若專案開啟 Email 驗證，回傳 { needsConfirmation: true }。 */
 export async function signUp({ name, email, password, address }) {
-  const cred = await createUserWithEmailAndPassword(auth, email, password);
-  await updateProfile(cred.user, { displayName: name });
-  await setDoc(doc(db, "users", cred.user.uid), {
-    displayName: name, email, address, createdAt: serverTimestamp(),
-  });
-  return cred.user;
+  const data = unwrap(await supabase.auth.signUp({
+    email,
+    password,
+    options: { data: { display_name: name, address }, emailRedirectTo: pageUrl("home.html") },
+  }));
+  return { user: data.user, needsConfirmation: !data.session };
 }
 
-export const signIn = (email, password) => signInWithEmailAndPassword(auth, email, password);
-export const signOutUser = () => signOut(auth);
-export const sendReset = (email) =>
-  sendPasswordResetEmail(auth, email, { url: new URL("login.html", location.href).href });
-export const checkResetCode = (code) => verifyPasswordResetCode(auth, code);
-export const applyReset = (code, password) => confirmPasswordReset(auth, code, password);
+export async function signIn(email, password) {
+  return unwrap(await supabase.auth.signInWithPassword({ email, password })).user;
+}
+
+export async function signOutUser() {
+  await supabase.auth.signOut();
+}
+
+export async function sendReset(email) {
+  unwrap(await supabase.auth.resetPasswordForEmail(email, { redirectTo: pageUrl("reset.html") }));
+}
+
+export async function updatePassword(password) {
+  unwrap(await supabase.auth.updateUser({ password }));
+}
 
 export async function getProfile(user) {
-  const snap = await getDoc(doc(db, "users", user.uid));
-  const data = snap.exists() ? snap.data() : {};
+  const row = unwrap(await supabase.from("profiles").select("display_name, address").eq("id", user.id).maybeSingle());
   return {
-    uid: user.uid,
+    id: user.id,
     email: user.email,
-    displayName: data.displayName || user.displayName || "",
-    address: data.address || data.Address || "",
+    displayName: row?.display_name || user.user_metadata?.display_name || "",
+    address: row?.address || "",
   };
 }
 
 export async function saveProfile(user, { displayName, address }) {
-  await updateProfile(user, { displayName });
-  await setDoc(doc(db, "users", user.uid), { displayName, address, updatedAt: serverTimestamp() }, { merge: true });
+  unwrap(await supabase.from("profiles").upsert({
+    id: user.id, display_name: displayName, address, updated_at: new Date().toISOString(),
+  }));
 }
 
-const AUTH_ERRORS = {
-  "auth/invalid-email": "Email 格式不正確",
-  "auth/user-not-found": "帳號或密碼錯誤",
-  "auth/wrong-password": "帳號或密碼錯誤",
-  "auth/invalid-credential": "帳號或密碼錯誤",
-  "auth/email-already-in-use": "這個 Email 已經註冊過了",
-  "auth/weak-password": "密碼至少需要 6 個字元",
-  "auth/too-many-requests": "嘗試次數過多，請稍後再試",
-  "auth/network-request-failed": "網路連線失敗，請檢查網路",
-  "auth/expired-action-code": "連結已過期，請重新申請",
-  "auth/invalid-action-code": "連結無效或已使用過，請重新申請",
-  "auth/unauthorized-domain": "此網域尚未加入 Firebase 授權網域",
-};
+const AUTH_ERRORS = [
+  [/invalid login credentials/i, "帳號或密碼錯誤"],
+  [/email not confirmed/i, "Email 尚未驗證，請先到信箱點擊驗證連結"],
+  [/already registered|already been registered/i, "這個 Email 已經註冊過了"],
+  [/password should be at least|weak password/i, "密碼至少需要 6 個字元"],
+  [/unable to validate email|invalid email|email address .* is invalid/i, "Email 格式不正確"],
+  [/rate limit|too many/i, "嘗試次數過多，請稍後再試"],
+  [/failed to fetch|network/i, "網路連線失敗，請檢查網路"],
+  [/same.*password|different from the old/i, "新密碼不能與舊密碼相同"],
+];
 
 export function authErrorMessage(err) {
-  return AUTH_ERRORS[err?.code] || err?.message || "發生未知錯誤";
+  const text = err?.message || String(err);
+  return AUTH_ERRORS.find(([re]) => re.test(text))?.[1] || text || "發生未知錯誤";
 }

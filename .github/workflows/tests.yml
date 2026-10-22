@@ -9,7 +9,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
-      - uses: actions/setup-node@v5
+      - uses: denoland/setup-deno@v2
         with:
-          node-version: 22
-      - run: node --test "tests/*.test.mjs"
+          deno-version: v2.x
+      # 前端邏輯、Edge Function、資料庫 schema（PGlite）一次測完
+      - run: deno test --allow-read --allow-env --allow-net --allow-sys tests/ supabase/

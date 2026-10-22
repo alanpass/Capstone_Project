@@ -45,7 +45,7 @@ $("picker").addEventListener("click", (e) => {
 async function loadPlants() {
   $("picker").innerHTML = loadingHtml();
   try {
-    plants = await listPlants(user.uid);
+    plants = await listPlants();
   } catch (err) {
     $("picker").innerHTML = `<div class="alert error">${esc(err.message)}</div>`;
     return;
@@ -78,7 +78,7 @@ $("createForm").addEventListener("submit", async (e) => {
   const done = busy($("createBtn"), "AI 分析中…");
   msg.classList.add("hidden");
   try {
-    const plant = await createPlant(user.uid, $("plantName").value);
+    const plant = await createPlant($("plantName").value);
     showAlert(msg, `已建立「${plant.plant_name}」的種植專案，預計 ${plant.total_days} 天。${plant.summary}`, "ok");
     toast("種植專案已建立");
     $("plantName").value = "";

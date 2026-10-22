@@ -11,104 +11,124 @@
 
 | 模組 | 說明 |
 | --- | --- |
-| 會員帳號 | Firebase Authentication 註冊、登入、忘記密碼、個人資料（地址用於查詢天氣） |
+| 會員帳號 | 註冊（Email 驗證）、登入、忘記密碼、個人資料（地址用於查詢天氣） |
 | 植物百科 | 100 種植物的澆水、日照、溫度、土壤、修剪、繁殖、毒性資訊，可搜尋／篩選／排序 |
-| AI 種植規劃 | Gemini 驗證植物名稱並估算生長週期，建立種植專案；可查看今日或任一天的照護指南 |
+| AI 種植規劃 | Gemini 驗證植物名稱並估算生長週期，建立種植專案；可查看今日或任一天的照護指南（結果會快取） |
 | 我的花園 | 同時管理多個種植專案，顯示天數、生長階段與進度 |
-| IoT 監測 | ESP32 上傳土壤濕度、氣溫、空氣濕度至 ThingSpeak，網站即時顯示圖表與紀錄 |
+| IoT 監測 | ESP32 每分鐘上傳土壤濕度、氣溫、空氣濕度，網站自動更新數值、折線圖與紀錄 |
 | 自動控制 | 在網站設定溫濕度與土壤濕度門檻，ESP32 自動啟動控溫繼電器與澆水泵 |
 
-## 系統架構（Serverless）
+## 系統架構
 
-不需要任何自架伺服器：網站是 GitHub Pages 上的靜態檔，其餘全部使用雲端託管服務，免費方案即可運作。
+全部使用託管服務的免費方案，**不需要自己維護任何伺服器**：
 
 ```mermaid
 flowchart LR
   subgraph Pages["GitHub Pages（靜態網站）"]
     UI["HTML + ES Modules"]
   end
-  subgraph Firebase
-    Auth["Authentication"]
-    FS[("Firestore")]
-    AIL["AI Logic → Gemini"]
-    AC["App Check"]
+  subgraph Supabase
+    Auth["Auth<br/>帳號與登入"]
+    DB[("PostgreSQL<br/>Row Level Security")]
+    Fn["Edge Function「ai」<br/>保管 Gemini 金鑰"]
   end
+  Gemini["Google Gemini"]
+  OM["Open-Meteo 天氣"]
   ESP1["ESP32 #1<br/>DHT22 + 控溫繼電器"]
   ESP2["ESP32 #2<br/>土壤濕度 + 水泵"]
-  TS[("ThingSpeak")]
-  OM["Open-Meteo 天氣"]
+  TS[("ThingSpeak<br/>選擇性備份／示範資料")]
 
-  UI -- 登入 --> Auth
-  UI -- "花園、門檻值（安全規則）" --> FS
-  UI -- "AI 指南（App Check 保護）" --> AIL
-  UI -- 讀取感測資料 --> TS
-  UI -- 天氣預報 --> OM
-  ESP1 & ESP2 -- 上傳數據 --> TS
-  ESP1 & ESP2 -- "REST 讀取門檻值" --> FS
+  UI --> Auth
+  UI -- "花園、門檻值、感測數據" --> DB
+  UI -- 登入後呼叫 --> Fn --> Gemini
+  UI --> OM
+  ESP1 & ESP2 -- "device_sync()<br/>上傳數據＋取得門檻" --> DB
+  ESP1 & ESP2 -. 選擇性 .-> TS
+  UI -. 沒有自己的數據時 .-> TS
 ```
 
-| 需求 | 舊版做法 | 新版做法 |
-| --- | --- | --- |
-| 呼叫 Gemini | Flask 代理（Render），金鑰寫在程式碼 | **Firebase AI Logic**：金鑰由 Firebase 保管，App Check 防濫用 |
-| 天氣 | 中央氣象署 API（需金鑰、需後端轉發） | **Open-Meteo**（免金鑰、瀏覽器直接呼叫） |
-| 感測資料 | 後端轉發 ThingSpeak | 瀏覽器直接讀取公開頻道 |
-| 花園資料 | 後端 Admin SDK，信任前端傳來的 user_id | 前端直接存取 Firestore，**安全規則**限制只能存取自己的資料 |
-| ESP32 門檻值 | Firestore → 本機 MySQL 同步 → Flask → ngrok | ESP32 直接呼叫 **Firestore REST API** |
-| 植物百科 | 瀏覽器登入後寫入 Firestore | 靜態 JSON，隨網站一起部署 |
+| 元件 | 用途 |
+| --- | --- |
+| GitHub Pages | 網站本體；推送到 `main` 自動部署 |
+| Supabase Auth | 註冊、登入、Email 驗證、重設密碼 |
+| Supabase PostgreSQL | 個人資料、種植專案、AI 指南快取、門檻值、感測數據；**Row Level Security** 確保每個人只能存取自己的資料 |
+| Supabase Edge Function | 唯一需要密鑰的地方：保管 Gemini 金鑰、固定提示詞、限制每人每小時 30 次 |
+| Open-Meteo | 天氣預報（免金鑰） |
+| ThingSpeak | 選擇性：ESP32 同時備份數據；網站在使用者還沒有裝置數據時顯示頻道資料作為示範 |
 
 ## 專案結構
 
 ```
-├── frontend/                 靜態網站（部署到 GitHub Pages）
-│   ├── *.html                各頁面（只有結構，邏輯在 assets/js/pages/）
-│   ├── assets/css/app.css    共用樣式
-│   ├── assets/js/            共用模組
-│   │   ├── config.js         Firebase 設定、Gemini 模型、App Check 金鑰
-│   │   ├── ai.js             Firebase AI Logic 提示詞與結構化輸出
-│   │   ├── garden.js         種植專案與 AI 指南快取（Firestore）
-│   │   ├── growth.js         生長天數／階段計算
-│   │   ├── weather.js        Open-Meteo 天氣
-│   │   ├── sensors.js        ThingSpeak 感測資料
-│   │   └── session.js / ui.js / guide.js / catalog.js
-│   └── data/plants.json      植物百科資料
-├── iot/                      ESP32 MicroPython 程式（climate_node、soil_node、common、config.example）
-├── tests/                    邏輯單元測試（node --test）
-├── tools/                    build_plant_catalog.py：由舊版資料產生植物百科
-├── firestore.rules           Firestore 安全規則
-└── docs/                     專案文件與參賽證明
+├── frontend/                   靜態網站
+│   ├── *.html                  各頁面（只有結構，邏輯在 assets/js/pages/）
+│   ├── assets/css/app.css      共用樣式
+│   ├── assets/js/
+│   │   ├── config.js           ← 部署時要填的設定（Supabase 網址與金鑰）
+│   │   ├── supabase.js         Supabase 用戶端
+│   │   ├── session.js          帳號：註冊、登入、重設密碼、個人資料
+│   │   ├── garden.js           種植專案與 AI 指南快取
+│   │   ├── ai.js               呼叫 Edge Function
+│   │   ├── sensors.js / charts.js   感測數據與折線圖
+│   │   ├── weather.js / growth.js   天氣、生長天數與階段
+│   │   └── ui.js / guide.js / catalog.js
+│   └── data/plants.json        植物百科資料
+├── supabase/
+│   ├── schema.sql              資料表、RLS 規則、裝置函式（貼到 SQL Editor 執行）
+│   ├── functions/ai/index.ts   Edge Function（AI）
+│   └── tests/                  在 PGlite 中驗證 schema 與 RLS
+├── iot/                        ESP32 MicroPython 程式
+├── tests/                      前端邏輯單元測試
+├── tools/                      build_plant_catalog.py：由舊版資料產生植物百科
+└── docs/                       專案文件與參賽證明
 ```
 
-## 部署步驟（一次性設定）
+## 部署步驟
 
-1. **GitHub Pages**：repo Settings → Pages → Source 選 *GitHub Actions*。之後每次推送到 `main` 都會自動部署 `frontend/`。
-2. **Firebase Authentication**：Authentication → 設定 → 授權網域，加入 `alanpass.github.io`。
-3. **Firestore 規則**：Firestore → 規則，貼上 [`firestore.rules`](firestore.rules) 並發布。
-4. **Firebase AI Logic**：Firebase Console → AI Logic → 開始使用 → 選 *Gemini Developer API*（免費方案即可）。
-5. **App Check**（AI Logic 預設強制）：
-   1. Google Cloud Console → Security → reCAPTCHA，建立「網站」類型金鑰，網域填 `alanpass.github.io`，不要勾選核取方塊驗證。
-   2. Firebase Console → App Check → 應用程式，用 reCAPTCHA Enterprise 註冊網頁應用程式並填入金鑰。
-   3. 把金鑰填進 `frontend/assets/js/config.js` 的 `RECAPTCHA_ENTERPRISE_SITE_KEY` 後推送。
-6. **ESP32**：燒錄 [MicroPython 韌體](https://micropython.org/download/ESP32_GENERIC/)，把 `iot/config.example.py` 複製成 `config.py` 並填值，用 Thonny 上傳 `common.py`、`config.py` 與對應節點的 `main.py`。
+> 需要的帳號：GitHub（已有）、[Supabase](https://supabase.com)、[Google AI Studio](https://aistudio.google.com)（取得 Gemini 金鑰）。全部免費。
 
-## 本機開發
+### 1. 建立 Supabase 專案與資料庫
+1. 到 https://supabase.com/dashboard 建立新專案（Region 選 **Northeast Asia (Tokyo)** 或 Singapore）。
+2. 左側 **SQL Editor** → New query → 貼上 [`supabase/schema.sql`](supabase/schema.sql) 全部內容 → **Run**。
+
+### 2. 設定登入
+1. **Authentication → URL Configuration**
+   - Site URL：`https://alanpass.github.io/Capstone_Project/`
+   - Redirect URLs 加入：`https://alanpass.github.io/Capstone_Project/**`、`http://localhost:5500/**`
+2. （選擇）**Authentication → Sign In / Providers → Email**：免費方案的驗證信每小時有寄送上限，展示時可關閉「Confirm email」讓註冊後直接登入。
+
+### 3. 部署 AI（Edge Function）
+1. 到 https://aistudio.google.com/apikey 建立 Gemini API 金鑰。
+2. Supabase **Edge Functions → Secrets**：新增 `GEMINI_API_KEY` = 你的金鑰。
+3. **Edge Functions → Deploy a new function → Via Editor**：名稱填 `ai`，貼上 [`supabase/functions/ai/index.ts`](supabase/functions/ai/index.ts) 全部內容 → Deploy。
+4. 在函式的 **Details / Settings** 關閉「Verify JWT with legacy secret」（程式內已自行驗證登入狀態，支援新版金鑰）。
+
+### 4. 連接網站
+1. Supabase **Project Settings → Data API** 複製 Project URL；**API Keys** 複製 Publishable key（`sb_publishable_` 開頭）。
+2. 填入 [`frontend/assets/js/config.js`](frontend/assets/js/config.js) 的 `SUPABASE_URL`、`SUPABASE_PUBLISHABLE_KEY`，推送到 GitHub 即自動部署。
+   這兩個值本來就是公開的，資料安全由 RLS 保護；**絕對不要**填 `service_role` / secret key。
+
+### 5. ESP32
+1. 燒錄 [MicroPython 韌體](https://micropython.org/download/ESP32_GENERIC/)。
+2. 登入網站 → 個人資料 → 複製「裝置權杖」。
+3. 把 `iot/config.example.py` 複製成 `config.py`，填入 Wi-Fi、Supabase 網址與 Publishable key、裝置權杖。
+4. 用 Thonny 上傳 `common.py`、`config.py`，以及節點的 `main.py`（`climate_node/` 或 `soil_node/`）。
+
+### 6. ThingSpeak（選擇）
+- 網站在使用者還沒有裝置數據時，會顯示 ThingSpeak 頻道 `3018608` 作為示範：到頻道 **Sharing** 選「Share channel view with everyone」即可讀取。
+- 想讓 ESP32 同時備份到 ThingSpeak，在 `config.py` 填 `THINGSPEAK_WRITE_KEY`。
+
+## 本機開發與測試
 
 ```bash
-python -m http.server 5500 --directory frontend
-```
-
-開啟 http://localhost:5500 。本機使用 AI 功能時，App Check 會改用除錯權杖：第一次執行後到瀏覽器 Console 複製權杖，登記到 Firebase Console → App Check → 應用程式 → 管理除錯權杖。
-
-測試（需要 Node.js 20+）：
-
-```bash
-node --test "tests/*.test.mjs"
+python -m http.server 5500 --directory frontend   # 開啟 http://localhost:5500
+deno task test                                     # 前端邏輯 + Edge Function + 資料庫 RLS，共 14 項
 ```
 
 ## 重構重點
 
-- **安全性**：移除程式碼中所有寫死的金鑰；資料存取改由 Firestore 安全規則把關（只能讀寫自己的花園與設定、檢查欄位型別）；AI 呼叫受 App Check 保護；所有動態內容渲染前先跳脫，AI 回應改為結構化 JSON，不再直接插入 AI 產生的 HTML。
-- **架構**：移除 Flask、Render、MySQL、ngrok，改為 Serverless；部署只剩「推送到 GitHub」。
-- **IoT**：ESP32 直接讀取 Firestore；土壤濕度在裝置端換算成百分比，與網站門檻意義一致。
-- **修正**：種植天數依使用者當地日期計算；土壤濕度 ADC 原始值原本一律被截成 100%；註冊時存的地址欄位原本讀不到；部分損毀的植物圖片。
-- **效能**：同一天的 AI 指南會快取在 Firestore；圖片由 13 MB 壓縮為約 2.5 MB（WebP）；植物百科改為靜態 JSON。
-- **介面**：統一設計、手機版選單、載入與錯誤狀態、登入後自動回到原頁面。
+- **安全性**：程式碼中沒有任何密鑰；資料庫每張表都啟用 Row Level Security；ESP32 使用可隨時重新產生的裝置權杖，只能呼叫 `device_sync()`；AI 只接受登入使用者、提示詞固定在伺服器端並限制使用次數；所有動態內容渲染前先跳脫，AI 回應為結構化 JSON。
+- **架構**：移除 Flask、Render、MySQL、ngrok、Firebase，改為 GitHub Pages + Supabase；ESP32 一個請求同時完成「上傳數據」與「取得門檻」。
+- **IoT**：感測數據存在自己的資料庫，網站自行繪製折線圖；土壤濕度在裝置端換算成百分比，與網站門檻意義一致；資料保留 90 天並有防洪限制。
+- **修正**：種植天數依使用者當地日期計算；土壤濕度原始值原本一律被截成 100%；註冊地址欄位原本讀不到；部分損毀的植物圖片。
+- **效能**：同一天的 AI 指南會快取；圖片由 13 MB 壓縮為約 2.5 MB（WebP）；植物百科為靜態 JSON。
+- **品質**：14 項自動化測試（含在 PostgreSQL 中實際驗證 RLS），GitHub Actions 每次推送自動執行。

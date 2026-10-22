@@ -1,37 +1,33 @@
-import { THINGSPEAK_CHANNEL_ID } from "../config.js";
-import { loadSensors } from "../sensors.js";
-import { emptyHtml, esc, fmt, loadingHtml, mountShell } from "../ui.js";
+import { renderCharts } from "../charts.js";
+import { formatTime, loadSensors } from "../sensors.js";
+import { emptyHtml, esc, fmt, loadingHtml, mountShell, showAlert } from "../ui.js";
 
-await mountShell();
+const user = await mountShell();
 const $ = (id) => document.getElementById(id);
 
-const CHARTS = [
-  [1, "土壤濕度", "fa-droplet"],
-  [2, "空氣溫度", "fa-temperature-half"],
-  [3, "空氣濕度", "fa-water"],
-];
-$("charts").innerHTML = CHARTS.map(([field, title, icon]) => `
-  <section class="card"><h2><i class="fa-solid ${icon}"></i> ${title}</h2>
-    <iframe class="chart-frame" title="${title}圖表" loading="lazy"
-      src="https://thingspeak.com/channels/${THINGSPEAK_CHANNEL_ID}/charts/${field}?bgcolor=%23ffffff&color=%234A6352&dynamic=true&results=60&type=line&update=15"></iframe>
-  </section>`).join("");
-
-async function load() {
-  $("latest").innerHTML = loadingHtml();
-  $("table").innerHTML = "";
+async function load(showSpinner = true) {
+  if (showSpinner) $("latest").innerHTML = loadingHtml();
   try {
-    const { latest, readings } = await loadSensors(30);
+    const { source, latest, readings } = await loadSensors(user, 120);
+    if (source === "demo") {
+      showAlert($("source"), user
+        ? "你的裝置還沒有上傳資料，目前顯示示範資料（ThingSpeak 公開頻道）。到「個人資料」取得裝置權杖並設定 ESP32 後，這裡就會顯示你自己的數據。"
+        : "目前顯示示範資料（ThingSpeak 公開頻道）。登入並連接自己的 ESP32 後，就會顯示你自己的數據。", "warn");
+    } else {
+      $("source").classList.add("hidden");
+    }
     $("latest").innerHTML = latest
       ? `<div class="stats">
           <div class="stat"><div class="label"><i class="fa-solid fa-droplet"></i> 土壤濕度</div><div class="value">${fmt(latest.soil)}<small>%</small></div></div>
           <div class="stat"><div class="label"><i class="fa-solid fa-temperature-half"></i> 空氣溫度</div><div class="value">${fmt(latest.temperature)}<small>°C</small></div></div>
           <div class="stat"><div class="label"><i class="fa-solid fa-water"></i> 空氣濕度</div><div class="value">${fmt(latest.humidity)}<small>%</small></div></div>
-          <div class="stat"><div class="label"><i class="fa-regular fa-clock"></i> 更新時間</div><div class="value" style="font-size:1rem">${esc(latest.time)}</div></div>
+          <div class="stat"><div class="label"><i class="fa-regular fa-clock"></i> 更新時間</div><div class="value" style="font-size:1rem">${esc(formatTime(latest.at))}</div></div>
         </div>`
       : emptyHtml("fa-plug-circle-xmark", "目前沒有感測器資料", "<p>請確認 ESP32 已開機並連上 Wi-Fi。</p>");
+    renderCharts(readings);
     $("table").innerHTML = readings.length
       ? `<table class="data"><thead><tr><th>時間</th><th>土壤濕度</th><th>空氣溫度</th><th>空氣濕度</th></tr></thead><tbody>
-          ${readings.map((r) => `<tr><td>${esc(r.time)}</td><td>${fmt(r.soil, "%")}</td><td>${fmt(r.temperature, "°C")}</td><td>${fmt(r.humidity, "%")}</td></tr>`).join("")}
+          ${readings.slice(0, 30).map((r) => `<tr><td>${esc(formatTime(r.at))}</td><td>${fmt(r.soil, "%")}</td><td>${fmt(r.temperature, "°C")}</td><td>${fmt(r.humidity, "%")}</td></tr>`).join("")}
         </tbody></table>`
       : emptyHtml("fa-table", "沒有紀錄");
   } catch (err) {
@@ -39,5 +35,6 @@ async function load() {
   }
 }
 
-$("refresh").addEventListener("click", load);
+$("refresh").addEventListener("click", () => load());
 load();
+setInterval(() => document.visibilityState === "visible" && load(false), 60_000);

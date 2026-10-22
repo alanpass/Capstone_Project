@@ -1,4 +1,5 @@
 // 共用介面：導覽列、頁尾、提示訊息、HTML 跳脫
+import { isConfigured } from "./config.js";
 import { currentUser, getProfile, signOutUser } from "./session.js";
 
 const PRIVATE_LINKS = [
@@ -35,6 +36,10 @@ export async function mountShell() {
       <nav class="nav" aria-label="主要導覽"></nav>
     </div>`;
   document.body.prepend(header);
+  if (!isConfigured) {
+    header.insertAdjacentHTML("afterend", `<div class="setup-banner" role="status">
+      <i class="fa-solid fa-circle-info"></i> 網站尚未連接 Supabase，會員與 AI 功能暫時無法使用；植物百科與感測器示範資料可正常瀏覽。</div>`);
+  }
 
   const footer = document.createElement("footer");
   footer.className = "site-footer";

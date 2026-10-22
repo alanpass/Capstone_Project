@@ -21,8 +21,13 @@ document.getElementById("form").addEventListener("submit", async (e) => {
   if (data.password.length < 6) return showAlert(msg, "密碼至少需要 6 個字元");
   const done = busy(document.getElementById("submit"), "建立帳號中…");
   try {
-    await signUp(data);
-    location.href = "home.html";
+    const { needsConfirmation } = await signUp(data);
+    if (!needsConfirmation) {
+      location.href = "home.html";
+      return;
+    }
+    document.getElementById("form").classList.add("hidden");
+    showAlert(msg, `驗證信已寄到 ${data.email}，請點擊信中的連結完成註冊（記得檢查垃圾郵件匣）。`, "ok");
   } catch (err) {
     showAlert(msg, authErrorMessage(err));
     done();

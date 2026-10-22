@@ -4,15 +4,15 @@
 WIFI_SSID = "your-wifi"
 WIFI_PASSWORD = "your-wifi-password"
 
-# Firebase 專案（與 frontend/assets/js/config.js 相同，屬於公開設定）
-FIREBASE_PROJECT_ID = "plantai-cac82"
-FIREBASE_WEB_API_KEY = "AIzaSyAVol7FJxkR7qec_4o8ib3V9eOBwdK8g-M"
+# Supabase 專案（與 frontend/assets/js/config.js 相同，屬於公開設定）
+SUPABASE_URL = "https://xxxxxxxx.supabase.co"
+SUPABASE_KEY = "sb_publishable_xxxxxxxx"
 
-# 網站「個人資料」頁顯示的使用者 ID，裝置會讀取這個使用者設定的門檻值
-USER_UID = "your-firebase-uid"
+# 網站「個人資料」頁的裝置權杖：裝置用它上傳數據並讀取你設定的門檻值
+DEVICE_TOKEN = "00000000-0000-0000-0000-000000000000"
 
-# ThingSpeak 寫入金鑰（Channel → API Keys → Write API Key）
-THINGSPEAK_WRITE_KEY = "your-write-key"
+# 選填：同時備份到 ThingSpeak（Channel 3018608 → API Keys → Write API Key），留空則不備份
+THINGSPEAK_WRITE_KEY = ""
 
 # 土壤濕度感測器校正：分別記錄「完全乾燥」與「泡在水中」時的 ADC 讀數
 SOIL_ADC_DRY = 0

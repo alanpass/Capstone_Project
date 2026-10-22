@@ -1,8 +1,8 @@
-// 純邏輯單元測試：node --test tests/
+// 純邏輯單元測試：deno test tests/
 import assert from "node:assert/strict";
 import { test } from "node:test";
 import { durationToDays, progressFor, stageFor, withProgress } from "../frontend/assets/js/growth.js";
-import { normalize, soilPercent } from "../frontend/assets/js/sensors.js";
+import { normalize, soilPercent, summarize } from "../frontend/assets/js/sensors.js";
 import { cityFromAddress } from "../frontend/assets/js/weather.js";
 
 test("生長階段邊界", () => {
@@ -49,4 +49,14 @@ test("感測資料正規化：ADC 原始值換算、超出範圍視為無效", (
   assert.equal(row.soil, null);
   assert.equal(row.temperature, 26.4);
   assert.equal(row.humidity, null);
+});
+
+test("summarize 合併最近幾筆中各欄位的最新值", () => {
+  const latest = summarize([
+    { at: "t3", soil: 40, temperature: null, humidity: null },
+    { at: "t2", soil: null, temperature: 25, humidity: 70 },
+    { at: "t1", soil: 38, temperature: 24, humidity: 65 },
+  ]);
+  assert.deepEqual(latest, { at: "t3", soil: 40, temperature: 25, humidity: 70 });
+  assert.equal(summarize([]), null);
 });

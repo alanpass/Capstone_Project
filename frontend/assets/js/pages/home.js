@@ -1,6 +1,6 @@
 import { listPlants } from "../garden.js";
 import { progressCard } from "../guide.js";
-import { loadSensors } from "../sensors.js";
+import { formatTime, loadSensors } from "../sensors.js";
 import { getProfile, requireUser } from "../session.js";
 import { emptyHtml, esc, fmt, loadingHtml, mountShell } from "../ui.js";
 import { forecast } from "../weather.js";
@@ -12,7 +12,7 @@ const $ = (id) => document.getElementById(id);
 ["weather", "sensor", "plants"].forEach((id) => ($(id).innerHTML = loadingHtml()));
 $("today").textContent = new Date().toLocaleDateString("zh-TW", { year: "numeric", month: "long", day: "numeric", weekday: "long" });
 
-const profile = await getProfile(user).catch(() => ({ displayName: user.email, address: "" }));
+const profile = await getProfile(user).catch(() => ({ displayName: "", address: "" }));
 const hour = new Date().getHours();
 $("greeting").textContent = `${hour < 11 ? "早安" : hour < 18 ? "午安" : "晚安"}，${profile.displayName || user.email}`;
 
@@ -29,17 +29,18 @@ forecast(profile.address).then((w) => {
     : emptyHtml("fa-cloud", "暫時取不到天氣資料");
 });
 
-loadSensors().then(({ latest: s }) => {
+loadSensors(user, 20).then(({ source, latest: s }) => {
   $("sensor").innerHTML = s
     ? `<div class="stats">
         <div class="stat"><div class="label"><i class="fa-solid fa-droplet"></i> 土壤濕度</div><div class="value">${fmt(s.soil)}<small>%</small></div></div>
         <div class="stat"><div class="label"><i class="fa-solid fa-temperature-half"></i> 空氣溫度</div><div class="value">${fmt(s.temperature)}<small>°C</small></div></div>
         <div class="stat"><div class="label"><i class="fa-solid fa-water"></i> 空氣濕度</div><div class="value">${fmt(s.humidity)}<small>%</small></div></div>
-      </div><p style="color:var(--muted);font-size:.85rem;margin-top:10px">更新時間：${esc(s.time)}・<a href="sensors.html">查看圖表</a></p>`
+      </div><p style="color:var(--muted);font-size:.85rem;margin-top:10px">
+        ${source === "demo" ? "示範資料・" : ""}更新時間：${esc(formatTime(s.at))}・<a href="sensors.html">查看圖表</a></p>`
     : emptyHtml("fa-plug-circle-xmark", "目前沒有感測器資料", "<p>請確認 ESP32 已開機並連上 Wi-Fi。</p>");
 }).catch((err) => ($("sensor").innerHTML = `<div class="alert error">${esc(err.message)}</div>`));
 
-listPlants(user.uid).then((plants) => {
+listPlants().then((plants) => {
   $("plants").innerHTML = plants.length
     ? plants.slice(0, 6).map((p) => progressCard(p, `
         <div class="row" style="margin-top:14px"><a class="btn sm" href="planner.html?id=${encodeURIComponent(p.id)}"><i class="fa-solid fa-list-check"></i> 今日指南</a></div>`)).join("")

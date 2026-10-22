@@ -1,6 +1,6 @@
 # ESP32 #1：DHT22 溫濕度 + 控溫繼電器
 # 接線：DHT22 DATA → GPIO23；繼電器 IN → GPIO5
-# 上傳 ThingSpeak field2（空氣溫度）、field3（空氣濕度）
+# 每分鐘把氣溫、空氣濕度同步到 Supabase，並取回網站設定的門檻值（可選擇同時備份到 ThingSpeak）
 import time
 
 import dht
@@ -10,8 +10,7 @@ import common
 
 DHT_PIN = 23
 RELAY_PIN = 5
-READ_INTERVAL = 60          # 秒：讀取感測器、控制、上傳
-THRESHOLD_INTERVAL = 300    # 秒：向後端同步門檻值
+READ_INTERVAL = 60          # 秒：讀取感測器、同步、控制
 
 sensor = dht.DHT22(machine.Pin(DHT_PIN))
 relay = machine.Pin(RELAY_PIN, machine.Pin.OUT, value=0)
@@ -35,22 +34,19 @@ def main():
         time.sleep(10)
 
     thresholds = {"tempMin": 20.0, "tempMax": 30.0, "humidMin": 40.0, "humidMax": 80.0}
-    last_sync = -THRESHOLD_INTERVAL
     print("--- 溫控節點啟動 ---")
 
     while True:
-        now = time.time()
-        if now - last_sync >= THRESHOLD_INTERVAL:
-            thresholds = common.fetch_thresholds(thresholds)
-            last_sync = now
         try:
             sensor.measure()
             temp, humi = sensor.temperature(), sensor.humidity()
             print("溫度 {}°C、濕度 {}%".format(temp, humi))
+            thresholds = common.sync(thresholds, temperature=temp, humidity=humi)
             control(temp, thresholds)
-            common.upload({"field2": temp, "field3": humi})
+            common.backup_to_thingspeak({"field2": temp, "field3": humi})
         except OSError as e:
             print("讀取 DHT22 失敗：{}".format(e))
+            thresholds = common.sync(thresholds)  # 仍然更新門檻值
         if not common.connect_wifi(timeout=5):
             print("Wi-Fi 中斷，稍後重試")
         time.sleep(READ_INTERVAL)

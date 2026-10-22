@@ -1,6 +1,6 @@
 # ESP32 #2：電容式土壤濕度感測器 + 澆水繼電器（水泵）
 # 接線：感測器 AOUT → GPIO34；繼電器 IN → GPIO26
-# 上傳 ThingSpeak field1（土壤濕度 %）
+# 每分鐘把土壤濕度（%）同步到 Supabase，並取回網站設定的澆水門檻（可選擇同時備份到 ThingSpeak）
 #
 # 舊版直接上傳 ADC 原始值，並把網站的「濕度下限」當成 ADC 門檻，數值意義不一致。
 # 新版在裝置端換算成百分比，網站上設定的 soilMin（%）可以直接比較。
@@ -14,7 +14,6 @@ import config
 SOIL_PIN = 34
 RELAY_PIN = 26
 READ_INTERVAL = 60
-THRESHOLD_INTERVAL = 300
 PUMP_SECONDS = 1            # 每次澆水時間
 SAMPLES = 10                # 取平均降低雜訊
 
@@ -41,21 +40,17 @@ def main():
         time.sleep(10)
 
     thresholds = {"soilMin": 35.0}
-    last_sync = -THRESHOLD_INTERVAL
     print("--- 土壤濕度節點啟動 ---")
 
     while True:
-        now = time.time()
-        if now - last_sync >= THRESHOLD_INTERVAL:
-            thresholds = common.fetch_thresholds(thresholds)
-            last_sync = now
         try:
             raw, percent = read_soil_percent()
+            thresholds = common.sync(thresholds, soil=percent)
             print("土壤濕度 {}%（ADC {}），門檻 {}%".format(percent, int(raw), thresholds["soilMin"]))
             if percent < thresholds["soilMin"]:
                 print("土壤偏乾，澆水 {} 秒".format(PUMP_SECONDS))
                 water()
-            common.upload({"field1": percent})
+            common.backup_to_thingspeak({"field1": percent})
         except Exception as e:
             pump.value(0)
             print("主程式錯誤：{}".format(e))

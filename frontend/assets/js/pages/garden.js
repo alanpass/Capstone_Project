@@ -4,13 +4,13 @@ import { requireUser } from "../session.js";
 import { emptyHtml, esc, loadingHtml, mountShell, toast } from "../ui.js";
 
 await mountShell();
-const user = await requireUser();
+await requireUser();
 const list = document.getElementById("list");
 
 async function load() {
   list.innerHTML = loadingHtml();
   try {
-    const plants = await listPlants(user.uid);
+    const plants = await listPlants();
     list.innerHTML = plants.length
       ? plants.map((p) => progressCard(p, `
           ${p.summary ? `<p style="color:var(--muted);font-size:.9rem;margin-top:12px">${esc(p.summary)}</p>` : ""}
@@ -30,7 +30,7 @@ list.addEventListener("click", async (e) => {
   if (!btn || !confirm(`確定要刪除「${btn.dataset.name}」嗎？此動作無法復原。`)) return;
   btn.disabled = true;
   try {
-    await deletePlant(user.uid, btn.dataset.delete);
+    await deletePlant(btn.dataset.delete);
     toast("已刪除");
     load();
   } catch (err) {
