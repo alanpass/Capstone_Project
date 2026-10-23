@@ -14,13 +14,14 @@ THINGSPEAK_URL = "https://api.thingspeak.com/update"
 def connect_wifi(timeout=20):
     wlan = network.WLAN(network.STA_IF)
     wlan.active(True)
-    if not wlan.isconnected():
-        print("連線 Wi-Fi：{}".format(config.WIFI_SSID))
-        wlan.connect(config.WIFI_SSID, config.WIFI_PASSWORD)
-        for _ in range(timeout):
-            if wlan.isconnected():
-                break
-            time.sleep(1)
+    if wlan.isconnected():
+        return True
+    print("連線 Wi-Fi：{}".format(config.WIFI_SSID))
+    wlan.connect(config.WIFI_SSID, config.WIFI_PASSWORD)
+    for _ in range(timeout):
+        if wlan.isconnected():
+            break
+        time.sleep(1)
     if wlan.isconnected():
         print("Wi-Fi 已連線，IP：{}".format(wlan.ifconfig()[0]))
         return True
