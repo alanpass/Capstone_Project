@@ -141,23 +141,35 @@ const json = (body: unknown, status = 200) =>
 
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
+// 免費額度是「每個模型分開計算」，所以準備多個穩定版模型輪流使用（可用環境變數覆寫）
+const DEFAULT_FALLBACKS = ["gemini-3.5-flash-lite", "gemini-3.1-flash-lite", "gemini-3.8-flash"];
+const REQUEST_TIMEOUT_MS = 30_000; // 單次請求上限：Google 偶爾會卡住不回應
+const TOTAL_BUDGET_MS = 100_000; // 整體上限，避免使用者等太久
+
+export function modelChain(): string[] {
+  const fallbacks = (Deno.env.get("GEMINI_FALLBACK_MODELS") ?? Deno.env.get("GEMINI_FALLBACK_MODEL") ?? "")
+    .split(",").map((m) => m.trim()).filter(Boolean);
+  return [Deno.env.get("GEMINI_MODEL") ?? "gemini-3.5-flash", ...(fallbacks.length ? fallbacks : DEFAULT_FALLBACKS)]
+    .filter((m, i, all) => all.indexOf(m) === i);
+}
+
 /**
- * 呼叫 Gemini 並解析 JSON。Gemini 尖峰時段常回 503（模型忙碌）或 429（該模型額度用完），
- * 因此每個模型最多試 2 次，主要模型不行再改用備援模型（各模型額度分開計算）。
+ * 呼叫 Gemini 並解析 JSON。
+ *   503（模型忙碌）/ 逾時 / 網路錯誤 → 同一模型再試一次，仍失敗就換下一個模型
+ *   429（該模型今日額度用完）/ 404（模型已下架）→ 直接換下一個模型
+ *   其他 4xx（請求或金鑰有問題）→ 立即回報，重試也沒用
  */
 export async function callGemini(prompt: string, schema: unknown, fetchImpl = fetch, wait = sleep): Promise<unknown> {
   const key = Deno.env.get("GEMINI_API_KEY");
   if (!key) throw new HttpError(503, "伺服器尚未設定 GEMINI_API_KEY");
-  const models = [
-    Deno.env.get("GEMINI_MODEL") ?? "gemini-3.5-flash",
-    Deno.env.get("GEMINI_FALLBACK_MODEL") ?? "gemini-3.1-flash-lite",
-  ].filter((m, i, all) => m && all.indexOf(m) === i);
 
+  const deadline = Date.now() + TOTAL_BUDGET_MS;
   let lastStatus = 0;
   const tried: string[] = []; // 例如 "gemini-3.5-flash 503"，附在錯誤訊息裡方便除錯（不含任何金鑰）
-  for (const model of models) {
+  models: for (const model of modelChain()) {
     for (let attempt = 0; attempt < 2; attempt++) {
-      if (attempt > 0) await wait(1000 * attempt);
+      if (Date.now() >= deadline) break models;
+      if (attempt > 0) await wait(1000);
       let res: Response;
       try {
         res = await fetchImpl(GEMINI_URL.replace("{model}", model), {
@@ -167,23 +179,25 @@ export async function callGemini(prompt: string, schema: unknown, fetchImpl = fe
             contents: [{ parts: [{ text: prompt }] }],
             generationConfig: { responseMimeType: "application/json", responseSchema: schema },
           }),
+          signal: AbortSignal.timeout(Math.max(1000, Math.min(REQUEST_TIMEOUT_MS, deadline - Date.now()))),
         });
       } catch (err) {
-        lastStatus = 503; // 網路錯誤視同暫時無法使用，重試
-        tried.push(`${model} 網路錯誤`);
-        console.warn(`Gemini ${model} 連線失敗：${err}`);
+        lastStatus = 503; // 逾時或網路錯誤視同暫時無法使用
+        const reason = err instanceof DOMException && err.name === "TimeoutError" ? "逾時" : "網路錯誤";
+        tried.push(`${model} ${reason}`);
+        console.warn(`Gemini ${model} ${reason}（第 ${attempt + 1} 次）：${err}`);
         continue;
       }
       if (res.ok) return parseResult(await res.json());
       lastStatus = res.status;
       tried.push(`${model} ${res.status}`);
-      // Google 的錯誤說明（例如模型忙碌、金鑰無效、地區不支援）只寫進 Supabase 日誌
+      // Google 的錯誤說明（例如模型忙碌、額度用完、金鑰無效）只寫進 Supabase 日誌
       console.warn(`Gemini ${model} 回傳 ${res.status}（第 ${attempt + 1} 次）：${(await res.text()).slice(0, 300)}`);
-      if (res.status === 429) break; // 該模型額度用完，直接換下一個模型
-      if (res.status < 500) throw new HttpError(502, `AI 服務錯誤（${tried.join("、")}）`); // 請求本身有問題，重試也沒用
+      if (res.status === 429 || res.status === 404) continue models;
+      if (res.status < 500) throw new HttpError(502, `AI 服務錯誤（${tried.join("、")}）`);
     }
   }
-  if (lastStatus === 429) throw new HttpError(429, `AI 使用量已達上限，請稍後再試（${tried.join("、")}）`);
+  if (lastStatus === 429) throw new HttpError(429, `今日 AI 免費額度已用完，請明天再試（${tried.join("、")}）`);
   throw new HttpError(503, `AI 服務目前忙碌中，請稍後再試（${tried.join("、")}）`);
 }
 

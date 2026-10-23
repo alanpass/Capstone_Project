@@ -1,6 +1,6 @@
 // deno test --allow-env supabase/functions/ai/index.test.ts
 Deno.env.set("AI_FUNCTION_TEST", "1");
-const { buildRequest, callGemini, HttpError, publishableKey } = await import("./index.ts");
+const { buildRequest, callGemini, HttpError, modelChain, publishableKey } = await import("./index.ts");
 
 function assertEquals(actual: unknown, expected: unknown) {
   if (JSON.stringify(actual) !== JSON.stringify(expected)) {
@@ -74,11 +74,11 @@ function scripted(statuses: number[]) {
   return { impl, calls };
 }
 
-Deno.test("callGemini：503 會重試，主要模型持續忙碌時改用備援模型", async () => {
+Deno.test("callGemini：503 重試、429/404 換模型、全部失敗時回報", async () => {
   Deno.env.set("GEMINI_API_KEY", "test-key");
-  Deno.env.delete("GEMINI_MODEL");
-  Deno.env.delete("GEMINI_FALLBACK_MODEL");
+  for (const k of ["GEMINI_MODEL", "GEMINI_FALLBACK_MODEL", "GEMINI_FALLBACK_MODELS"]) Deno.env.delete(k);
   const noWait = async () => {};
+  assertEquals(modelChain(), ["gemini-3.5-flash", "gemini-3.5-flash-lite", "gemini-3.1-flash-lite", "gemini-3.8-flash"]);
 
   const retry = scripted([503, 200]);
   assertEquals(await callGemini("hi", {}, retry.impl, noWait), { ok: true });
@@ -86,19 +86,54 @@ Deno.test("callGemini：503 會重試，主要模型持續忙碌時改用備援�
 
   const fallback = scripted([503, 503, 200]);
   assertEquals(await callGemini("hi", {}, fallback.impl, noWait), { ok: true });
-  assertEquals(fallback.calls, ["gemini-3.5-flash", "gemini-3.5-flash", "gemini-3.1-flash-lite"]);
+  assertEquals(fallback.calls, ["gemini-3.5-flash", "gemini-3.5-flash", "gemini-3.5-flash-lite"]);
 
-  const quota = scripted([429, 200]);
+  // 今天實際遇到的情況：主要模型額度用完、第一個備援忙碌
+  const quota = scripted([429, 503, 503, 200]);
   assertEquals(await callGemini("hi", {}, quota.impl, noWait), { ok: true });
-  assertEquals(quota.calls, ["gemini-3.5-flash", "gemini-3.1-flash-lite"]);
+  assertEquals(quota.calls, ["gemini-3.5-flash", "gemini-3.5-flash-lite", "gemini-3.5-flash-lite", "gemini-3.1-flash-lite"]);
 
-  const down = scripted([503, 503, 503, 503]);
+  const retired = scripted([404, 200]);
+  assertEquals(await callGemini("hi", {}, retired.impl, noWait), { ok: true });
+  assertEquals(retired.calls, ["gemini-3.5-flash", "gemini-3.5-flash-lite"]);
+
+  const allQuota = scripted([429, 429, 429, 429]);
+  await assertRejects(() => callGemini("hi", {}, allQuota.impl, noWait), 429);
+  assertEquals(allQuota.calls.length, 4);
+
+  const down = scripted(Array(8).fill(503));
   await assertRejects(() => callGemini("hi", {}, down.impl, noWait), 503);
-  assertEquals(down.calls.length, 4);
+  assertEquals(down.calls.length, 8);
 
   const badRequest = scripted([400]);
   await assertRejects(() => callGemini("hi", {}, badRequest.impl, noWait), 502);
   assertEquals(badRequest.calls.length, 1);
+
+  Deno.env.set("GEMINI_FALLBACK_MODELS", "a, b");
+  assertEquals(modelChain(), ["gemini-3.5-flash", "a", "b"]);
+  Deno.env.delete("GEMINI_FALLBACK_MODELS");
+});
+
+Deno.test("callGemini：請求逾時會換下一個模型", async () => {
+  Deno.env.set("GEMINI_API_KEY", "test-key");
+  const calls: string[] = [];
+  const impl = (async (url: string) => {
+    calls.push(String(url).match(/models\/([^:]+):/)![1]);
+    if (calls.length <= 2) throw new DOMException("timed out", "TimeoutError");
+    return new Response(JSON.stringify({ candidates: [{ content: { parts: [{ text: '{"ok":true}' }] } }] }));
+  }) as typeof fetch;
+  assertEquals(await callGemini("hi", {}, impl, async () => {}), { ok: true });
+  assertEquals(calls, ["gemini-3.5-flash", "gemini-3.5-flash", "gemini-3.5-flash-lite"]);
+});
+
+Deno.test("thresholds：依週期列出各階段天數，並驗證輸入", async () => {
+  const req = buildRequest({ task: "thresholds", plantName: "番茄", totalDays: 90 });
+  assertEquals(req.task, "thresholds");
+  assertEquals(req.prompt.includes("flowering 開花期：第 30~59 天"), true);
+  assertEquals(req.prompt.includes("harvest 收成期：第 91 天之後"), true);
+  assertEquals((req.schema as { required: string[] }).required, ["planting", "growing", "flowering", "fruiting", "harvest"]);
+  await assertRejects(() => buildRequest({ task: "thresholds", plantName: "番茄", totalDays: 999 }), 400);
+  await assertRejects(() => buildRequest({ task: "thresholds", totalDays: 90 }), 400);
 });
 
 Deno.test("publishableKey：優先使用新版 SUPABASE_PUBLISHABLE_KEYS，否則用舊版 anon key", async () => {
@@ -110,14 +145,4 @@ Deno.test("publishableKey：優先使用新版 SUPABASE_PUBLISHABLE_KEYS，否�
   Deno.env.delete("SUPABASE_PUBLISHABLE_KEYS");
   Deno.env.delete("SUPABASE_ANON_KEY");
   await assertRejects(() => publishableKey(), 500);
-});
-
-Deno.test("thresholds：依週期列出各階段天數，並驗證輸入", async () => {
-  const req = buildRequest({ task: "thresholds", plantName: "番茄", totalDays: 90 });
-  assertEquals(req.task, "thresholds");
-  assertEquals(req.prompt.includes("flowering 開花期：第 30~59 天"), true);
-  assertEquals(req.prompt.includes("harvest 收成期：第 91 天之後"), true);
-  assertEquals((req.schema as { required: string[] }).required, ["planting", "growing", "flowering", "fruiting", "harvest"]);
-  await assertRejects(() => buildRequest({ task: "thresholds", plantName: "番茄", totalDays: 999 }), 400);
-  await assertRejects(() => buildRequest({ task: "thresholds", totalDays: 90 }), 400);
 });
