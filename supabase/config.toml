@@ -1,0 +1,6 @@
+# Supabase CLI 設定（自動部署 Edge Function 時使用）
+project_id = "plantai"
+
+[functions.ai]
+# 函式內已自行驗證登入狀態，並支援新版金鑰
+verify_jwt = false

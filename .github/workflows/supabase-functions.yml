@@ -1,0 +1,34 @@
+# supabase/functions/ 有變更時，自動部署 Edge Function 到 Supabase，不必再手動貼程式碼。
+# 一次性設定：Supabase → Account → Access Tokens 建立權杖，
+# 存到 GitHub repo → Settings → Secrets and variables → Actions → New repository secret，名稱 SUPABASE_ACCESS_TOKEN。
+# 尚未設定 secret 時此流程會直接略過。
+name: Deploy Supabase functions
+
+on:
+  push:
+    branches: [main]
+    paths: ["supabase/functions/**", ".github/workflows/supabase-functions.yml"]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+      PROJECT_REF: pgxfytfwpgyyyklpzwcn
+    steps:
+      - name: Check token
+        id: token
+        run: echo "present=${{ env.SUPABASE_ACCESS_TOKEN != '' }}" >> "$GITHUB_OUTPUT"
+      - uses: actions/checkout@v5
+        if: steps.token.outputs.present == 'true'
+      - uses: supabase/setup-cli@v1
+        if: steps.token.outputs.present == 'true'
+        with:
+          version: latest
+      - name: Deploy ai function
+        if: steps.token.outputs.present == 'true'
+        run: supabase functions deploy ai --project-ref "$PROJECT_REF" --no-verify-jwt --use-api
+      - name: Skip (no token)
+        if: steps.token.outputs.present != 'true'
+        run: echo "SUPABASE_ACCESS_TOKEN 尚未設定，略過自動部署。"
