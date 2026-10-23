@@ -104,3 +104,73 @@ Deno.test("裝置權杖與 device_sync：上傳數據、取得門檻、限流、
   if (newToken === token) throw new Error("重新產生後應該不同");
   await fails(as(db, null, () => db.query(`select device_sync($1)`, [token])), "舊權杖失效");
 });
+
+const STAGE_SET = {
+  planting: { tempMin: 18, tempMax: 26, humidMin: 60, humidMax: 85, soilMin: 55 },
+  growing: { tempMin: 20, tempMax: 28, humidMin: 55, humidMax: 80, soilMin: 45 },
+  flowering: { tempMin: 21, tempMax: 27, humidMin: 50, humidMax: 70, soilMin: 40 },
+  fruiting: { tempMin: 22, tempMax: 30, humidMin: 50, humidMax: 70, soilMin: 45 },
+  harvest: { tempMin: 18, tempMax: 30, humidMin: 40, humidMax: 70, soilMin: 30 },
+};
+
+Deno.test("生長階段計算與前端規則一致", async () => {
+  const db = await setup();
+  const { rows } = await db.query<{ s: string }>(
+    `select public.growth_stage(d, 90) as s from unnest(array[1, 7, 8, 29, 30, 59, 60, 90, 91]) d`);
+  eq(rows.map((r) => r.s), ["planting", "planting", "growing", "growing", "flowering", "flowering", "fruiting", "fruiting", "harvest"], "階段邊界");
+});
+
+Deno.test("階段門檻格式驗證", async () => {
+  const db = await setup();
+  const insert = (j: unknown) => as(db, A, () => db.query(
+    `insert into plants (plant_name, total_days, stage_thresholds) values ('番茄', 90, $1::jsonb)`, [JSON.stringify(j)]));
+  await insert(STAGE_SET);
+  await fails(insert({ planting: { ...STAGE_SET.planting, tempMin: 30 } }), "下限大於上限");
+  await fails(insert({ planting: { ...STAGE_SET.planting, soilMin: "50" } }), "數值必須是數字");
+  await fails(insert({ winter: STAGE_SET.planting }), "未知的階段");
+  await fails(insert({ planting: { tempMin: 18, tempMax: 26 } }), "缺欄位");
+});
+
+Deno.test("依生長計畫自動切換門檻，且只能指定自己的植物", async () => {
+  const db = await setup();
+  const token = (await as(db, A, () => db.query<{ t: string }>("select device_token() as t"))).rows[0].t;
+  // 第 40 天（90 天週期）→ 開花期
+  const { rows: [plant] } = await as(db, A, () => db.query<{ id: string }>(
+    `insert into plants (plant_name, total_days, start_date, stage_thresholds)
+     values ('番茄', 90, (now() at time zone 'Asia/Taipei')::date - 39, $1::jsonb) returning id`, [JSON.stringify(STAGE_SET)]));
+  await as(db, A, () => db.query(`insert into thresholds (temp_min, temp_max, mode, plant_id) values (10, 40, 'plan', $1)`, [plant.id]));
+
+  const sync = async () => (await as(db, null, () => db.query<{ r: Record<string, unknown> }>(`select device_sync($1) as r`, [token]))).rows[0].r;
+  let r = await sync();
+  eq([r.source, r.stage, r.day, r.tempMin, r.tempMax, r.soilMin], ["plan", "flowering", 40, 21, 27, 40], "開花期門檻");
+
+  // 使用者把進度調到第 70 天（結果期）
+  await as(db, A, () => db.query(`update plants set start_date = (now() at time zone 'Asia/Taipei')::date - 69 where id = $1`, [plant.id]));
+  r = await sync();
+  eq([r.stage, r.tempMax], ["fruiting", 30], "調整進度後改用結果期門檻");
+
+  const mine = (await as(db, A, () => db.query<{ r: Record<string, unknown> }>("select my_effective_thresholds() as r"))).rows[0].r;
+  eq([mine.source, mine.stage], ["plan", "fruiting"], "網站看到的與裝置一致");
+
+  // 改回手動模式 → 使用手動門檻
+  await as(db, A, () => db.query(`update thresholds set mode = 'manual'`));
+  r = await sync();
+  eq([r.source, r.tempMin, r.tempMax], ["user", 10, 40], "手動模式");
+
+  // 植物沒有階段門檻時退回手動門檻
+  await as(db, A, () => db.query(`update thresholds set mode = 'plan'`));
+  await as(db, A, () => db.query(`update plants set stage_thresholds = null where id = $1`, [plant.id]));
+  r = await sync();
+  eq([r.source, r.tempMax], ["user", 40], "沒有階段門檻時用手動值");
+
+  // 刪除植物 → plant_id 自動清空，不會出錯
+  await as(db, A, () => db.query(`delete from plants where id = $1`, [plant.id]));
+  r = await sync();
+  eq(r.source, "user", "植物刪除後仍可同步");
+
+  // B 不能把 A 的植物設為控制來源
+  const { rows: [aPlant] } = await as(db, A, () => db.query<{ id: string }>(`insert into plants (plant_name, total_days) values ('羅勒', 60) returning id`));
+  await fails(as(db, B, () => db.query(`insert into thresholds (mode, plant_id) values ('plan', $1)`, [aPlant.id])), "B 不能指定 A 的植物");
+  await fails(as(db, null, () => db.query(`select effective_thresholds($1)`, [A])), "anon 不能直接呼叫內部函式");
+  await fails(as(db, B, () => db.query(`select effective_thresholds($1)`, [A])), "B 不能查 A 的門檻");
+});

@@ -111,3 +111,13 @@ Deno.test("publishableKey：優先使用新版 SUPABASE_PUBLISHABLE_KEYS，否�
   Deno.env.delete("SUPABASE_ANON_KEY");
   await assertRejects(() => publishableKey(), 500);
 });
+
+Deno.test("thresholds：依週期列出各階段天數，並驗證輸入", async () => {
+  const req = buildRequest({ task: "thresholds", plantName: "番茄", totalDays: 90 });
+  assertEquals(req.task, "thresholds");
+  assertEquals(req.prompt.includes("flowering 開花期：第 30~59 天"), true);
+  assertEquals(req.prompt.includes("harvest 收成期：第 91 天之後"), true);
+  assertEquals((req.schema as { required: string[] }).required, ["planting", "growing", "flowering", "fruiting", "harvest"]);
+  await assertRejects(() => buildRequest({ task: "thresholds", plantName: "番茄", totalDays: 999 }), 400);
+  await assertRejects(() => buildRequest({ task: "thresholds", totalDays: 90 }), 400);
+});

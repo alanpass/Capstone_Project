@@ -1,6 +1,7 @@
 // Supabase Edge Function：AI 照護助理
 // Gemini 金鑰只存在 Supabase 的 Secrets（GEMINI_API_KEY），前端永遠拿不到。
 // 只接受已登入使用者，且提示詞固定在這裡，前端只能送「植物名稱 / 天數 / 環境數據」。
+// 任務：check（判斷植物與週期）、guide（每日照護指南）、thresholds（各生長階段的自動控制門檻）
 import { createClient } from "npm:@supabase/supabase-js@2.117.1";
 
 // ---------- 提示詞與 Gemini 回應格式（responseSchema）。回應一律為 JSON，前端再以純文字安全渲染。 ----------
@@ -83,6 +84,40 @@ ${env.length ? env.join("\n") : "- （無即時資料，請以該階段的典型
 - risks：1~3 項這個階段常見的病蟲害或環境風險與預防方法。
 - expert_tip：一個進階栽培技巧。
 內容要專業、具體、有數據，不要使用 Markdown 或 HTML 標記。`;
+}
+
+const STAGE_KEYS = ["planting", "growing", "flowering", "fruiting", "harvest"] as const;
+const RANGE_SCHEMA = {
+  type: "OBJECT",
+  properties: {
+    tempMin: { type: "NUMBER" },
+    tempMax: { type: "NUMBER" },
+    humidMin: { type: "NUMBER" },
+    humidMax: { type: "NUMBER" },
+    soilMin: { type: "NUMBER" },
+  },
+  required: ["tempMin", "tempMax", "humidMin", "humidMax", "soilMin"],
+};
+export const STAGE_THRESHOLDS_SCHEMA = {
+  type: "OBJECT",
+  properties: Object.fromEntries(STAGE_KEYS.map((k) => [k, RANGE_SCHEMA])),
+  required: [...STAGE_KEYS],
+};
+
+export function stageThresholdsPrompt(plantName: string, totalDays: number): string {
+  const d = (ratio: number) => Math.floor(totalDays * ratio);
+  return `你是設施園藝與環境控制專家。作物：${plantName}，生長週期共 ${totalDays} 天。
+請為下列 5 個生長階段，分別建議自動控制門檻：
+- planting 種植期：第 1~7 天
+- growing 成長期：第 8~${d(0.33)} 天
+- flowering 開花期：第 ${d(0.33) + 1}~${d(0.66)} 天
+- fruiting 結果期：第 ${d(0.66) + 1}~${totalDays} 天
+- harvest 收成期：第 ${totalDays + 1} 天之後
+每個階段提供：
+- tempMin / tempMax：適合的空氣溫度範圍（°C，介於 -10~50，tempMin 必須小於 tempMax）；超出範圍時裝置會啟動風扇或加熱片。
+- humidMin / humidMax：適合的空氣相對濕度範圍（%，0~100，humidMin 小於 humidMax）。
+- soilMin：土壤濕度低於此百分比（0~100）時自動澆水；需考量該作物在此階段的需水量。
+數值請符合該作物的實際栽培需求，並反映不同階段的差異（例如開花結果期通常需較穩定的溫度、收成前可減少澆水）。`;
 }
 
 // ---------- 呼叫 Gemini 與處理請求 ----------
@@ -188,6 +223,12 @@ export function buildRequest(body: Record<string, unknown>): { task: string; pro
         sensor: s ? { soil: num(s.soil), temperature: num(s.temperature), humidity: num(s.humidity) } : null,
       }),
     };
+  }
+  if (body.task === "thresholds") {
+    const plantName = text(body.plantName, 40);
+    const totalDays = num(body.totalDays);
+    if (!plantName || totalDays === null || totalDays < 1 || totalDays > 365) throw new HttpError(400, "缺少植物名稱或生長週期");
+    return { task: "thresholds", prompt: stageThresholdsPrompt(plantName, Math.round(totalDays)), schema: STAGE_THRESHOLDS_SCHEMA };
   }
   throw new HttpError(400, "未知的任務類型");
 }

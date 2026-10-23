@@ -51,6 +51,67 @@ create table if not exists public.plants (
 );
 create index if not exists plants_user_idx on public.plants (user_id, start_date desc);
 
+-- 生長階段（與前端 growth.js 的 stageFor 規則一致）：
+--   planting 種植期（1~7 天）、growing 成長期（~33%）、flowering 開花期（~66%）、fruiting 結果期（~100%）、harvest 收成期
+create or replace function public.growth_stage(day integer, total integer)
+returns text
+language sql
+immutable
+as $$
+  select case
+    when day <= 7 then 'planting'
+    when day <= total * 0.33 then 'growing'
+    when day <= total * 0.66 then 'flowering'
+    when day <= total then 'fruiting'
+    else 'harvest'
+  end
+$$;
+
+-- 每個生長階段的自動控制門檻，例如
+--   {"planting": {"tempMin": 18, "tempMax": 28, "humidMin": 60, "humidMax": 85, "soilMin": 50}, ...}
+-- 寫入前檢查格式與範圍，device_sync() 讀取時就能安全轉型
+create or replace function public.valid_stage_thresholds(j jsonb)
+returns boolean
+language plpgsql
+immutable
+as $$
+declare
+  k text;
+  v jsonb;
+begin
+  if j is null then
+    return true;
+  end if;
+  if jsonb_typeof(j) <> 'object' then
+    return false;
+  end if;
+  for k, v in select * from jsonb_each(j) loop
+    if k not in ('planting', 'growing', 'flowering', 'fruiting', 'harvest') or jsonb_typeof(v) <> 'object' then
+      return false;
+    end if;
+    if not (v ? 'tempMin' and v ? 'tempMax' and v ? 'humidMin' and v ? 'humidMax' and v ? 'soilMin') then
+      return false;
+    end if;
+    if exists (select 1 from jsonb_each(v) e where jsonb_typeof(e.value) <> 'number') then
+      return false;
+    end if;
+    if (v ->> 'tempMin')::real >= (v ->> 'tempMax')::real
+       or (v ->> 'tempMin')::real < -10 or (v ->> 'tempMax')::real > 50
+       or (v ->> 'humidMin')::real >= (v ->> 'humidMax')::real
+       or (v ->> 'humidMin')::real < 0 or (v ->> 'humidMax')::real > 100
+       or (v ->> 'soilMin')::real < 0 or (v ->> 'soilMin')::real > 100 then
+      return false;
+    end if;
+  end loop;
+  return true;
+end;
+$$;
+
+alter table public.plants add column if not exists stage_thresholds jsonb;
+alter table public.plants drop constraint if exists plants_stage_thresholds_valid;
+alter table public.plants add constraint plants_stage_thresholds_valid
+  check (public.valid_stage_thresholds(stage_thresholds));
+
 -- ---------- AI 照護指南快取（同一天不重複呼叫 AI） ----------
 create table if not exists public.plant_guides (
   plant_id   uuid not null references public.plants (id) on delete cascade,
@@ -83,6 +144,12 @@ create table if not exists public.thresholds (
   check (humid_min < humid_max and humid_min >= 0 and humid_max <= 100),
   check (soil_min between 0 and 100)
 );
+
+-- 控制模式：manual = 使用上面的手動門檻；plan = 依指定植物目前的生長階段，自動套用該階段門檻
+alter table public.thresholds add column if not exists mode text not null default 'manual';
+alter table public.thresholds add column if not exists plant_id uuid references public.plants (id) on delete set null;
+alter table public.thresholds drop constraint if exists thresholds_mode_check;
+alter table public.thresholds add constraint thresholds_mode_check check (mode in ('manual', 'plan'));
 
 -- ---------- 裝置權杖（每位使用者一組，可重新產生） ----------
 create table if not exists public.devices (
@@ -140,7 +207,12 @@ create policy "own ai requests" on public.ai_requests
 drop policy if exists "own thresholds" on public.thresholds;
 create policy "own thresholds" on public.thresholds
   for all to authenticated
-  using (user_id = (select auth.uid())) with check (user_id = (select auth.uid()));
+  using (user_id = (select auth.uid()))
+  with check (
+    user_id = (select auth.uid())
+    -- 只能指定自己的植物來控制裝置
+    and (plant_id is null or exists (select 1 from public.plants p where p.id = plant_id and p.user_id = (select auth.uid())))
+  );
 
 drop policy if exists "read own device" on public.devices;
 create policy "read own device" on public.devices
@@ -193,6 +265,70 @@ begin
 end;
 $$;
 
+-- 計算某位使用者「此刻」應套用的門檻（內部使用，不開放直接呼叫）：
+--   plan 模式且指定的植物有該階段門檻 → 用生長計畫的門檻；否則用手動門檻；都沒有則用預設值
+create or replace function public.effective_thresholds(uid uuid)
+returns json
+language plpgsql
+stable
+security definer
+set search_path = ''
+as $$
+declare
+  t public.thresholds;
+  p public.plants;
+  day integer;
+  stage text;
+  s jsonb;
+begin
+  select * into t from public.thresholds where user_id = uid;
+
+  if t.mode = 'plan' and t.plant_id is not null then
+    select * into p from public.plants where id = t.plant_id and user_id = uid;
+    if found then
+      -- 以台灣日期計算第幾天，與網站顯示一致
+      day := (now() at time zone 'Asia/Taipei')::date - p.start_date + 1;
+      stage := public.growth_stage(day, p.total_days);
+      s := p.stage_thresholds -> stage;
+      if s is not null then
+        return json_build_object(
+          'tempMin',  (s ->> 'tempMin')::real,
+          'tempMax',  (s ->> 'tempMax')::real,
+          'humidMin', (s ->> 'humidMin')::real,
+          'humidMax', (s ->> 'humidMax')::real,
+          'soilMin',  (s ->> 'soilMin')::real,
+          'source',   'plan',
+          'plantId',  p.id,
+          'plantName', p.plant_name,
+          'day',      day,
+          'stage',    stage
+        );
+      end if;
+    end if;
+  end if;
+
+  return json_build_object(
+    'tempMin',  coalesce(t.temp_min, 20),
+    'tempMax',  coalesce(t.temp_max, 30),
+    'humidMin', coalesce(t.humid_min, 40),
+    'humidMax', coalesce(t.humid_max, 80),
+    'soilMin',  coalesce(t.soil_min, 35),
+    'source',   case when t.user_id is null then 'default' else 'user' end
+  );
+end;
+$$;
+
+-- 網站顯示「裝置目前套用的門檻」
+create or replace function public.my_effective_thresholds()
+returns json
+language sql
+stable
+security definer
+set search_path = ''
+as $$
+  select public.effective_thresholds(auth.uid())
+$$;
+
 -- ESP32 每個週期呼叫一次：上傳數據（可只傳部分欄位）並取得門檻值
 create or replace function public.device_sync(
   p_token uuid,
@@ -207,7 +343,6 @@ set search_path = ''
 as $$
 declare
   uid uuid;
-  t public.thresholds;
 begin
   select user_id into uid from public.devices where token = p_token;
   if uid is null then
@@ -232,15 +367,7 @@ begin
     end if;
   end if;
 
-  select * into t from public.thresholds where user_id = uid;
-  return json_build_object(
-    'tempMin',  coalesce(t.temp_min, 20),
-    'tempMax',  coalesce(t.temp_max, 30),
-    'humidMin', coalesce(t.humid_min, 40),
-    'humidMax', coalesce(t.humid_max, 80),
-    'soilMin',  coalesce(t.soil_min, 35),
-    'source',   case when t.user_id is null then 'default' else 'user' end
-  );
+  return public.effective_thresholds(uid);
 end;
 $$;
 
@@ -249,3 +376,6 @@ grant execute on function public.device_token(boolean) to authenticated;
 revoke all on function public.device_sync(uuid, real, real, real) from public;
 grant execute on function public.device_sync(uuid, real, real, real) to anon, authenticated;
 revoke all on function public.handle_new_user() from public, anon, authenticated;
+revoke all on function public.effective_thresholds(uuid) from public, anon, authenticated;
+revoke all on function public.my_effective_thresholds() from public, anon;
+grant execute on function public.my_effective_thresholds() to authenticated;
