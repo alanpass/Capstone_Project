@@ -1,4 +1,4 @@
-import { createPlant, getGuide, listPlants } from "../garden.js";
+import { createPlant, getGuide, listPlants, suggestStageThresholds } from "../garden.js";
 import { renderGuide } from "../guide.js";
 import { requireUser } from "../session.js";
 import { busy, esc, loadingHtml, mountShell, showAlert, toast } from "../ui.js";
@@ -81,6 +81,8 @@ $("createForm").addEventListener("submit", async (e) => {
     const plant = await createPlant($("plantName").value);
     showAlert(msg, `已建立「${plant.plant_name}」的種植專案，預計 ${plant.total_days} 天。${plant.summary}`, "ok");
     toast("種植專案已建立");
+    // 背景產生各生長階段的自動控制門檻，不影響目前操作；失敗時可到「自動控制」頁重新產生
+    suggestStageThresholds(plant).catch((err) => console.warn("階段門檻產生失敗", err));
     $("plantName").value = "";
     selectedId = plant.id;
     history.replaceState(null, "", `?id=${encodeURIComponent(plant.id)}`);

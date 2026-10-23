@@ -1,14 +1,17 @@
 // 使用者花園資料（Supabase）。Row Level Security 限制每個人只能存取自己的資料。
 //   plants         種植專案
 //   plant_guides   AI 指南快取（同一天不重複呼叫 AI）
-import { checkPlant, generateGuide } from "./ai.js";
-import { durationToDays, progressFor, todayISO, withProgress } from "./growth.js";
+//   plants.stage_thresholds  各生長階段的自動控制門檻（依生長計畫控制 ESP32）
+import { checkPlant, generateGuide, suggestThresholds } from "./ai.js";
+import {
+  durationToDays, progressFor, sanitizeStageThresholds, startDateForDay, todayISO, withProgress,
+} from "./growth.js";
 import { loadSensors } from "./sensors.js";
 import { getProfile } from "./session.js";
 import { supabase, unwrap } from "./supabase.js";
 import { forecast } from "./weather.js";
 
-const COLUMNS = "id, plant_name, summary, start_date, total_days";
+const COLUMNS = "id, plant_name, summary, start_date, total_days, stage_thresholds";
 
 export async function listPlants() {
   const rows = unwrap(await supabase.from("plants").select(COLUMNS).order("start_date", { ascending: false }));
@@ -47,7 +50,8 @@ export async function getGuide(user, plant, { day, refresh = false } = {}) {
     throw new Error(`天數需介於 1 到 ${plant.total_days + 30} 之間`);
   }
   const { stage } = progressFor(plant.start_date, plant.total_days, targetDay);
-  const cacheKey = isToday ? `today-${todayISO()}` : `day-${targetDay}`;
+  // 今天的指南依日期＋天數快取：使用者調整進度後會重新產生
+  const cacheKey = isToday ? `today-${todayISO()}-d${targetDay}` : `day-${targetDay}`;
 
   if (!refresh) {
     const cached = unwrap(await supabase.from("plant_guides").select("payload")
@@ -68,4 +72,25 @@ export async function getGuide(user, plant, { day, refresh = false } = {}) {
   const payload = { guide, weather, sensor, generated_at: new Date().toISOString() };
   unwrap(await supabase.from("plant_guides").upsert({ plant_id: plant.id, cache_key: cacheKey, payload }));
   return { ...payload, plant, day: targetDay, stage, cached: false };
+}
+
+/** 調整進度：把開始日期改成「今天是第 day 天」。資料庫會據此重新計算階段與自動控制門檻。 */
+export async function setPlantDay(plantId, day) {
+  const d = Math.round(Number(day));
+  if (!Number.isFinite(d) || d < 1 || d > 400) throw new Error("天數需介於 1 到 400 之間");
+  const row = unwrap(await supabase.from("plants").update({ start_date: startDateForDay(d) })
+    .eq("id", plantId).select(COLUMNS).single());
+  return withProgress(row);
+}
+
+/** 請 AI 建議各生長階段門檻並存檔。 */
+export async function suggestStageThresholds(plant) {
+  const suggested = sanitizeStageThresholds(await suggestThresholds(plant.plant_name, plant.total_days));
+  return saveStageThresholds(plant.id, suggested);
+}
+
+export async function saveStageThresholds(plantId, thresholds) {
+  const clean = sanitizeStageThresholds(thresholds);
+  unwrap(await supabase.from("plants").update({ stage_thresholds: clean }).eq("id", plantId));
+  return clean;
 }

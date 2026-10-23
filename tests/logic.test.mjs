@@ -63,3 +63,18 @@ test("summarize 合併最近幾筆中各欄位的最新值", () => {
   assert.deepEqual(latest, { at: "t3", soil: 40, temperature: 25, humidity: 70 });
   assert.equal(summarize([]), null);
 });
+
+test("階段範圍、調整進度與門檻整理", async () => {
+  const g = await import("../frontend/assets/js/growth.js");
+  assert.deepEqual(["planting", "growing", "flowering", "fruiting", "harvest"].map((k) => g.stageRange(k, 90)),
+    [[1, 7], [8, 29], [30, 59], [60, 90], [91, null]]);
+  // 每個範圍的第一天，stageKeyFor 都要算回同一個階段
+  for (const s of g.STAGES) assert.equal(g.stageKeyFor(g.stageRange(s.key, 90)[0], 90), s.key);
+  assert.equal(g.stageKeyFor(0, 90), "planting");
+  assert.equal(g.startDateForDay(1, "2026-10-23"), "2026-10-23");
+  assert.equal(g.startDateForDay(40, "2026-10-23"), "2026-09-14");
+  assert.equal(g.progressFor(g.startDateForDay(40, "2026-10-23"), 90, undefined, "2026-10-23").day, 40);
+  const clean = g.sanitizeStageThresholds({ planting: { tempMin: 30, tempMax: 20, humidMin: "70", humidMax: 70, soilMin: 150 } });
+  assert.deepEqual(clean.planting, { tempMin: 20, tempMax: 30, humidMin: 70, humidMax: 71, soilMin: 100 });
+  assert.deepEqual(Object.keys(clean), ["planting", "growing", "flowering", "fruiting", "harvest"]);
+});

@@ -18,3 +18,6 @@ export const checkPlant = (plantName) => invoke({ task: "check", plantName });
 
 /** 產生第 day 天的照護指南；weather / sensor 只在查詢今天時提供。 */
 export const generateGuide = (params) => invoke({ task: "guide", ...params });
+
+/** 依植物與週期建議 5 個生長階段的自動控制門檻。 */
+export const suggestThresholds = (plantName, totalDays) => invoke({ task: "thresholds", plantName, totalDays });
