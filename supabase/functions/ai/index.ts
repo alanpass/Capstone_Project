@@ -119,6 +119,7 @@ export async function callGemini(prompt: string, schema: unknown, fetchImpl = fe
   ].filter((m, i, all) => m && all.indexOf(m) === i);
 
   let lastStatus = 0;
+  const tried: string[] = []; // 例如 "gemini-3.5-flash 503"，附在錯誤訊息裡方便除錯（不含任何金鑰）
   for (const model of models) {
     for (let attempt = 0; attempt < 2; attempt++) {
       if (attempt > 0) await wait(1000 * attempt);
@@ -132,19 +133,23 @@ export async function callGemini(prompt: string, schema: unknown, fetchImpl = fe
             generationConfig: { responseMimeType: "application/json", responseSchema: schema },
           }),
         });
-      } catch {
+      } catch (err) {
         lastStatus = 503; // 網路錯誤視同暫時無法使用，重試
+        tried.push(`${model} 網路錯誤`);
+        console.warn(`Gemini ${model} 連線失敗：${err}`);
         continue;
       }
       if (res.ok) return parseResult(await res.json());
       lastStatus = res.status;
-      console.warn(`Gemini ${model} 回傳 ${res.status}（第 ${attempt + 1} 次）`);
+      tried.push(`${model} ${res.status}`);
+      // Google 的錯誤說明（例如模型忙碌、金鑰無效、地區不支援）只寫進 Supabase 日誌
+      console.warn(`Gemini ${model} 回傳 ${res.status}（第 ${attempt + 1} 次）：${(await res.text()).slice(0, 300)}`);
       if (res.status === 429) break; // 該模型額度用完，直接換下一個模型
-      if (res.status < 500) throw new HttpError(502, `AI 服務錯誤（${res.status}）`); // 請求本身有問題，重試也沒用
+      if (res.status < 500) throw new HttpError(502, `AI 服務錯誤（${tried.join("、")}）`); // 請求本身有問題，重試也沒用
     }
   }
-  if (lastStatus === 429) throw new HttpError(429, "AI 使用量已達上限，請稍後再試");
-  throw new HttpError(503, "AI 服務目前忙碌中，請稍後再試");
+  if (lastStatus === 429) throw new HttpError(429, `AI 使用量已達上限，請稍後再試（${tried.join("、")}）`);
+  throw new HttpError(503, `AI 服務目前忙碌中，請稍後再試（${tried.join("、")}）`);
 }
 
 function parseResult(data: { candidates?: { content?: { parts?: { text?: string }[] } }[] }): unknown {
