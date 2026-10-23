@@ -11,6 +11,8 @@ export const isConfigured = Boolean(SUPABASE_URL && SUPABASE_PUBLISHABLE_KEY);
 // 若保持私人頻道，請填 Read API Key（唯讀，但放在網站上等於公開，所以建議直接設為公開）。
 export const DEMO_THINGSPEAK_CHANNEL_ID = "3018608";
 export const DEMO_THINGSPEAK_READ_KEY = "";
+// 頻道欄位對應（頻道 3018608：field1 土壤濕度、field3 濕度、field4 溫度）
+export const DEMO_THINGSPEAK_FIELDS = { soil: "field1", temperature: "field4", humidity: "field3" };
 // 舊版韌體上傳 ADC 原始值（> 100），用這兩個校正值換算成百分比
 export const SOIL_ADC_DRY = 0;
 export const SOIL_ADC_WET = 1993;

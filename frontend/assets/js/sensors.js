@@ -1,8 +1,10 @@
 // 感測資料來源：
 //   1. 已登入且 ESP32 有上傳 → 讀取自己 Supabase 裡的 sensor_readings
 //   2. 否則 → 讀取 ThingSpeak 公開頻道當作示範資料（不需要帳號，頻道維持公開即可）
-// ThingSpeak 欄位：field1 = 土壤濕度、field2 = 空氣溫度、field3 = 空氣濕度
-import { DEMO_THINGSPEAK_CHANNEL_ID, DEMO_THINGSPEAK_READ_KEY, SOIL_ADC_DRY, SOIL_ADC_WET } from "./config.js";
+// ThingSpeak 欄位對應見 config.js 的 DEMO_THINGSPEAK_FIELDS
+import {
+  DEMO_THINGSPEAK_CHANNEL_ID, DEMO_THINGSPEAK_FIELDS, DEMO_THINGSPEAK_READ_KEY, SOIL_ADC_DRY, SOIL_ADC_WET,
+} from "./config.js";
 
 const KEYS = ["soil", "temperature", "humidity"];
 
@@ -17,12 +19,12 @@ export function soilPercent(value) {
 }
 
 /** ThingSpeak feed → 統一格式 */
-export function normalize(feed) {
+export function normalize(feed, fields = DEMO_THINGSPEAK_FIELDS) {
   return {
     at: feed.created_at ?? null,
-    soil: soilPercent(num(feed.field1)),
-    temperature: ranged(num(feed.field2), -40, 80),
-    humidity: ranged(num(feed.field3), 0, 100),
+    soil: soilPercent(num(feed[fields.soil])),
+    temperature: ranged(num(feed[fields.temperature]), -40, 80),
+    humidity: ranged(num(feed[fields.humidity]), 0, 100),
   };
 }
 
@@ -44,7 +46,7 @@ async function fromThingSpeak(results) {
   // 私人頻道且沒有金鑰時，ThingSpeak 會回傳 -1
   if (!body || body === -1) throw new Error("無法讀取 ThingSpeak 頻道：請將頻道設為公開，或在 config.js 填入 Read API Key");
   return (body.feeds || [])
-    .map(normalize)
+    .map((feed) => normalize(feed))
     .filter((r) => KEYS.some((k) => r[k] !== null))
     .reverse();
 }

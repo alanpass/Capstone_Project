@@ -45,10 +45,13 @@ test("感測資料正規化：ADC 原始值換算、超出範圍視為無效", (
   assert.equal(soilPercent(35), 35);
   assert.equal(soilPercent(1993), 100);
   assert.equal(soilPercent(996.5), 50);
-  const row = normalize({ created_at: "2026-10-22T02:00:00Z", field1: "", field2: "26.44", field3: "150" });
+  // 頻道 3018608：field2 是馬達狀態，不應被當成溫度
+  const row = normalize({ created_at: "2026-10-22T02:00:00Z", field1: "", field2: "1", field3: "150", field4: "26.44" });
   assert.equal(row.soil, null);
   assert.equal(row.temperature, 26.4);
   assert.equal(row.humidity, null);
+  const custom = normalize({ field2: "25" }, { soil: "field1", temperature: "field2", humidity: "field3" });
+  assert.equal(custom.temperature, 25);
 });
 
 test("summarize 合併最近幾筆中各欄位的最新值", () => {

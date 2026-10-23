@@ -17,16 +17,19 @@ relay = machine.Pin(RELAY_PIN, machine.Pin.OUT, value=0)
 
 
 def control(temp, thresholds):
-    """溫度超出範圍時啟動繼電器（接風扇或加熱燈），回到範圍內就關閉。"""
+    """溫度超出範圍時啟動繼電器（接風扇或 PTC 加熱片），回到範圍內就關閉。
+    回傳 (風扇狀態, 加熱狀態)，1 = 啟動、0 = 關閉，供 ThingSpeak 記錄。"""
     if temp > thresholds["tempMax"]:
         relay.value(1)
-        print("溫度過高 {}°C > {}°C，啟動繼電器".format(temp, thresholds["tempMax"]))
-    elif temp < thresholds["tempMin"]:
+        print("溫度過高 {}°C > {}°C，啟動繼電器（降溫）".format(temp, thresholds["tempMax"]))
+        return 1, 0
+    if temp < thresholds["tempMin"]:
         relay.value(1)
-        print("溫度過低 {}°C < {}°C，啟動繼電器".format(temp, thresholds["tempMin"]))
-    else:
-        relay.value(0)
-        print("溫度正常（{}~{}°C），關閉繼電器".format(thresholds["tempMin"], thresholds["tempMax"]))
+        print("溫度過低 {}°C < {}°C，啟動繼電器（加熱）".format(temp, thresholds["tempMin"]))
+        return 0, 1
+    relay.value(0)
+    print("溫度正常（{}~{}°C），關閉繼電器".format(thresholds["tempMin"], thresholds["tempMax"]))
+    return 0, 0
 
 
 def main():
@@ -39,11 +42,12 @@ def main():
     while True:
         try:
             sensor.measure()
-            temp, humi = sensor.temperature(), sensor.humidity()
+            temp, humi = round(sensor.temperature(), 1), round(sensor.humidity(), 1)
             print("溫度 {}°C、濕度 {}%".format(temp, humi))
             thresholds = common.sync(thresholds, temperature=temp, humidity=humi)
-            control(temp, thresholds)
-            common.backup_to_thingspeak({"field2": temp, "field3": humi})
+            fan, heater = control(temp, thresholds)
+            # ThingSpeak 頻道欄位：field3 濕度、field4 溫度、field5 風扇狀態、field6 PTC 狀態
+            common.backup_to_thingspeak({"field3": humi, "field4": temp, "field5": fan, "field6": heater})
         except OSError as e:
             print("讀取 DHT22 失敗：{}".format(e))
             thresholds = common.sync(thresholds)  # 仍然更新門檻值

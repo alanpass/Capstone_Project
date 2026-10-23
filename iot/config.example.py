@@ -12,6 +12,7 @@ SUPABASE_KEY = "sb_publishable_xn72aTtTth-NPPEKGFJ0NA_bOHBl_BM"
 DEVICE_TOKEN = "00000000-0000-0000-0000-000000000000"
 
 # 選填：同時備份到 ThingSpeak（Channel 3018608 → API Keys → Write API Key），留空則不備份
+# 欄位：field1 土壤濕度、field2 馬達狀態、field3 濕度、field4 溫度、field5 風扇狀態、field6 PTC 狀態
 THINGSPEAK_WRITE_KEY = ""
 
 # 土壤濕度感測器校正：分別記錄「完全乾燥」與「泡在水中」時的 ADC 讀數
