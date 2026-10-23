@@ -24,3 +24,6 @@ firebase-debug*.log
 .DS_Store
 Thumbs.db
 ~$*
+
+# ESP32 flash 備份（可能含舊程式中的 Wi-Fi 密碼等資料）
+iot/backup/
