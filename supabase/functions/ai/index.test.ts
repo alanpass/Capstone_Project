@@ -54,10 +54,51 @@ Deno.test("callGemini：解析 JSON、處理限流與缺金鑰", async () => {
   assertEquals(await callGemini("hi", {}, ok), { is_plant: true });
   assertEquals(sentKey, "test-key");
 
+  const noWait = async () => {};
   const limited = (async () => new Response("", { status: 429 })) as typeof fetch;
-  await assertRejects(() => callGemini("hi", {}, limited), 429);
+  await assertRejects(() => callGemini("hi", {}, limited, noWait), 429);
   const garbage = (async () => new Response(JSON.stringify({ candidates: [{ content: { parts: [{ text: "not json" }] } }] }))) as typeof fetch;
-  await assertRejects(() => callGemini("hi", {}, garbage), 502);
+  await assertRejects(() => callGemini("hi", {}, garbage, noWait), 502);
+});
+
+/** 依序回傳指定的狀態碼，並記錄呼叫了哪些模型。 */
+function scripted(statuses: number[]) {
+  const calls: string[] = [];
+  const impl = (async (url: string) => {
+    calls.push(String(url).match(/models\/([^:]+):/)![1]);
+    const status = statuses.shift() ?? 200;
+    return status === 200
+      ? new Response(JSON.stringify({ candidates: [{ content: { parts: [{ text: '{"ok":true}' }] } }] }))
+      : new Response("busy", { status });
+  }) as typeof fetch;
+  return { impl, calls };
+}
+
+Deno.test("callGemini：503 會重試，主要模型持續忙碌時改用備援模型", async () => {
+  Deno.env.set("GEMINI_API_KEY", "test-key");
+  Deno.env.delete("GEMINI_MODEL");
+  Deno.env.delete("GEMINI_FALLBACK_MODEL");
+  const noWait = async () => {};
+
+  const retry = scripted([503, 200]);
+  assertEquals(await callGemini("hi", {}, retry.impl, noWait), { ok: true });
+  assertEquals(retry.calls, ["gemini-3.5-flash", "gemini-3.5-flash"]);
+
+  const fallback = scripted([503, 503, 200]);
+  assertEquals(await callGemini("hi", {}, fallback.impl, noWait), { ok: true });
+  assertEquals(fallback.calls, ["gemini-3.5-flash", "gemini-3.5-flash", "gemini-3.1-flash-lite"]);
+
+  const quota = scripted([429, 200]);
+  assertEquals(await callGemini("hi", {}, quota.impl, noWait), { ok: true });
+  assertEquals(quota.calls, ["gemini-3.5-flash", "gemini-3.1-flash-lite"]);
+
+  const down = scripted([503, 503, 503, 503]);
+  await assertRejects(() => callGemini("hi", {}, down.impl, noWait), 503);
+  assertEquals(down.calls.length, 4);
+
+  const badRequest = scripted([400]);
+  await assertRejects(() => callGemini("hi", {}, badRequest.impl, noWait), 502);
+  assertEquals(badRequest.calls.length, 1);
 });
 
 Deno.test("publishableKey：優先使用新版 SUPABASE_PUBLISHABLE_KEYS，否則用舊版 anon key", async () => {

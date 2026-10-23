@@ -104,21 +104,50 @@ export class HttpError extends Error {
 const json = (body: unknown, status = 200) =>
   new Response(JSON.stringify(body), { status, headers: { ...CORS, "Content-Type": "application/json" } });
 
-export async function callGemini(prompt: string, schema: unknown, fetchImpl = fetch): Promise<unknown> {
+const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+
+/**
+ * 呼叫 Gemini 並解析 JSON。Gemini 尖峰時段常回 503（模型忙碌）或 429（該模型額度用完），
+ * 因此每個模型最多試 2 次，主要模型不行再改用備援模型（各模型額度分開計算）。
+ */
+export async function callGemini(prompt: string, schema: unknown, fetchImpl = fetch, wait = sleep): Promise<unknown> {
   const key = Deno.env.get("GEMINI_API_KEY");
   if (!key) throw new HttpError(503, "伺服器尚未設定 GEMINI_API_KEY");
-  const model = Deno.env.get("GEMINI_MODEL") ?? "gemini-3.5-flash";
-  const res = await fetchImpl(GEMINI_URL.replace("{model}", model), {
-    method: "POST",
-    headers: { "Content-Type": "application/json", "x-goog-api-key": key },
-    body: JSON.stringify({
-      contents: [{ parts: [{ text: prompt }] }],
-      generationConfig: { responseMimeType: "application/json", responseSchema: schema },
-    }),
-  });
-  if (res.status === 429) throw new HttpError(429, "AI 使用量已達上限，請稍後再試");
-  if (!res.ok) throw new HttpError(502, `AI 服務錯誤（${res.status}）`);
-  const data = await res.json();
+  const models = [
+    Deno.env.get("GEMINI_MODEL") ?? "gemini-3.5-flash",
+    Deno.env.get("GEMINI_FALLBACK_MODEL") ?? "gemini-3.1-flash-lite",
+  ].filter((m, i, all) => m && all.indexOf(m) === i);
+
+  let lastStatus = 0;
+  for (const model of models) {
+    for (let attempt = 0; attempt < 2; attempt++) {
+      if (attempt > 0) await wait(1000 * attempt);
+      let res: Response;
+      try {
+        res = await fetchImpl(GEMINI_URL.replace("{model}", model), {
+          method: "POST",
+          headers: { "Content-Type": "application/json", "x-goog-api-key": key },
+          body: JSON.stringify({
+            contents: [{ parts: [{ text: prompt }] }],
+            generationConfig: { responseMimeType: "application/json", responseSchema: schema },
+          }),
+        });
+      } catch {
+        lastStatus = 503; // 網路錯誤視同暫時無法使用，重試
+        continue;
+      }
+      if (res.ok) return parseResult(await res.json());
+      lastStatus = res.status;
+      console.warn(`Gemini ${model} 回傳 ${res.status}（第 ${attempt + 1} 次）`);
+      if (res.status === 429) break; // 該模型額度用完，直接換下一個模型
+      if (res.status < 500) throw new HttpError(502, `AI 服務錯誤（${res.status}）`); // 請求本身有問題，重試也沒用
+    }
+  }
+  if (lastStatus === 429) throw new HttpError(429, "AI 使用量已達上限，請稍後再試");
+  throw new HttpError(503, "AI 服務目前忙碌中，請稍後再試");
+}
+
+function parseResult(data: { candidates?: { content?: { parts?: { text?: string }[] } }[] }): unknown {
   const text = data?.candidates?.[0]?.content?.parts?.[0]?.text;
   if (!text) throw new HttpError(502, "AI 沒有產生回應，請再試一次");
   try {
