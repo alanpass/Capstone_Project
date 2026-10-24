@@ -1,0 +1,50 @@
+# 蘭花與鳳梨科
+大白花蝴蝶蘭|Phalaenopsis amabilis|2|S|4|18-28|KI|P|t|台灣蘭花的代表，水苔乾了再澆，冬季低溫刺激花梗。
+迷你蝴蝶蘭|Phalaenopsis 'Mini'|2|S|4|18-28|KI|P|t|小型蝴蝶蘭，適合辦公桌與窗台。
+台灣阿嬤蝴蝶蘭|Phalaenopsis aphrodite subsp. formosana|2|S|4|18-30|KI|P|t|台灣原生種，白色花朵是許多雜交品種的親本。
+文心蘭|Oncidium hybrids|2|S|3|18-30|KI|P|d|黃色小花成串如跳舞女郎，又稱跳舞蘭。
+嘉德麗雅蘭|Cattleya hybrids|3|P|4|18-30|KI|P|d|蘭花之后，花朵大而芳香，需明亮光線。
+秋石斛|Dendrobium phalaenopsis hybrids|2|F|3|18-32|KI|P|dc|花梗長、花朵多，喜明亮光線與通風。
+春石斛|Dendrobium nobile hybrids|2|P|4|12-28|KI|P|dc|秋冬需低溫與控水才能在春天開花。
+蕙蘭|Cymbidium hybrids|2|P|3|10-26|KI|P|d|大型東亞蘭，冬季低溫有助開花，花期長。
+報歲蘭|Cymbidium sinense|2|S|3|15-28|KI|P|d|農曆春節開花，香氣清幽，台灣傳統名蘭。
+四季蘭|Cymbidium ensifolium|2|S|3|15-28|KI|P|d|夏秋開花，花香淡雅，葉形優美。
+春蘭|Cymbidium goeringii|3|S|3|8-25|KI|P|d|早春開花，香氣清幽，需冷涼通風。
+拖鞋蘭|Paphiopedilum hybrids|2|H|3|16-28|KI|P|d|唇瓣如拖鞋，耐陰，適合室內窗邊。
+萬代蘭|Vanda hybrids|3|F|2|20-32|KI|P|c|根部裸露吊掛栽培，需每天噴水，花色豔麗。
+千代蘭|Ascocenda hybrids|3|F|2|20-32|KI|P|c|萬代蘭雜交種，花朵較小但耐熱。
+美洲拖鞋蘭|Phragmipedium hybrids|3|S|2|16-28|KI|P|d|需保持濕潤的拖鞋蘭，花瓣細長下垂。
+虎頭蘭|Cymbidium lowianum|2|P|3|10-26|KI|P|d|花莖長，花大色豔，冬春開花。
+燕子蘭|Vanda falcata|2|P|3|15-28|KI|P|d|白色小花香氣濃郁，帶長距如燕尾。
+風蘭|Neofinetia falcata|2|S|3|10-30|KI|P|d|日本古典蘭花，夜晚香氣濃。
+白及|Bletilla striata|1|P|2|10-28|KI|P|d|地生蘭，粉紫花朵，耐寒好種。
+鶴頂蘭|Phaius tankervilleae|2|P|2|15-30|KI|P|d|大型地生蘭，花朵外白內紅褐。
+寶島羊耳蒜|Liparis formosana|2|H|2|15-28|KI|P|d|台灣原生小型地生蘭。
+金線蓮|Anoectochilus formosanus|3|H|2|18-26|EKI|P|tc|葉面有金色網紋，珍貴藥用蘭花。
+綬草|Spiranthes sinensis|2|F|2|12-28|KI|P|s|粉紅小花螺旋排列，常見於草地。
+豹紋蘭|Ansellia africana|2|F|3|18-32|KI|P|d|黃色花瓣帶棕色斑點，花朵成串。
+貝殼蘭|Prosthechea cochleata|2|S|3|18-28|KI|P|d|唇瓣如貝殼朝上，花期長。
+蜂蘭|Ophrys apifera|3|F|3|8-22|K|P|d|花朵形似蜜蜂，以擬態吸引授粉者。
+攀緣樹蘭|Epidendrum radicans|1|F|3|18-32|KI|P|c|橙紅色小花成球，生命力強。
+斑葉香草蘭|Vanilla planifolia 'Variegata'|2|S|3|21-32|KI|P|c|斑葉香草蘭，蔓性觀葉。
+禾葉美冠蘭|Eulophia graminea|2|F|3|18-32|KI|P|d|地生蘭，花莖高挺，耐熱。
+豆蘭|Bulbophyllum hybrids|2|S|2|18-28|KI|P|d|小型附生蘭，假球莖排列，花型奇特。
+石豆蘭|Bulbophyllum drymoglossum|2|S|2|16-28|KI|P|d|台灣原生迷你蘭，附生於樹幹。
+小精靈空氣鳳梨|Tillandsia ionantha|1|F|3|15-30|KI|P|r|不需土壤，每週泡水，開花前葉片轉紅。
+霸王鳳|Tillandsia xerographica|1|F|4|15-32|KI|P|r|大型空氣鳳梨，銀白捲曲葉片極具造型。
+松蘿鳳梨|Tillandsia usneoides|1|P|2|15-30|KI|P|c|鬍子狀垂吊生長，需高濕度。
+章魚鳳梨|Tillandsia bulbosa|1|P|3|15-30|KI|P|r|基部膨大、葉片捲曲如章魚觸手。
+紫花鳳梨|Wallisia cyanea|1|P|3|18-30|KI|P|r|粉紅色扁平花序開出紫色小花。
+擎天鳳梨|Guzmania lingulata|1|S|3|18-28|KI|P|r|紅色苞片可維持數月，葉筒需保持有水。
+鶯哥鳳梨|Vriesea splendens|1|S|3|18-28|KI|P|r|劍形紅色花序，葉片有橫紋。
+蜻蜓鳳梨|Aechmea fasciata|1|S|3|18-30|KI|P|r|粉紅苞片配藍紫小花，葉片銀白斑紋。
+彩葉鳳梨|Neoregelia carolinae|1|S|3|18-30|KI|P|r|開花時葉心轉紅，耐陰好養。
+姬鳳梨|Cryptanthus bivittatus|1|S|3|18-28|KI|P|r|葉片星形貼地，色彩條紋美麗。
+火輪鳳梨|Neoregelia 'Fireball'|1|F|3|18-30|KI|P|r|小型鳳梨，陽光充足時全株轉紅。
+水塔花|Billbergia pyramidalis|1|P|3|18-30|KI|P|r|葉筒狀如水塔，開紅色花穗。
+垂花水塔花|Billbergia nutans|1|P|3|15-30|KI|P|r|花序下垂，花色粉藍相間，耐寒。
+艷鳳梨|Ananas bracteatus 'Tricolor'|1|F|4|20-32|K|P|r|葉片有乳黃條紋，果實紅豔可觀賞。
+迷你觀賞鳳梨|Ananas nanus|1|F|4|20-32|K|P|r|小型鳳梨，結出迷你果實，適合盆栽。
+皇后鳳梨|Aechmea chantinii|2|S|3|18-30|KI|P|r|葉片有白色橫帶，被譽為鳳梨中的皇后。
+紅苞鳳梨|Guzmania 'Hilda'|1|S|3|18-28|KI|P|r|鮮紅苞片持久，室內年節盆花。
+虎紋鳳梨|Vriesea hieroglyphica|2|S|3|18-28|KI|P|r|葉片有象形文字般斑紋，觀葉為主。

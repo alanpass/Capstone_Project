@@ -1,0 +1,21 @@
+# 蕨類與石松類
+翠雲草|Selaginella uncinata|1|H|2|15-28|KI|P|cd|葉片泛藍綠色光澤，喜陰濕。
+卷柏|Selaginella tamariscina|1|P|4|10-30|KI|P|d|乾旱時捲曲、遇水展開，有九死還魂草之稱。
+波士頓腎蕨|Nephrolepis exaltata 'Bostoniensis'|1|S|2|15-28|KI|P|d|下垂羽狀葉片，室內加濕效果好。
+兔腳蕨|Davallia fejeensis|1|S|3|15-28|KI|P|d|毛茸茸根莖如兔腳，懸掛於盆外。
+鹿角蕨|Platycerium bifurcatum|2|S|3|15-30|KI|P|r|葉片分叉如鹿角，可上板懸掛。
+皺葉山蘇|Asplenium nidus 'Crispy Wave'|1|H|3|18-28|KI|P|f|葉緣波浪狀的山蘇品種，耐陰。
+鐵線蕨|Adiantum capillus-veneris|2|S|1|15-26|KI|P|d|纖細黑色葉柄與扇形小葉，需高濕。
+藍星蕨|Phlebodium aureum|1|S|3|15-28|KI|P|d|藍綠色葉片，根莖毛茸茸。
+筆筒樹|Sphaeropteris lepifera|2|P|2|15-28|K|P|f|台灣原生樹蕨，葉柄脫落後留下如筆筒的痕跡。
+台灣桫欏|Alsophila metteniana|2|H|2|15-26|K|P|f|樹蕨，喜陰濕的山谷，遠古植物代表。
+腎蕨|Nephrolepis cordifolia|1|P|3|15-30|KI|P|d|台灣低海拔常見，地下有球狀塊莖可儲水。
+鳳尾蕨|Pteris multifida|1|H|2|15-28|KI|P|f|葉片細長如鳳尾，牆角石縫常見。
+傅氏鳳尾蕨|Pteris fauriei|1|H|2|15-28|K|P|f|台灣低海拔林下常見的鳳尾蕨。
+烏毛蕨|Blechnopsis orientalis|1|P|2|18-30|K|P|f|大型蕨類，新葉紅色，嫩芽可食。
+崖薑蕨|Aglaomorpha coronans|1|P|3|18-30|K|P|d|附生大型蕨類，常見於樹幹與岩壁。
+伏石蕨|Lemmaphyllum microphyllum|1|H|3|15-28|KI|P|d|小型附生蕨，圓形肉質小葉貼石生長。
+瓦葦|Lepisorus thunbergianus|1|H|3|12-28|K|P|d|附生於屋瓦或樹幹，耐旱的小型蕨。
+銀脈鳳尾蕨|Pteris ensiformis 'Victoriae'|1|H|2|15-28|KI|P|d|葉片中央有銀白色條紋，適合室內。
+芒萁|Dicranopteris linearis|1|F|3|15-32|K|P|d|山坡上常見的二叉分枝蕨類。
+水蕨|Ceratopteris thalictroides|1|P|W|20-30|EK|A|f|水生蕨類，嫩葉可食，也可做水族造景。

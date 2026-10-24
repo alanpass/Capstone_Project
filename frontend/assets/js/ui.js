@@ -2,20 +2,57 @@
 import { isConfigured } from "./config.js";
 import { currentUser, getProfile, signOutUser } from "./session.js";
 
-const PRIVATE_LINKS = [
-  ["home.html", "主控台"],
-  ["planner.html", "種植規劃"],
-  ["garden.html", "我的花園"],
-  ["plants.html", "植物百科"],
-  ["sensors.html", "感測器"],
-  ["device.html", "自動控制"],
-  ["profile.html", "個人資料"],
+// 導覽分類：單一連結，或含 items 的群組（桌機為下拉選單、手機為分段清單）
+const PRIVATE_NAV = [
+  { href: "home.html", label: "主控台", icon: "fa-house" },
+  { label: "我的植物", icon: "fa-seedling", items: [
+    { href: "garden.html", label: "我的花園", desc: "所有種植專案、天數與生長階段", icon: "fa-leaf" },
+    { href: "planner.html", label: "種植規劃・照護指南", desc: "新增植物，查看 AI 每日任務", icon: "fa-wand-magic-sparkles" },
+  ] },
+  { label: "智慧設備", icon: "fa-microchip", items: [
+    { href: "status.html", label: "裝置狀態", desc: "是否在線、風扇／加熱／水泵運轉情形", icon: "fa-tower-broadcast" },
+    { href: "sensors.html", label: "環境數據", desc: "溫度、濕度、土壤濕度圖表", icon: "fa-chart-line" },
+    { href: "device.html", label: "自動控制設定", desc: "裝置管理哪株植物、門檻值", icon: "fa-sliders" },
+  ] },
+  { href: "plants.html", label: "植物百科", icon: "fa-book-open", also: ["plant.html"] },
+  { label: "帳號", icon: "fa-circle-user", items: [
+    { href: "profile.html", label: "個人資料", desc: "姓名與地址（用於天氣）", icon: "fa-id-card" },
+    { href: "#logout", label: "登出", icon: "fa-arrow-right-from-bracket" },
+  ] },
 ];
-const PUBLIC_LINKS = [
-  ["index.html", "首頁"],
-  ["plants.html", "植物百科"],
-  ["sensors.html", "感測器"],
+const PUBLIC_NAV = [
+  { href: "index.html", label: "首頁", icon: "fa-house" },
+  { href: "plants.html", label: "植物百科", icon: "fa-book-open", also: ["plant.html"] },
+  { href: "sensors.html", label: "環境數據", icon: "fa-chart-line" },
+  { href: "login.html", label: "登入", icon: "fa-right-to-bracket" },
+  { href: "register.html", label: "免費註冊", icon: "fa-user-plus", cta: true },
 ];
+
+const isCurrent = (item, page) => item.href === page || item.also?.includes(page);
+
+function linkHtml(item, page, withDesc = false) {
+  return `<a href="${item.href}" class="${isCurrent(item, page) ? "active" : ""} ${item.cta ? "cta" : ""}">
+    <i class="fa-solid ${item.icon}"></i><span>${item.label}${withDesc && item.desc ? `<small>${item.desc}</small>` : ""}</span></a>`;
+}
+
+function navHtml(entries, page) {
+  return entries.map((entry) => {
+    if (!entry.items) return linkHtml(entry, page);
+    const active = entry.items.some((i) => isCurrent(i, page));
+    return `<div class="nav-group ${active ? "active" : ""}">
+      <button type="button" class="nav-group-btn" aria-expanded="false"><i class="fa-solid ${entry.icon}"></i><span>${entry.label}</span><i class="fa-solid fa-chevron-down caret"></i></button>
+      <div class="nav-menu">${entry.items.map((i) => linkHtml(i, page, true)).join("")}</div>
+    </div>`;
+  }).join("");
+}
+
+/** 同一分類內的頁面頂端顯示分頁標籤，方便在相關功能間切換。 */
+function subnavHtml(entries, page) {
+  const group = entries.find((e) => e.items?.some((i) => isCurrent(i, page)) && e.items.every((i) => !i.href.startsWith("#")));
+  if (!group) return "";
+  return `<nav class="subnav" aria-label="${group.label}">${group.items.map((i) =>
+    `<a href="${i.href}" class="${isCurrent(i, page) ? "active" : ""}"><i class="fa-solid ${i.icon}"></i> ${i.label}</a>`).join("")}</nav>`;
+}
 
 /** 所有使用者輸入、資料庫或 AI 產生的文字，插入 HTML 前都要經過這個函式，避免 XSS。 */
 export function esc(value) {
@@ -54,25 +91,33 @@ export async function mountShell() {
   });
 
   const user = await currentUser();
-  const links = user ? PRIVATE_LINKS : PUBLIC_LINKS;
-  nav.innerHTML = links
-    .map(([href, label]) => `<a href="${href}" class="${href === page ? "active" : ""}">${label}</a>`)
-    .join("");
+  const entries = user ? PRIVATE_NAV : PUBLIC_NAV;
+  nav.innerHTML = navHtml(entries, page);
+  if (user) header.querySelector(".brand").href = "home.html";
+  document.querySelector("main")?.insertAdjacentHTML("afterbegin", subnavHtml(entries, page));
 
-  if (user) {
-    const logout = document.createElement("a");
-    logout.href = "#";
-    logout.innerHTML = `<i class="fa-solid fa-arrow-right-from-bracket"></i> 登出`;
-    logout.addEventListener("click", async (e) => {
+  const closeMenus = (except) => nav.querySelectorAll(".nav-group.open").forEach((g) => {
+    if (g === except) return;
+    g.classList.remove("open");
+    g.querySelector(".nav-group-btn").setAttribute("aria-expanded", "false");
+  });
+  nav.addEventListener("click", async (e) => {
+    const btn = e.target.closest(".nav-group-btn");
+    if (btn) {
+      const group = btn.parentElement;
+      closeMenus(group);
+      btn.setAttribute("aria-expanded", String(group.classList.toggle("open")));
+      return;
+    }
+    if (e.target.closest('a[href="#logout"]')) {
       e.preventDefault();
       if (!confirm("確定要登出嗎？")) return;
       await signOutUser();
       location.href = "index.html";
-    });
-    nav.append(logout);
-  } else {
-    nav.insertAdjacentHTML("beforeend", `<a href="login.html" class="${page === "login.html" ? "active" : ""}">登入</a>`);
-  }
+    }
+  });
+  document.addEventListener("click", (e) => { if (!nav.contains(e.target)) closeMenus(); });
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeMenus(); });
   return user;
 }
 

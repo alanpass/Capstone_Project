@@ -1,0 +1,89 @@
+# 香草、香料與藥用植物
+甜羅勒|Ocimum basilicum|1|F|2|20-32|EKI|A|sc|義式青醬的主角，喜溫暖日照，摘心可讓植株更茂密。
+檸檬羅勒|Ocimum × africanum|1|F|2|20-32|EK|A|sc|帶清新檸檬香的羅勒，適合泡茶與海鮮料理。
+聖羅勒|Ocimum tenuiflorum|1|F|2|20-35|EK|P|sc|又稱打拋葉，泰式打拋料理不可或缺，耐熱。
+泰國羅勒|Ocimum basilicum var. thyrsiflora 'Thai'|1|F|2|20-35|EK|A|sc|莖紫色、帶八角香氣，常用於越南河粉。
+紫羅勒|Ocimum basilicum 'Purpurascens'|1|F|2|20-32|EK|A|sc|葉片深紫色，觀賞與食用兼具。
+迷迭香|Salvia rosmarinus|1|F|4|15-28|EKI|P|c|耐旱怕積水，需排水良好的土壤與充足日照。
+薰衣草|Lavandula angustifolia|2|F|4|12-26|ET|P|cs|喜涼爽乾燥，台灣夏季需避雨通風，花可做香包。
+齒葉薰衣草|Lavandula dentata|1|F|4|15-30|ET|P|c|葉緣呈鋸齒狀，比真薰衣草耐熱，適合台灣平地。
+甜薰衣草|Lavandula × heterophylla|1|F|4|15-30|ET|P|c|耐熱耐濕的雜交薰衣草，花穗長、香氣甜。
+百里香|Thymus vulgaris|1|F|4|15-28|EKI|P|cs|低矮耐旱的香草，適合燉肉與烤雞，怕悶熱潮濕。
+檸檬百里香|Thymus × citriodorus|1|F|4|15-28|EK|P|c|帶檸檬香氣，葉有斑紋品種，常用於魚料理。
+匍匐百里香|Thymus serpyllum|1|F|4|12-26|EK|P|cd|貼地生長，可做地被，開粉紫色小花。
+鼠尾草|Salvia officinalis|2|F|4|15-28|EK|P|cs|灰綠色葉片具濃郁香氣，常搭配肉類料理。
+鳳梨鼠尾草|Salvia elegans|1|F|3|18-30|EK|P|c|葉片帶鳳梨香，秋冬開鮮紅花朵，吸引蜂鳥與蜜蜂。
+奧勒岡|Origanum vulgare|1|F|4|15-30|EK|P|cd|披薩草，乾燥後香氣更濃，耐旱好照顧。
+甜馬鬱蘭|Origanum majorana|1|F|3|15-28|EK|P|cs|香氣比奧勒岡溫和甜美，適合湯品與醬汁。
+綠薄荷|Mentha spicata|1|P|2|15-28|EKI|P|cd|繁殖力強，建議單獨盆植以免蔓延。
+胡椒薄荷|Mentha × piperita|1|P|2|15-28|EK|P|cd|涼感最強的薄荷，適合泡茶、甜點。
+蘋果薄荷|Mentha suaveolens|1|P|2|15-28|EK|P|cd|葉片毛茸茸帶蘋果香，味道溫和。
+巧克力薄荷|Mentha × piperita 'Chocolate'|1|P|2|15-28|EK|P|c|莖帶紫褐色，香氣似巧克力薄荷糖。
+柳橙薄荷|Mentha aquatica var. citrata|1|P|1|15-28|EK|P|cd|帶柑橘香，喜潮濕，可種在水邊。
+日本薄荷|Mentha canadensis|1|P|2|15-28|EK|P|cd|薄荷腦含量高，清涼感強烈。
+檸檬香蜂草|Melissa officinalis|1|P|2|15-26|EK|P|sd|葉片帶檸檬香，可泡茶放鬆，怕強烈西曬。
+檸檬馬鞭草|Aloysia citrodora|2|F|3|15-30|EK|P|c|檸檬香氣最濃郁的香草之一，冬季會落葉。
+檸檬香茅|Cymbopogon citratus|1|F|2|20-35|EK|P|d|東南亞料理常用，耐熱，分株即可繁殖。
+香水茅|Cymbopogon nardus|1|F|3|20-35|ET|P|d|即香茅油原料，可驅蚊，不宜食用。
+細香蔥|Allium schoenoprasum|1|F|3|12-25|ET|P|sd|細管狀葉帶溫和蔥香，紫色花球也可食用。
+平葉巴西里|Petroselinum crispum var. neapolitanum|1|P|2|12-25|EK|B|s|義大利香芹，香氣比捲葉品種濃郁。
+捲葉巴西里|Petroselinum crispum|1|P|2|12-25|EK|B|s|葉片捲曲，常做西餐盤飾，富含維生素 C。
+龍艾|Artemisia dracunculus|2|F|3|12-25|E|P|cd|法式料理的經典香草，帶淡淡茴香味。
+艾草|Artemisia argyi|1|F|3|15-30|ET|P|d|端午節常用，可做艾草粿，生命力旺盛。
+芸香|Ruta graveolens|1|F|4|15-30|T|P|sc|俗稱臭草，傳統用於綠豆湯，接觸汁液可能引起光過敏。
+琉璃苣|Borago officinalis|1|F|3|12-25|E|A|s|開藍色星形花，花可裝飾沙拉，吸引蜜蜂。
+金蓮花|Tropaeolum majus|1|F|3|12-25|EK|A|s|葉與花皆可食，帶芥末辣味，花色橙黃亮麗。
+德國洋甘菊|Matricaria chamomilla|1|F|3|12-24|ET|A|s|花朵曬乾即可泡茶，秋冬播種、春天開花。
+羅馬洋甘菊|Chamaemelum nobile|2|F|3|12-24|ET|P|sd|匍匐生長，可做香草草坪，香氣似蘋果。
+金盞花|Calendula officinalis|1|F|3|10-24|EK|A|s|花瓣可食用與入藥，冬春季開出橙黃花朵。
+紫錐花|Echinacea purpurea|1|F|3|15-30|EK|P|sd|知名免疫保健香草，耐熱耐旱，花期長。
+甜菊|Stevia rebaudiana|2|F|2|20-30|EK|P|c|葉片甜度約砂糖 200 倍，可做天然甜味劑。
+左手香|Coleus amboinicus 'Variegatus'|1|P|4|20-35|EI|P|c|斑葉品種的到手香，葉肉厚帶濃烈香氣。
+魚腥草|Houttuynia cordata|1|H|1|15-28|E|P|dc|喜陰濕，全株有魚腥味，曬乾泡茶味道轉淡。
+車前草|Plantago asiatica|1|F|3|15-30|EK|P|s|路邊常見的藥草，嫩葉可食，種子可利尿。
+咸豐草|Bidens pilosa|1|F|4|18-32|E|A|s|台灣最常見的野草之一，可煮青草茶。
+仙草|Platostoma palustre|1|F|2|20-32|EK|P|c|乾燥後熬煮成仙草凍、燒仙草的原料。
+苦茶油樹|Camellia oleifera|2|P|3|15-28|E|P|s|種子可榨苦茶油，秋冬開白花，生長緩慢。
+桂花|Osmanthus fragrans|1|F|3|15-30|EK|P|cl|秋季開花香氣濃郁，花可做桂花釀。
+茉莉花|Jasminum sambac|1|F|2|20-32|EK|P|cl|夏季開白花，香氣迷人，可薰茶。
+玫瑰天竺葵|Pelargonium graveolens|1|F|4|15-28|T|P|c|葉片散發玫瑰香，可萃取精油，對寵物有毒。
+香葉萬壽菊|Tagetes lemmonii|1|F|3|15-30|T|P|c|葉片帶百香果香氣，秋冬開黃花。
+甜茴香|Foeniculum vulgare var. dulce|2|F|3|12-25|EK|P|s|鱗莖膨大可當蔬菜，種子做香料。
+葛縷子|Carum carvi|2|F|3|10-22|EK|B|s|種子是黑麥麵包常用香料，第二年才開花結籽。
+孜然|Cuminum cyminum|2|F|4|20-30|EK|A|s|中東與印度料理香料，需溫暖乾燥氣候。
+葫蘆巴|Trigonella foenum-graecum|1|F|3|15-28|E|A|s|種子用於咖哩，嫩葉也可炒食。
+黑種草|Nigella sativa|1|F|3|12-25|E|A|s|種子為香料，花朵藍白色、形態特別。
+芥末|Brassica juncea (Mustard Seed)|1|F|3|12-25|EK|A|s|成熟種子研磨成芥末醬，嫩葉可食。
+山葵|Eurutrema japonicum|3|H|1|10-17|E|P|d|需冷涼清澈流水環境，根莖磨成新鮮山葵醬。
+辣根|Armoracia rusticana|1|F|3|10-25|ET|P|c|根部辛辣，常做西式辣根醬。
+胡椒|Piper nigrum|3|P|2|22-32|EK|P|c|蔓性藤本，需高溫多濕，果實加工成黑、白胡椒。
+蓽茇|Piper longum|2|P|2|22-32|E|P|c|長形花穗乾燥後為香料長胡椒。
+荖葉|Piper betle|1|P|2|22-32|E|P|c|檳榔包葉的來源，心形葉片具辛香。
+假蒟|Piper sarmentosum|1|H|2|22-32|E|P|cd|越南料理包肉用的葉片，耐陰易繁殖。
+肉桂|Cinnamomum verum|2|P|3|20-32|EK|P|sc|樹皮即肉桂香料，需熱帶氣候，可盆植觀賞。
+土肉桂|Cinnamomum osmophloeum|1|P|3|18-30|EK|P|s|台灣原生樹種，葉片可泡茶，有肉桂香氣。
+月桂|Laurus nobilis|1|F|3|12-28|ET|P|c|葉片乾燥後用於燉煮，樹形可修剪成造型。
+香蘭葉|Pandanus amaryllifolius|1|P|2|22-32|EK|P|r|東南亞甜點的天然香料，葉片帶芋頭香。
+咖哩葉|Murraya koenigii|2|F|3|20-32|E|P|s|印度料理的咖哩香葉，屬於芸香科小樹。
+香椿|Toona sinensis|1|F|3|15-30|E|P|sr|春季嫩芽帶獨特香氣，可拌麵、炒蛋。
+刺蔥|Zanthoxylum ailanthoides|1|F|4|18-30|E|P|s|原住民香料「食茱萸」，嫩葉帶柑橘香，莖有刺。
+花椒|Zanthoxylum bungeanum|2|F|4|12-28|E|P|sg|麻辣料理的靈魂，果皮乾燥後使用。
+八角|Illicium verum|3|P|3|18-28|E|P|s|果實為五香粉原料，需溫暖濕潤山區。
+丁香|Syzygium aromaticum|3|P|2|22-30|E|P|s|乾燥花苞即丁香香料，需高溫多濕環境。
+薑花|Hedychium gardnerianum|1|P|1|15-28|E|P|d|黃色穗狀花序芬芳，喜濕潤半陰。
+南薑|Alpinia galanga|1|P|2|22-32|E|P|d|泰式冬蔭功湯必備，根莖比薑更具辛香。
+砂仁|Wurfbainia villosa|2|H|2|20-30|E|P|d|果實為中藥與香料，喜溫暖陰濕的林下環境。
+白豆蔻|Elettaria cardamomum|3|H|2|20-30|E|P|d|香料之后，需熱帶林下環境，盆植較難開花。
+香草蘭|Vanilla planifolia|3|S|3|21-32|EK|P|c|香草莢來源的蘭花，需人工授粉，室內栽培具挑戰。
+番紅花|Crocus sativus|3|F|4|5-20|ET|P|b|秋季開花，紅色柱頭即昂貴香料番紅花。
+芝麻|Sesamum indicum|1|F|4|22-32|EK|A|s|耐旱的油料作物，蒴果成熟裂開前採收種子。
+青紫蘇|Perilla frutescens var. crispa 'Green'|1|P|2|18-30|E|A|s|日式料理的大葉，香氣清新，夏季生長旺盛。
+荊芥|Schizonepeta tenuifolia|1|F|3|15-28|E|A|s|中藥與涼拌常用的香草，帶清涼薄荷味。
+藿香|Agastache rugosa|1|F|3|15-30|EK|P|sd|紫色穗狀花吸引蝴蝶蜜蜂，葉帶茴香味。
+牛至花薄荷|Calamintha nepeta|1|F|4|15-28|EK|P|cd|低矮香草，開淡紫小花，蜜蜂最愛。
+美國薄荷|Monarda didyma|1|F|2|12-26|EK|P|d|花朵鮮紅，葉片可泡伯爵茶風味的花草茶。
+牛膝草|Hyssopus officinalis|1|F|4|12-26|E|P|sc|藍紫色花穗芳香，傳統藥草，耐旱。
+歐白芷|Angelica archangelica|2|P|2|10-22|E|B|s|植株高大，莖可做蜜餞，喜冷涼濕潤。
+纈草|Valeriana officinalis|1|P|2|10-25|E|P|sd|根部傳統用於助眠，開淡粉色繖狀花。
+貓穗草|Nepeta × faassenii|1|F|4|12-28|EK|P|cd|開藍紫色花穗，耐旱，是貓薄荷的近親。
+蘆薈|Aloe vera|1|F|5|18-32|IT|P|r|葉肉可外用舒緩曬傷，耐旱，但對寵物有毒。

@@ -14,16 +14,20 @@
 </head>
 <body>
 <main>
-  <div class="page-head"><h1>植物百科 <span id="total" class="badge"></span></h1><p>搜尋適合你的綠色夥伴，點選卡片查看完整照護資訊。</p></div>
+  <div class="page-head"><h1>植物百科 <span id="total" class="badge"></span></h1><p>依用途分類，或用「新手友善」「寵物友善」等條件快速找到適合你的植物。</p></div>
+  <div class="cat-chips" id="cats" role="group" aria-label="植物分類"></div>
   <div class="toolbar card" style="padding:16px">
-    <div class="field search" style="margin:0"><label for="q">搜尋</label><input class="input" id="q" type="search" placeholder="名稱、特性、澆水方式…"></div>
-    <div class="field" style="margin:0"><label for="level">照護等級</label><select class="input" id="level"><option value="">全部</option></select></div>
-    <div class="field" style="margin:0"><label for="sun">日照需求</label><select class="input" id="sun"><option value="">全部</option></select></div>
+    <div class="field search" style="margin:0"><label for="q">搜尋</label><input class="input" id="q" type="search" placeholder="植物名稱、學名或特色，例如：番茄、驅蚊、耐陰"></div>
+    <div class="field" style="margin:0"><label for="sun">日照</label><select class="input" id="sun"><option value="">不限</option>
+      <option>全日照</option><option>半日照</option><option>明亮散射光</option><option>耐陰</option></select></div>
     <div class="field" style="margin:0"><label for="sort">排序</label><select class="input" id="sort">
-      <option value="id">預設</option><option value="name">名稱 A→Z</option><option value="name-desc">名稱 Z→A</option></select></div>
-    <div id="shown" style="padding-bottom:12px;color:var(--muted);font-size:.9rem"></div>
+      <option value="default">依分類</option><option value="easy">由好照顧到難</option><option value="name">名稱筆畫</option></select></div>
+    <div class="quick-chips" id="quick" role="group" aria-label="快速篩選"></div>
   </div>
+  <p id="catDesc" class="cat-desc"></p>
+  <p id="shown" class="muted-note" style="margin:0 0 12px"></p>
   <div id="list" class="grid grid-3"></div>
+  <div style="text-align:center;margin-top:24px"><button class="btn secondary hidden" id="more"></button></div>
 </main>
 <script type="module" src="assets/js/pages/plants.js"></script>
 </body>

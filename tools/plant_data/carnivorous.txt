@@ -1,0 +1,13 @@
+# 食蟲植物
+捕蠅草|Dionaea muscipula|3|F|1|10-30|KI|P|ds|葉片碰觸兩次就會閉合捕蟲，需用純水或雨水澆灌。
+瓶子草|Sarracenia purpurea|2|F|1|8-30|K|P|ds|筒狀葉內有消化液，冬季需低溫休眠。
+黃瓶子草|Sarracenia flava|2|F|1|8-32|K|P|ds|黃綠色高挺捕蟲筒，春季開黃花。
+豬籠草|Nepenthes × ventrata|2|S|2|20-32|KI|P|c|葉尖長出捕蟲籠，喜高濕，適合吊盆。
+紅瓶豬籠草|Nepenthes alata|2|S|2|20-32|KI|P|c|籠子帶紅色斑紋，較耐低濕度。
+毛氈苔|Drosera spatulata|2|F|1|15-30|KI|P|sd|葉面腺毛分泌黏液捕蟲，台灣原生。
+好望角毛氈苔|Drosera capensis|1|F|1|12-30|KI|P|se|最好種的毛氈苔，葉片細長會捲曲包住獵物。
+寬葉毛氈苔|Drosera burmannii|2|F|1|18-32|KI|A|s|台灣原生小型毛氈苔，蓮座貼地生長。
+捕蟲堇|Pinguicula moranensis|2|S|2|15-28|KI|P|e|葉面黏液捕捉小蟲，開紫色花朵。
+狸藻|Utricularia gibba|2|F|W|18-30|K|P|d|水生食蟲植物，以微小捕蟲囊吸入獵物。
+挖耳草|Utricularia bifida|2|F|1|18-30|K|A|s|台灣濕地原生狸藻，開黃色小花。
+土瓶草|Cephalotus follicularis|3|P|1|10-25|KI|P|d|迷你捕蟲瓶如小茶壺，生長緩慢。

@@ -1,0 +1,112 @@
+# 多肉植物與仙人掌（水量代碼多為 5～6：土完全乾透再澆）
+玉露|Haworthiopsis cooperi var. truncata|1|S|5|10-28|KI|P|re|葉尖透明如窗，喜散射光，夏季休眠需減水。
+姬玉露|Haworthia cooperi var. cooperi|1|S|5|10-28|KI|P|re|小型玉露，葉窗清透，適合室內窗台。
+十二之卷|Haworthiopsis attenuata|1|P|5|10-30|KI|P|r|葉片有白色橫紋，非常耐陰耐旱。
+琉璃殿|Haworthiopsis limifolia|1|P|5|10-30|KI|P|r|葉片排列成螺旋狀，表面有細紋。
+壽|Haworthia retusa|1|S|5|10-28|KI|P|re|葉片三角形、頂端有透明窗。
+萬象|Haworthia maughanii|3|S|5|10-28|KI|P|r|葉片截平如柱狀，生長極慢。
+寶草|Haworthia cymbiformis|1|S|5|10-28|KI|P|r|葉片肥厚透綠，群生易爆盆。
+熊童子|Cotyledon tomentosa|2|F|5|10-28|TI|P|c|葉片毛茸茸、前端紅齒如熊掌，怕悶熱。
+福娘|Cotyledon orbiculata var. oophylla|1|F|5|10-30|T|P|c|葉片覆白粉，邊緣泛紅。
+乙女心|Sedum pachyphyllum|1|F|5|10-30|K|P|ce|棒狀葉片尖端泛紅，日照充足時更紅。
+虹之玉|Sedum rubrotinctum|1|F|5|10-30|T|P|ce|豆子狀葉片冬季轉紅，葉插極易繁殖。
+黃麗|Sedum adolphi|1|F|5|10-30|K|P|ce|葉片黃綠色，日照下邊緣轉橘紅。
+佛甲草|Sedum lineare|1|F|4|10-32|K|P|cd|細葉地被，耐旱耐熱，常用於綠屋頂。
+薄雪萬年草|Sedum hispanicum|1|F|4|10-30|K|P|c|小型地被多肉，葉片帶白粉。
+玉綴|Sedum morganianum|1|P|5|12-28|KI|P|ce|葉片串成長尾下垂，適合吊盆，葉易掉落。
+新玉綴|Sedum burrito|1|P|5|12-28|KI|P|ce|葉片短圓的驢尾景天，垂吊性佳。
+銘月|Sedum nussbaumerianum|1|F|5|10-30|K|P|ce|葉片橘黃色，日照越強顏色越亮。
+姬朧月|Graptosedum 'Bronze'|1|F|5|10-30|K|P|ce|紫褐色小蓮座，好照顧的入門多肉。
+朧月|Graptopetalum paraguayense|1|F|5|8-32|EK|P|ce|又稱石蓮花，可涼拌食用，非常強健。
+桃之嬌|Echeveria 'Momotarou'|2|F|5|10-28|K|P|re|葉尖紅色爪狀，蓮座緊密。
+吉娃娃|Echeveria chihuahuensis|2|F|5|10-28|K|P|re|藍白葉片配紅色葉尖，造型精緻。
+花月夜|Echeveria pulidonis|2|F|5|10-28|K|P|re|葉緣泛紅，春季開黃花。
+月影|Echeveria elegans|1|F|5|10-28|K|P|re|半透明藍白蓮座，群生美麗。
+雪蓮|Echeveria laui|3|F|5|10-28|K|P|r|葉面覆厚白粉，切勿觸摸葉片。
+紫珍珠|Echeveria 'Perle von Nürnberg'|1|F|5|10-30|K|P|ce|粉紫色蓮座，入門常見品種。
+特玉蓮|Echeveria runyonii 'Topsy Turvy'|1|F|5|10-30|K|P|re|葉片向內反捲如湯匙，形態奇特。
+玉蝶|Echeveria secunda|1|F|5|10-30|K|P|r|蓮座圓整，容易群生。
+黑王子|Echeveria 'Black Prince'|1|F|5|10-28|K|P|re|深黑紫色葉片，日照足時更黑。
+女雛|Echeveria 'Mebina'|1|F|5|10-28|K|P|r|小型粉色蓮座，易群生成團。
+初戀|Echeveria 'Huthspinke'|1|F|5|10-30|K|P|ce|粉紫色葉片，耐熱好照顧。
+藍石蓮|Echeveria peacockii|1|F|5|10-30|K|P|r|藍灰色葉片覆白粉，蓮座整齊。
+大和錦|Echeveria purpusorum|2|F|5|10-28|K|P|r|葉片厚硬，帶紅褐斑紋。
+特葉玉蝶|Echeveria 'Lola'|2|F|5|10-28|K|P|re|淡粉紫蓮座，質感如玉。
+星美人|Pachyphytum oviferum|1|F|5|10-28|K|P|e|葉片圓胖覆白粉，如糖果般可愛。
+千代田之松|Pachyphytum compactum|1|F|5|10-28|K|P|e|葉片有稜角紋路，像精雕玉石。
+桃美人|Pachyphytum 'Momobijin'|1|F|5|10-28|K|P|e|粉紅色圓胖葉片，日照足時更粉。
+火祭|Crassula capitella 'Campfire'|1|F|5|10-30|K|P|c|冬季全株轉為火紅色，生長快速。
+玉樹|Crassula ovata|1|F|5|10-32|TI|P|ce|俗稱發財樹（翡翠木），葉片肥厚油亮，非常好養。
+筒葉花月|Crassula ovata 'Gollum'|1|F|5|10-32|TI|P|c|葉片呈管狀如手指，又稱史瑞克耳朵。
+星乙女|Crassula perforata|1|F|5|10-30|T|P|c|葉片對生串成塔狀，邊緣泛紅。
+若綠|Crassula muscosa|1|P|5|10-28|T|P|c|鱗片狀小葉排列成繩索，細緻可愛。
+神刀|Crassula perfoliata var. falcata|2|F|5|10-30|T|P|ce|葉片如刀片交錯，夏季開紅花。
+紅稚兒|Crassula radicans|1|F|5|10-30|T|P|c|小葉群生，冬季轉紅並開白花。
+小米星|Crassula 'Tom Thumb'|1|F|5|10-30|T|P|c|迷你串錢型多肉，適合組合盆栽。
+落地生根|Kalanchoe pinnata|1|F|4|15-32|T|P|e|葉緣會長出小苗，落地即生根。
+不死鳥|Kalanchoe daigremontiana|1|F|5|15-32|T|P|e|葉緣佈滿小芽，繁殖力驚人，全株有毒。
+長壽花|Kalanchoe blossfeldiana|1|F|4|15-28|TI|P|c|短日照開花，花期長，年節常見盆花。
+月兔耳|Kalanchoe tomentosa|1|F|5|12-30|TI|P|ce|葉片毛茸茸、邊緣褐點如兔耳。
+唐印|Kalanchoe luciae|1|F|5|15-30|T|P|r|圓扁葉片冬季轉紅，又稱冬之寶。
+仙女之舞|Kalanchoe beharensis|1|F|5|15-32|T|P|c|大型多肉，葉片如天鵝絨。
+白銀之舞|Kalanchoe pumila|1|F|5|12-28|T|P|c|葉片覆銀白粉，冬春開粉紅小花。
+蝴蝶之舞|Kalanchoe fedtschenkoi|1|F|5|12-30|T|P|c|葉緣波浪狀，有斑葉品種。
+生石花|Lithops spp.|3|F|6|10-28|K|P|s|形似石頭，生長期與休眠期需嚴格控水。
+肉錐花|Conophytum spp.|3|P|6|10-25|K|P|s|小巧球狀多肉，夏季休眠需斷水。
+鹿角海棠|Astridia velutina|1|F|5|10-28|K|P|c|三角形葉片覆細毛，冬季開花。
+四海波|Faucaria tigrina|1|F|5|10-30|K|P|c|葉緣有軟齒如老虎嘴，秋季開黃花。
+花蔓草|Mesembryanthemum cordifolium|1|F|4|15-32|K|P|c|心形葉片，紫紅小花，適合吊盆地被。
+松葉菊|Lampranthus spectabilis|1|F|5|12-30|K|P|c|花瓣鮮豔有光澤，陽光下盛開。
+四馬路|Sinocrassula yunnanensis|2|F|5|10-28|K|P|ce|四馬路，深綠色細長葉片緊密排列。
+蓮花掌|Aeonium arboreum|2|F|5|10-26|K|P|c|大型蓮座長在枝頂，夏季休眠。
+黑法師|Aeonium arboreum 'Zwartkop'|2|F|5|10-26|K|P|c|黑紫色葉片油亮，冬季生長型。
+山地玫瑰|Aeonium aureum|3|P|5|8-24|K|P|sr|休眠時葉片包合如玫瑰花苞。
+綠之鈴|Curio rowleyanus|2|S|5|12-28|TI|P|c|葉片如綠色珍珠串，適合吊盆，怕悶濕。
+弦月|Curio radicans|1|S|5|12-28|TI|P|c|香蕉狀葉片串成垂吊，比綠之鈴好養。
+藍松|Curio repens|1|F|5|10-30|T|P|c|藍白色棒狀葉片，耐旱。
+愛之蔓|Ceropegia woodii|1|S|5|15-28|KI|P|cb|心形葉片串成垂吊，莖上會長零余子。
+紫蛇蔓|Ceropegia linearis|2|S|5|15-28|KI|P|c|細長葉片垂吊，開奇特小燈籠花。
+大犀角|Stapelia gigantea|2|F|5|18-32|K|P|c|開出巨大星形花，帶腐肉味吸引蒼蠅。
+龍舌蘭|Agave americana|1|F|6|10-35|T|P|r|大型蓮座葉緣有刺，數十年才開花一次。
+笹之雪|Agave victoriae-reginae|2|F|6|10-35|T|P|s|葉片有白色線紋，生長緩慢、造型精緻。
+吹上|Agave stricta|2|F|6|10-35|T|P|r|細長葉片呈放射狀，如刺蝟。
+王妃雷神|Agave isthmensis|2|F|6|12-35|T|P|r|小型龍舌蘭，葉緣紅褐色鋸齒。
+虎尾蘭|Dracaena trifasciata|1|H|5|15-32|TI|P|de|最耐陰耐旱的室內植物之一，夜間釋放氧氣。
+金邊虎尾蘭|Dracaena trifasciata 'Laurentii'|1|P|5|15-32|TI|P|d|葉緣金黃，室內淨化空氣的明星。
+棒葉虎尾蘭|Dracaena angolensis|1|P|5|15-32|TI|P|d|圓柱狀葉片挺拔，可編成辮子造型。
+姬虎尾蘭|Dracaena trifasciata 'Hahnii'|1|H|5|15-32|TI|P|d|矮性蓮座型虎尾蘭，適合桌上。
+臥牛|Gasteria armstrongii|1|P|5|10-30|KI|P|re|葉片厚硬粗糙，耐陰耐旱。
+子寶|Gasteria gracilis var. minima|1|P|5|10-30|KI|P|r|斑葉小型臥牛，易生側芽。
+千代田錦|Aloe variegata|1|F|5|10-30|T|P|r|葉片V形帶白斑，又稱翠花掌。
+不夜城蘆薈|Aloe nobilis|1|F|5|10-32|T|P|r|葉緣有白刺，冬季開橙紅花。
+綾錦|Aristaloe aristata|1|F|5|10-30|T|P|r|小型蘆薈，葉片佈滿白點與細絲。
+酒瓶蘭|Beaucarnea recurvata|1|F|6|15-32|KI|P|s|基部膨大如酒瓶儲水，葉片細長垂墜。
+沙漠玫瑰|Adenium obesum|2|F|5|20-35|T|P|sc|莖基膨大，花朵如玫瑰，汁液劇毒。
+龜甲龍|Dioscorea elephantipes|3|F|6|12-28|K|P|s|塊莖表面如龜殼，冬季生長、夏季休眠。
+火星人|Fockea edulis|3|F|6|15-32|K|P|s|塊根奇特，可提根栽培觀賞。
+彩雲閣|Euphorbia trigona|1|F|5|15-32|TI|P|c|三稜柱狀莖帶綠白斑紋，乳汁有毒。
+綠珊瑚|Euphorbia tirucalli|1|F|5|15-35|T|P|c|光棍樹，枝條如珊瑚，乳汁刺激性強。
+布紋球|Euphorbia obesa|3|F|6|15-32|T|P|s|球形莖有紋路如棒球，生長緩慢。
+金琥|Echinocactus grusonii|1|F|6|12-35|K|P|s|金黃色刺的大型球形仙人掌，又稱象牙球。
+金晃丸|Parodia leninghausii|1|F|5|12-32|K|P|s|金黃細刺包覆柱狀莖，夏季開黃花。
+白星|Mammillaria plumosa|2|F|6|12-32|K|P|r|羽毛狀白刺覆蓋全株，群生如雪球。
+玉翁|Mammillaria hahniana|1|F|6|12-32|K|P|s|長白毛包覆球體，春季開紫紅小花環。
+黃金司|Mammillaria elongata|1|F|5|12-32|K|P|r|細長指狀莖布滿金黃短刺，易群生。
+月世界|Epithelantha micromeris|3|F|6|12-32|K|P|s|迷你球體佈滿白色細刺。
+兜|Astrophytum asterias|3|F|6|15-32|K|P|s|無刺扁圓球體佈滿白點，如海膽。
+鸞鳳玉|Astrophytum myriostigma|2|F|6|15-32|K|P|s|五稜星形球體，表面有白色斑點。
+緋牡丹|Gymnocalycium mihanovichii var. friedrichii|1|P|5|15-30|K|P|g|缺乏葉綠素的紅色球，需嫁接在三角柱上。
+兔耳仙人掌|Opuntia microdasys|1|F|6|15-35|K|P|c|兔耳仙人掌，扁平莖節佈滿細刺毛。
+仙人柱|Cereus repandus|1|F|6|15-35|K|P|c|柱狀仙人掌，可長得很高，夜間開花。
+鬼面角|Cereus hildmannianus|1|F|6|15-35|K|P|c|常見柱狀仙人掌，石化品種造型奇特。
+蟹爪蘭|Schlumbergera truncata|1|S|3|12-26|KI|P|c|冬季開花的森林型仙人掌，花朵下垂。
+仙人指|Schlumbergera × buckleyi|1|S|3|12-26|KI|P|c|莖節圓鈍，聖誕節前後開花。
+姬孔雀|Disocactus ackermannii|2|S|3|15-28|KI|P|c|附生仙人掌，開鮮紅大花。
+曇花|Epiphyllum oxypetalum|1|P|3|18-32|EKI|P|c|夏夜開白色大花，數小時後即凋謝。
+令箭荷花|Disocactus × hybridus|2|P|3|15-28|KI|P|c|扁平莖如令箭，春季開大型豔麗花。
+絲葦|Rhipsalis baccifera|1|S|3|15-28|KI|P|c|細長莖如絲線垂吊，附生於樹上。
+麒麟角|Euphorbia neriifolia 'Cristata'|1|F|5|18-35|T|P|c|扁平綴化的大戟，造型如珊瑚。
+雅樂之舞|Portulacaria afra 'Variegata'|1|F|5|15-32|KI|P|c|斑葉金錢木，葉片小巧帶粉紅邊。
+樹馬齒莧|Portulacaria afra|1|F|5|15-32|EKI|P|c|又稱象樹，葉片小而肉質，可修剪成盆景。
+蜘蛛巢萬代|Sempervivum arachnoideum|1|F|5|0-25|K|P|r|蓮座中心布滿蜘蛛網狀白絲，耐寒。
+長生草|Sempervivum tectorum|1|F|5|0-25|K|P|r|耐寒蓮座多肉，側芽源源不絕。

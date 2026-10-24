@@ -1,0 +1,21 @@
+# 水生植物
+睡蓮|Nymphaea tetragona|1|F|W|15-32|K|P|d|花朵浮於水面，白天開放、傍晚閉合，水缸也能種。
+熱帶睡蓮|Nymphaea 'Tropical Hybrids'|2|F|W|22-35|K|P|d|花色豐富含藍紫色，花梗挺出水面。
+碗蓮|Nelumbo nucifera 'Bowl'|2|F|W|20-32|E|P|bd|迷你品種荷花，可種在碗或小缸中。
+台灣萍蓬草|Nuphar shimadae|2|F|W|18-30|K|P|d|台灣特有水生植物，黃色花朵挺出水面。
+水芙蓉|Pistia stratiotes|1|P|W|20-32|K|P|o|浮水植物如綠色玫瑰，繁殖快需定期清除。
+布袋蓮|Pontederia crassipes|1|F|W|20-35|K|P|o|葉柄膨大可浮水，紫花美麗但易泛濫成災。
+滿江紅|Azolla pinnata|1|F|W|15-30|K|A|f|微小浮水蕨，秋冬轉紅，可做綠肥。
+浮萍|Lemna minor|1|P|W|15-30|EK|P|o|世界最小的開花植物之一，繁殖極快。
+香蒲|Typha orientalis|1|F|W|15-32|EK|P|d|水邊挺水植物，花穗如熱狗，可做乾燥花。
+紙莎草|Cyperus papyrus|1|F|W|18-35|K|P|d|古埃及造紙原料，莖頂葉片如煙火綻放。
+輪傘莎草|Cyperus involucratus|1|F|W|18-35|K|P|d|葉片如雨傘骨架，水邊景觀常見。
+水生鳶尾|Iris pseudacorus|1|F|W|10-30|T|P|d|黃色花朵開在水邊，耐寒耐濕。
+梭魚草|Pontederia cordata|1|F|W|18-32|K|P|d|紫色穗狀花序，挺水生長，夏季開花。
+再力花|Thalia dealbata|1|F|W|18-32|K|P|d|高大挺水植物，紫色小花垂掛。
+大安水蓑衣|Hygrophila pogonocalyx|2|F|W|20-32|K|P|c|台灣特有濕地植物，紫花美麗、族群稀少。
+水丁香|Ludwigia octovalvis|1|F|W|20-32|K|A|s|濕地常見，開黃色四瓣花。
+金魚藻|Ceratophyllum demersum|1|P|W|15-30|K|P|c|沉水植物，水族箱常見，能淨化水質。
+水蘊草|Egeria densa|1|P|W|15-28|K|P|c|沉水植物，生長快，適合魚缸。
+鹿角苔|Riccia fluitans|1|P|W|18-28|K|P|d|浮生或綁石沉水的苔類，水草造景常見。
+爪哇莫絲|Taxiphyllum barbieri|1|H|W|18-28|K|P|d|可綁在沉木上的水生苔蘚，耐陰好養。

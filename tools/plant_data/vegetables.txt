@@ -1,0 +1,141 @@
+# 蔬菜（格式說明見 tools/build_catalog.py）
+番茄|Solanum lycopersicum|2|F|2|18-29|ET|A|sc|家庭菜園最受歡迎的果菜，需立支架、摘側芽，果實轉紅即可採收。
+小番茄|Solanum lycopersicum var. cerasiforme|1|F|2|18-30|ET|A|sc|比大番茄更耐熱好種，一株可結上百顆，適合陽台盆植。
+茄子|Solanum melongena|2|F|2|22-30|ET|A|s|喜高溫的果菜，開花後約 20 天採收，盛夏結果最多。
+甜椒|Capsicum annuum (Grossum Group)|2|F|2|20-30|ET|A|s|果實肥厚無辣味，由綠轉紅黃時甜度最高，需充足日照。
+辣椒|Capsicum annuum|1|F|3|20-32|ET|P|s|耐熱耐旱，盆植也能結實累累，氣溫越高辣度越明顯。
+朝天椒|Capsicum frutescens|1|F|3|20-32|ET|P|s|果實朝上生長、辣度高，觀賞與食用兼具，可多年生。
+黃瓜|Cucumis sativus|2|F|2|18-30|EK|A|s|生長快速的蔓性瓜類，需搭網架，播種後約 50 天可採收。
+苦瓜|Momordica charantia|2|F|2|20-32|E|A|s|耐熱的蔓性瓜類，台灣夏季代表蔬菜，需搭棚架並套袋防蟲。
+絲瓜|Luffa aegyptiaca|1|F|2|20-35|EK|A|s|生長旺盛、夏季結果多，嫩果食用，老果纖維可做菜瓜布。
+南瓜|Cucurbita moschata|2|F|3|18-32|EK|A|s|藤蔓需要大空間，果實耐儲藏，嫩葉與花也可食用。
+櫛瓜|Cucurbita pepo|2|F|2|16-28|EK|A|s|叢生型夏南瓜，開花後一週就能採收嫩果，產量高。
+冬瓜|Benincasa hispida|2|F|3|20-33|EK|A|s|果實巨大、耐儲存，需大面積棚架或地面爬行栽培。
+瓠瓜|Lagenaria siceraria|2|F|2|20-32|EK|A|s|俗稱蒲仔，夏季蔓性瓜類，嫩果清甜，適合搭棚栽培。
+佛手瓜|Sechium edule|2|F|3|15-28|EK|P|s|以整顆果實種植，嫩梢即「龍鬚菜」，高冷地區產量佳。
+秋葵|Abelmoschus esculentus|1|F|3|22-35|EK|A|s|非常耐熱，花朵漂亮，嫩莢需每天採收以免變硬。
+長豇豆|Vigna unguiculata subsp. sesquipedalis|1|F|3|20-32|E|A|s|豆莢可長達 50 公分，耐熱，夏季需搭高架。
+毛豆|Glycine max|1|F|3|20-30|EK|A|s|大豆的嫩莢，豆莢飽滿轉黃前採收，風味最佳。
+豌豆|Pisum sativum|1|F|3|10-22|EK|A|s|涼季作物，嫩莢、豌豆仁與嫩梢（豆苗）皆可食用。
+甜豌豆|Pisum sativum var. macrocarpon|1|F|3|10-22|EK|A|s|豆莢肥厚多汁可連莢食用，秋冬播種、需支架攀爬。
+蠶豆|Vicia faba|2|F|3|8-22|ET|A|s|秋冬栽培的豆類，豆仁鬆軟，蠶豆症者不可食用。
+花豆|Phaseolus coccineus|2|F|3|12-25|ET|P|s|紅花菜豆，花色鮮紅，成熟豆粒大，適合冷涼山區。
+皇帝豆|Phaseolus lunatus|2|F|3|18-30|ET|A|s|豆仁大而綿密，蔓性強，需高架並注意排水。
+菜豆仁|Phaseolus vulgaris (Dry Bean Group)|2|F|3|18-28|ET|A|s|以成熟豆粒為收穫目標的菜豆，莢乾後採收曬乾保存。
+花生|Arachis hypogaea|1|F|3|20-30|EK|A|s|開花後子房鑽入土中結莢，宜疏鬆砂質土。
+萵苣|Lactuca sativa|1|P|2|10-24|EK|A|s|生長快速的葉菜，耐熱性差，夏季宜選耐熱品種並遮陰。
+蘿蔓萵苣|Lactuca sativa var. longifolia|1|P|2|10-24|EK|A|s|葉片直立爽脆，常用於凱薩沙拉，可從外葉陸續採收。
+結球萵苣|Lactuca sativa var. capitata|2|P|2|10-22|EK|A|s|即美生菜，需冷涼氣候才能包球。
+油菜|Brassica rapa subsp. chinensis var. parachinensis|1|F|2|15-28|EK|A|s|台灣常見葉菜，播種後約 25 天採收，四季皆可種。
+小白菜|Brassica rapa subsp. chinensis|1|F|2|15-28|EK|A|s|最好種的葉菜之一，生長快，注意防範小菜蛾與跳甲蟲。
+青江菜|Brassica rapa subsp. chinensis 'Qingjiang'|1|F|2|15-28|EK|A|s|葉柄翠綠肥厚，適合秋冬，約 30 天可採收。
+大白菜|Brassica rapa subsp. pekinensis|2|F|2|12-22|EK|A|s|秋冬作物，需冷涼才會包心結球，生長期約 70 天。
+芥菜|Brassica juncea|1|F|2|12-25|EK|A|s|帶微辣的葉菜，可鮮食或醃製成酸菜、梅干菜。
+芥藍|Brassica oleracea var. alboglabra|1|F|2|15-28|EK|A|s|採收嫩莖與葉，耐熱性佳，可多次採收側枝。
+青花菜|Brassica oleracea var. italica|2|F|2|12-22|EK|A|s|俗稱綠花椰菜，食用花蕾，主花採收後側芽仍可收成。
+白花椰菜|Brassica oleracea var. botrytis|2|F|2|12-22|EK|A|s|花球潔白緊實，結球時可用外葉包覆避免轉黃。
+羽衣甘藍|Brassica oleracea var. sabellica|1|F|2|10-25|EK|B|s|營養豐富的超級食物，耐寒，可從外葉陸續採收。
+抱子甘藍|Brassica oleracea var. gemmifera|3|F|2|7-20|EK|B|s|莖上長出一顆顆小甘藍，需長時間冷涼氣候。
+球莖甘藍|Brassica oleracea var. gongylodes|2|F|2|10-24|EK|B|s|俗稱大頭菜，食用膨大的球莖，口感清脆。
+紫甘藍|Brassica oleracea var. capitata f. rubra|2|F|2|10-22|EK|B|s|紫紅色結球甘藍，富含花青素，適合涼季種植。
+蕪菁|Brassica rapa subsp. rapa|1|F|2|10-22|EK|B|s|根部圓潤、葉也能吃，涼季播種約 50 天收成。
+白蘿蔔|Raphanus sativus var. longipinnatus|1|F|2|10-25|EK|A|s|秋冬代表根菜，需深厚鬆軟土壤，根才會筆直。
+櫻桃蘿蔔|Raphanus sativus var. sativus|1|F|2|10-25|EK|A|s|播種後約 30 天即可採收，最適合新手與兒童栽培。
+甜菜根|Beta vulgaris|2|F|2|10-24|EK|B|s|深紫紅色根部富含營養，嫩葉也可做沙拉。
+牛蒡|Arctium lappa|2|F|3|15-28|EK|B|s|根長可達 1 公尺，需深耕砂質土，或用深桶栽培。
+山藥|Dioscorea polystachya|2|F|3|20-30|E|P|bc|以塊莖繁殖的蔓性作物，需支架，秋冬地上部枯萎後採收。
+地瓜|Ipomoea batatas|1|F|4|20-32|EK|P|c|以莖段扦插繁殖，極耐旱，塊根與地瓜葉都能吃。
+地瓜葉|Ipomoea batatas (Leaf Group)|1|F|3|20-35|EK|P|c|專門採嫩葉的甘藷品種，耐熱好種，可持續採收數月。
+馬鈴薯|Solanum tuberosum|2|F|3|12-24|ET|A|b|以種薯切塊種植，培土可增加產量，綠化塊莖有毒勿食。
+芋頭|Colocasia esculenta|2|F|1|20-32|ET|P|bd|喜濕熱，可水田或旱田種植，塊莖需煮熟食用。
+樹薯|Manihot esculenta|1|F|4|22-35|ET|P|c|極耐旱耐貧瘠，塊根富含澱粉，生食有毒必須充分煮熟。
+蓮藕|Nelumbo nucifera (Rhizome Group)|2|F|W|20-30|E|P|bd|在水田或大水缸中種植，夏季開花、秋冬採收地下莖。
+菱角|Trapa natans|2|F|W|20-32|E|A|s|浮水植物，秋季採收果實，需在水深 1 公尺內的池塘栽培。
+筊白筍|Zizania latifolia|2|F|W|18-30|E|P|d|受黑穗菌寄生而膨大的嫩莖，需水田栽培。
+空心菜|Ipomoea aquatica|1|F|1|22-35|EK|P|sc|夏季最好種的葉菜，可水耕或旱作，剪後會再發。
+莧菜|Amaranthus tricolor|1|F|2|22-35|EK|A|s|耐熱夏季葉菜，有紅莧、白莧，播種後約 25 天採收。
+菠菜|Spinacia oleracea|1|P|2|8-20|EK|A|s|冷涼季節葉菜，高溫易抽苔，秋冬播種最理想。
+茼蒿|Glebionis coronaria|1|F|2|10-24|EK|A|s|火鍋常用的香氣葉菜，冬季栽培，摘心後可多次採收。
+芹菜|Apium graveolens var. dulce|2|P|1|12-22|EK|B|s|需保持土壤濕潤，莖葉具香氣，秋冬栽培品質佳。
+西洋芹|Apium graveolens|3|F|1|12-22|EK|B|s|莖粗而脆，生長期長，需充足水分與肥料。
+韭菜|Allium tuberosum|1|F|3|15-28|ET|P|sd|多年生，剪下後會再長，可持續收成多年，韭菜花也可食。
+青蔥|Allium fistulosum|1|F|3|12-28|ET|P|sd|可用帶根蔥白直接種植，剪葉後會持續再生。
+洋蔥|Allium cepa|2|F|3|12-25|ET|B|s|秋季育苗、冬季定植，春天鱗莖膨大後採收。
+大蒜|Allium sativum|1|F|3|10-24|ET|P|b|秋天把蒜瓣尖端朝上種下，青蒜、蒜苔、蒜頭都能吃。
+紅蔥頭|Allium cepa var. aggregatum|1|F|3|12-28|ET|P|b|以小鱗莖分球繁殖，台灣常用於油蔥酥。
+蒜苗|Allium sativum (Leaf Group)|1|F|3|10-24|ET|P|b|採收大蒜的嫩葉與假莖，播種後約 2 個月可收。
+韭黃|Allium tuberosum (Blanched)|2|H|3|15-25|ET|P|d|韭菜遮光栽培而成，葉片嫩黃無纖維。
+薑|Zingiber officinale|2|P|2|22-30|EK|P|b|以根莖繁殖，喜溫暖半遮陰，嫩薑與老薑風味不同。
+薑黃|Curcuma longa|1|P|2|22-32|EK|P|b|根莖金黃，春天種下、冬天地上部枯萎後採收。
+蘆筍|Asparagus officinalis|2|F|3|15-28|ET|P|sd|多年生，定植後第二年起可年年採收嫩莖。
+朝鮮薊|Cynara cardunculus var. scolymus|3|F|3|12-24|EK|P|sd|食用大型花苞，植株高大，需冷涼氣候。
+玉米|Zea mays|2|F|2|20-30|EK|A|s|需成片種植以利授粉，雄穗散粉後約 20 天採收。
+甜玉米|Zea mays convar. saccharata|2|F|2|20-30|EK|A|s|糖分高可生食，採收後甜度下降快，宜即採即食。
+玉米筍|Zea mays (Baby Corn)|1|F|2|20-30|EK|A|s|在雌穗吐絲 1～3 天內採收的幼嫩玉米。
+紅鳳菜|Gynura bicolor|1|P|3|18-30|E|P|c|葉背紫紅，扦插極易發根，可長期採收嫩梢。
+過溝菜蕨|Diplazium esculentum|2|H|1|20-30|E|P|df|即野菜「過貓」，喜潮濕半陰，採收捲曲嫩芽。
+山蘇|Asplenium antiquum|1|H|3|18-28|EK|P|f|嫩葉可炒食的蕨類，耐陰，適合室內或樹蔭下栽培。
+落葵|Basella alba|1|F|2|20-35|EK|P|sc|俗稱皇宮菜，蔓性耐熱，葉片滑嫩，需支架攀爬。
+川七|Anredera cordifolia|1|P|3|18-32|E|P|c|蔓性植物，以珠芽或扦插繁殖，嫩葉可炒食。
+龍葵|Solanum nigrum|1|P|3|18-30|ET|A|s|野菜「烏甜仔菜」，嫩葉需煮熟，未熟果實有毒。
+昭和草|Crassocephalum crepidioides|1|F|3|18-30|E|A|s|常見野菜，嫩葉帶茼蒿香氣，生命力強。
+野莧|Amaranthus viridis|1|F|3|20-35|EK|A|s|隨處可見的野菜，耐旱耐貧瘠，嫩莖葉可炒食。
+水芹|Oenanthe javanica|1|P|W|10-25|E|P|c|喜水濕環境的香氣蔬菜，可在淺水中栽培。
+豆瓣菜|Nasturtium officinale|1|P|W|10-22|EK|P|sc|俗稱西洋菜，需流動清水或濕潤環境，冬季生長佳。
+芝麻葉|Eruca vesicaria|1|F|2|10-24|EK|A|s|帶芝麻香與微辣，生長快，播種後 30 天可採收。
+甜菜葉|Beta vulgaris subsp. vulgaris (Leaf Beet Group)|1|F|2|10-28|EK|B|s|即瑞士甜菜，葉柄色彩繽紛，耐熱也耐寒。
+菊苣葉|Cichorium endivia|2|F|2|10-22|EK|B|s|即苦苣，葉片捲曲帶微苦，適合沙拉。
+紫蘇芽|Perilla frutescens var. crispa|1|P|2|18-30|E|A|s|紅紫蘇的嫩芽，常用於日式料理擺盤。
+豌豆苗|Pisum sativum (Sprouts)|1|S|1|12-25|EK|A|s|豌豆浸泡後密植，約 10 天即可剪收嫩苗。
+綠豆芽|Vigna radiata|1|H|1|20-30|EK|A|s|避光栽培 4～5 天即可食用，適合廚房 DIY。
+苜蓿芽|Medicago sativa|1|S|1|18-25|EK|P|s|發芽約 5 天即可食用的芽菜，口感清脆。
+蘿蔔嬰|Raphanus sativus (Sprouts)|1|S|1|15-28|EK|A|s|蘿蔔種子發芽 7 天左右的芽菜，略帶辛辣。
+葵花苗|Helianthus annuus (Microgreens)|1|S|1|18-28|EK|A|s|向日葵芽菜，口感脆甜，約 10 天即可剪收。
+小麥草|Triticum aestivum (Wheatgrass)|1|S|2|15-25|EK|A|s|小麥嫩芽，可榨汁，也是貓咪喜歡的貓草。
+蕹菜苗|Ipomoea aquatica (Microgreens)|1|S|1|22-32|EK|A|s|空心菜的芽菜，密播 2 週即可採收。
+櫻桃蘿蔔芽|Raphanus sativus 'Sango'|1|S|1|15-25|EK|A|s|紫紅色蘿蔔芽菜，為料理增添色彩。
+紅莧菜|Amaranthus tricolor 'Red'|1|F|2|22-35|EK|A|s|葉片紫紅，富含鐵質，夏季生長快速。
+地膚|Bassia scoparia|1|F|4|18-30|E|A|s|種子即中藥「地膚子」，秋季植株轉紅，可觀賞。
+黃秋葵|Abelmoschus manihot|1|F|3|22-35|E|P|sc|花朵大而淡黃，嫩葉與花可食，耐熱。
+樹番茄|Solanum betaceum|2|F|3|15-25|ET|P|sc|小喬木狀的茄科植物，果實酸甜，需冷涼至溫暖氣候。
+人參果|Solanum muricatum|2|F|3|15-25|ET|P|c|又稱香瓜茄，果實帶瓜香，宜溫和氣候栽培。
+食用仙人掌|Opuntia ficus-indica|1|F|6|18-35|E|P|c|扁平莖節與果實可食，極耐旱，去刺後料理。
+辣木|Moringa oleifera|1|F|4|22-35|EK|P|sc|生長極快的熱帶樹，嫩葉營養豐富，耐旱。
+樹豆|Cajanus cajan|1|F|4|20-32|EK|P|s|原住民常見作物，耐旱耐貧瘠，豆子燉排骨風味佳。
+破布子|Cordia dichotoma|1|F|4|20-32|E|P|s|果實醃漬成破布子，常用來蒸魚，樹性強健。
+芫荽|Coriandrum sativum|1|P|2|10-24|EK|A|s|俗稱香菜，怕熱易抽苔，秋冬播種最適合。
+刺芫荽|Eryngium foetidum|1|P|2|20-32|E|B|s|又稱香菜刺，比芫荽耐熱，葉緣有軟刺。
+九層塔|Ocimum basilicum var. thyrsiflora|1|F|2|20-35|EK|A|sc|台式料理常用香草，摘除花穗可延長採收期。
+蒔蘿|Anethum graveolens|1|F|3|15-25|EK|A|s|羽狀細葉帶清香，常用於醃魚與泡菜。
+豆薯|Pachyrhizus erosus|2|F|3|22-32|ET|A|s|塊根清甜多汁可生食，但種子與莖葉有毒。
+菊花菜|Chrysanthemum morifolium (Edible)|2|F|3|12-25|ET|P|cd|食用菊的嫩葉帶香氣，冬季生長佳。
+山芹菜|Cryptotaenia japonica|1|H|1|12-25|E|P|s|日式料理常用的「鴨兒芹」，喜半陰潮濕。
+明日葉|Angelica keiskei|2|P|3|12-25|E|P|s|今天摘明天又長出嫩葉而得名，耐寒性佳。
+番杏|Tetragonia tetragonioides|1|F|3|18-30|E|A|s|又稱紐西蘭菠菜，耐熱耐鹽，夏季可代替菠菜。
+冰花|Mesembryanthemum crystallinum|2|F|4|12-25|E|A|s|葉面有晶亮顆粒，帶天然鹹味，適合涼季。
+水耕萵苣|Lactuca sativa 'Butterhead'|1|S|W|15-24|EK|A|s|奶油萵苣葉片柔軟，非常適合室內水耕栽培。
+櫻桃椒|Capsicum annuum 'Cherry'|1|F|3|20-32|ET|A|s|果實圓小如櫻桃，色彩鮮豔，觀賞食用兩相宜。
+哈瓦那辣椒|Capsicum chinense|2|F|3|22-32|ET|P|s|極辣品種，帶熱帶果香，需高溫才能結果良好。
+糯米椒|Capsicum annuum 'Shishito'|1|F|2|20-30|ET|A|s|即獅子唐辛子，幾乎不辣，適合煎烤。
+彩色甜椒|Capsicum annuum 'California Wonder'|2|F|2|20-28|ET|A|s|轉色需較長時間，溫室栽培品質較穩定。
+山蘿蔔|Raphanus sativus 'Daikon Mini'|1|F|2|10-24|EK|A|s|小型白蘿蔔，盆植也能收成。
+胡蘿蔔芽|Daucus carota (Microgreens)|1|S|1|15-25|EK|A|s|胡蘿蔔幼苗，葉片細緻帶胡蘿蔔香。
+紫高麗芽|Brassica oleracea (Red Cabbage Microgreens)|1|S|1|15-25|EK|A|s|紫色莖桿的芽菜，色彩鮮豔、營養豐富。
+小黃瓜|Cucumis sativus 'Mini'|1|F|2|18-30|EK|A|s|迷你品種，盆植搭小支架即可，果實爽脆。
+迷你南瓜|Cucurbita pepo 'Jack Be Little'|1|F|3|18-30|EK|A|s|果實掌心大小，可食用也可當擺飾。
+越瓜|Cucumis melo var. conomon|1|F|2|20-32|EK|A|s|常醃製成醬瓜的瓜類，夏季栽培。
+胡瓜|Cucumis sativus 'Chinese Long'|2|F|2|20-30|EK|A|s|中國長形黃瓜，果長而直，需搭高架。
+菜瓜|Luffa acutangula|1|F|2|20-35|EK|A|s|俗稱角瓜，果實有稜角，口感較脆。
+蛇瓜|Trichosanthes cucumerina|2|F|2|22-35|E|A|s|果實細長捲曲如蛇，嫩果可炒食，需高棚架。
+扁蒲|Lagenaria siceraria 'Flat'|2|F|2|20-32|EK|A|s|扁圓形瓠瓜，果肉細嫩。
+黑豆|Glycine max 'Black'|1|F|3|20-30|EK|A|s|種皮黑色的大豆，可做豆漿、蔭油或黑豆茶。
+紅豆|Vigna angularis|1|F|3|20-30|EK|A|s|台灣南部秋作，莢乾後採收，用於甜點。
+綠豆|Vigna radiata 'Seed'|1|F|4|22-32|EK|A|s|耐熱耐旱的豆類，生長期短，約 70 天收成。
+米豆|Vigna unguiculata subsp. unguiculata|1|F|3|20-32|EK|A|s|豆粒有黑色臍點，又稱眉豆，耐熱耐旱。
+翼豆|Psophocarpus tetragonolobus|2|F|2|22-32|EK|P|s|豆莢有四條翼狀稜，全株幾乎都可食用。
+刀豆|Canavalia gladiata|2|F|3|22-32|ET|A|s|豆莢寬大如刀，嫩莢需充分煮熟才可食用。
+鵲豆|Lablab purpureus|1|F|3|20-32|ET|P|s|紫花扁豆，花莢皆美，嫩莢需煮熟食用。
+野薑花|Hedychium coronarium|1|P|1|18-30|EK|P|d|花香濃郁，喜濕潤水邊，花與根莖皆可入菜。
+蘘荷|Zingiber mioga|2|H|2|15-25|E|P|d|食用花苞的薑科植物，喜陰濕，日式料理常用。
+甘藷葉用種|Ipomoea batatas 'Taoyuan No. 2'|1|F|3|20-35|EK|P|c|台灣育成的葉用地瓜品種，葉片多、適合採嫩梢。
+樹仔菜|Sauropus androgynus|1|P|3|20-35|E|P|c|又稱守宮木，嫩梢炒蛋清甜，耐熱好種，生食過量有害需煮熟。

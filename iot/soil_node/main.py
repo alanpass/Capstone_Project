@@ -45,7 +45,7 @@ def main():
     while True:
         try:
             raw, percent = read_soil_percent()
-            thresholds = common.sync(thresholds, soil=percent)
+            thresholds = common.sync(thresholds, soil=percent, state=common.status("soil", {"pump": 0}))
             print("土壤濕度 {}%（ADC {}），門檻 {}%（{}）".format(
                 percent, int(raw), thresholds["soilMin"], thresholds.get("plan") or "手動門檻"))
             watered = 0
@@ -53,6 +53,9 @@ def main():
                 print("土壤偏乾，澆水 {} 秒".format(PUMP_SECONDS))
                 water()
                 watered = 1
+                common.sync(thresholds, state=common.status("soil", {"pump": 0}),
+                            event="澆水 {} 秒：土壤 {}% 低於 {}%（{}）".format(
+                                PUMP_SECONDS, percent, thresholds["soilMin"], thresholds.get("plan") or "手動門檻"))
             # ThingSpeak 頻道欄位：field1 土壤濕度、field2 馬達狀態
             common.backup_to_thingspeak({"field1": percent, "field2": watered})
         except Exception as e:

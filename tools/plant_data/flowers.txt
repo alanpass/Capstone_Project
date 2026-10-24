@@ -1,0 +1,99 @@
+# 花卉：一二年生草花與宿根花卉
+向日葵|Helianthus annuus|1|F|3|18-32|EK|A|s|花朵追著太陽轉，播種後約 60 天開花，種子可食。
+迷你向日葵|Helianthus annuus 'Teddy Bear'|1|F|3|18-30|K|A|s|植株矮小、花瓣重瓣蓬鬆，適合盆植。
+波斯菊|Cosmos bipinnatus|1|F|4|15-30|K|A|s|秋季花海常見花卉，耐貧瘠、自播性強。
+黃波斯菊|Cosmos sulphureus|1|F|4|18-35|K|A|s|橙黃色花朵，比波斯菊更耐熱。
+萬壽菊|Tagetes erecta|1|F|3|15-30|T|A|s|花色金黃，可驅線蟲，常用作伴生植物。
+孔雀草|Tagetes patula|1|F|3|15-30|T|A|s|植株矮小、花期長，適合花壇與盆栽。
+百日草|Zinnia elegans|1|F|3|18-32|K|A|s|花期長達百日，耐熱，是夏季花壇主力。
+千日紅|Gomphrena globosa|1|F|4|20-35|K|A|s|球形花序乾燥後不褪色，可做乾燥花。
+羽狀雞冠花|Celosia argentea var. plumosa|1|F|3|20-32|K|A|s|羽毛狀花穗色彩鮮豔，耐熱。
+三色堇|Viola × wittrockiana|1|F|2|8-22|EK|A|s|冬春代表花卉，花瓣可食用，怕高溫。
+香堇菜|Viola odorata|1|P|2|8-22|EK|P|sd|花朵小巧芳香，喜涼爽半陰。
+角堇|Viola cornuta|1|F|2|8-22|EK|A|s|比三色堇花小但多花，耐寒性佳。
+金魚草|Antirrhinum majus|1|F|2|10-24|K|A|s|花形似金魚嘴巴，冬春開花，花色豐富。
+石竹|Dianthus chinensis|1|F|3|10-25|T|P|sc|花瓣邊緣呈鋸齒狀，耐寒，冬春開花。
+美國石竹|Dianthus barbatus|1|F|3|10-24|T|B|s|花朵密集成團，又稱五彩石竹。
+矮性金蓮花|Tropaeolum minus|1|F|3|12-25|EK|A|s|矮性品種，適合吊盆與花檯。
+鳳仙花|Impatiens balsamina|1|P|2|18-30|K|A|s|夏季草花，成熟果莢一碰就彈出種子。
+新幾內亞鳳仙花|Impatiens hawkeri|2|P|2|18-28|K|P|c|花朵大、葉片具斑紋，喜半陰。
+四季秋海棠|Begonia cucullata|1|P|2|18-30|T|P|cs|全年開花不斷的花壇常客，耐熱又耐陰。
+夏堇|Torenia fournieri|1|P|2|20-32|K|A|s|夏季耐熱草花，花朵似小喇叭，適合半陰處。
+一串紅|Salvia splendens|1|F|2|18-30|K|A|sc|紅色花穗醒目，花朵基部有蜜可吸食。
+墨西哥鼠尾草|Salvia leucantha|1|F|4|15-30|K|P|cd|紫色絨毛花穗，秋冬盛開，耐旱強健。
+天人菊|Gaillardia pulchella|1|F|4|18-35|K|A|s|澎湖縣花，耐旱耐鹽，花色紅黃相間。
+金雞菊|Coreopsis lanceolata|1|F|4|15-30|K|P|sd|黃色花海常見花卉，耐旱好照顧。
+大花金雞菊|Coreopsis grandiflora|1|F|4|15-30|K|P|sd|花朵金黃大型，花期長。
+松葉牡丹|Portulaca grandiflora|1|F|5|20-35|T|A|sc|多肉質草花，陽光越強開越多，耐旱。
+馬齒牡丹|Portulaca oleracea × grandiflora|1|F|5|20-35|T|A|c|花色繽紛的吊盆花卉，中午盛開。
+垂枝長春花|Catharanthus roseus 'Cora Cascade'|1|F|4|20-35|T|P|s|垂枝型長春花，適合吊盆，耐熱耐旱。
+繁星花|Pentas lanceolata|1|F|3|20-35|K|P|cs|星形小花聚成花球，吸引蝴蝶，花期長。
+藍雪花|Plumbago auriculata|1|F|3|18-32|T|P|c|天藍色花朵清新，夏秋盛開，可修剪成綠籬。
+蔓性野牡丹|Heterotis rotundifolia|1|F|2|20-32|K|P|c|匍匐生長的地被花卉，開粉紫花。
+紫花酢醬草|Oxalis triangularis|1|P|3|15-28|T|P|b|葉片紫色三角形，夜間閉合，適合室內。
+大花酢醬草|Oxalis bowiei|1|F|3|12-25|T|P|b|秋冬開粉紅大花的球根酢醬草。
+勿忘我|Myosotis sylvatica|1|P|2|8-20|K|B|s|藍色小花惹人憐愛，喜冷涼。
+羽扇豆|Lupinus polyphyllus|2|F|3|8-22|T|P|s|花穗高聳壯觀，需冷涼氣候。
+飛燕草|Consolida ajacis|2|F|3|8-22|T|A|s|藍紫色花穗高雅，全株有毒。
+翠雀|Delphinium elatum|3|F|2|8-22|T|P|sd|高大花穗呈藍色系，需冷涼與支架。
+香豌豆|Lathyrus odoratus|2|F|2|8-20|T|A|s|蝶形花芳香，冬季播種、春天開花，需攀爬。
+紫羅蘭|Matthiola incana|1|F|3|8-20|K|A|s|冬春開花，香氣濃郁，適合切花。
+桂竹香|Erysimum cheiri|1|F|3|8-20|T|P|s|花色橙黃、香氣甜，冬春開花。
+報春花|Primula malacoides|1|P|2|8-20|T|A|s|冬季盆花，花朵層層排列，怕高溫。
+西洋櫻草|Primula vulgaris|2|P|2|5-18|T|P|sd|花色豐富的冬季盆花，喜涼爽。
+仙客來|Cyclamen persicum|2|S|3|10-20|T|P|b|冬季代表盆花，花瓣反捲如兔耳，球根有毒。
+非洲菊|Gerbera jamesonii|2|F|3|15-28|K|P|sd|切花常用，花色豐富，注意避免葉面積水。
+大理花|Dahlia pinnata|2|F|2|15-26|T|P|bc|花形多變華麗，塊根繁殖，需支柱。
+菊花|Chrysanthemum morifolium|1|F|3|12-28|T|P|cd|秋季短日照開花，品種極多。
+瑪格麗特|Argyranthemum frutescens|1|F|3|10-25|T|P|c|冬春開白色或粉色小雛菊，怕悶熱。
+雛菊|Bellis perennis|1|F|2|8-20|K|P|sd|小巧可愛的冬季草花，花瓣可食。
+藍目菊|Osteospermum ecklonis|1|F|3|10-25|K|P|cs|花朵中心呈藍紫色，冬春盛開。
+非洲萬壽菊|Dimorphotheca sinuata|1|F|4|10-25|K|A|s|又稱異果菊，陽光充足才會開花。
+勳章菊|Gazania rigens|1|F|4|15-30|K|P|sd|花瓣基部有勳章般斑紋，耐旱耐鹽。
+銀葉菊|Jacobaea maritima|1|F|4|10-28|T|P|sc|銀白色葉片是花壇配色良伴。
+麥稈菊|Xerochrysum bracteatum|1|F|4|12-28|K|A|s|花瓣質感如紙，可製作永生乾燥花。
+紫菀|Aster tataricus|1|F|3|12-28|K|P|d|秋季開淡紫色小花，耐寒。
+荷蘭菊|Symphyotrichum novi-belgii|1|F|3|10-28|K|P|d|秋天開滿紫色小菊花，花期長。
+黃帝菊|Melampodium divaricatum|1|F|3|20-35|K|A|s|小黃花開滿全株，極耐熱，夏季花壇首選。
+大花咸豐草|Bidens pilosa var. radiata|1|F|4|18-32|K|P|s|白色花朵是蜜蜂的重要蜜源。
+宿根天人菊|Gaillardia × grandiflora|1|F|4|15-32|K|P|sd|花色鮮艷，比一年生天人菊更長壽。
+白花紫錐花|Echinacea purpurea 'White Swan'|1|F|3|15-30|K|P|d|白色花瓣搭配橙色花心，耐熱耐旱。
+金光菊|Rudbeckia laciniata|1|F|3|15-30|T|P|d|高大的黃色花朵，夏秋盛開。
+滿天星|Gypsophila paniculata|2|F|4|10-25|T|P|sc|細小白花繁多，常搭配花束。
+洋桔梗|Eustoma grandiflorum|3|F|3|15-28|K|A|s|花型典雅似玫瑰，育苗期長、需細心照顧。
+桔梗|Platycodon grandiflorus|1|F|3|12-28|EK|P|s|花苞膨大似氣球，根可入藥或做泡菜。
+風鈴草|Campanula medium|2|F|3|10-24|K|B|s|鐘形花朵成串，需冷涼氣候。
+大花倒掛金鐘|Fuchsia hybrida|2|P|2|12-24|EK|P|c|花朵下垂如燈籠，怕高溫，適合高山或冷涼地區。
+毛蕊花|Verbascum thapsus|1|F|4|10-26|K|B|s|高大花穗佈滿黃花，葉片毛茸茸。
+蛇目菊|Coreopsis tinctoria|1|F|4|15-30|K|A|s|花瓣基部有深紅色斑，耐旱。
+花菱草|Eschscholzia californica|1|F|4|10-25|T|A|s|加州罌粟，花朵橙黃絲綢質感，陰天會閉合。
+冰島罌粟|Papaver nudicaule|2|F|3|8-20|T|P|s|花瓣如薄紙，花色鮮豔，需冷涼氣候。
+東方罌粟|Papaver orientale|2|F|3|8-22|T|P|sd|大型紅花中心黑斑，觀賞用品種。
+大馬士革黑種草|Nigella damascena|1|F|3|10-24|K|A|s|又稱霧中之愛，花朵被細葉包圍，果實可做乾燥花材。
+屈曲花|Iberis umbellata|1|F|3|10-24|K|A|s|花朵密集成傘狀，春季開花。
+香雪球|Lobularia maritima|1|F|3|10-25|K|A|s|白色小花帶蜂蜜香，適合花壇鑲邊。
+彩葉草|Coleus scutellarioides|1|P|2|18-32|TI|P|cs|葉片色彩繽紛，摘除花穗可維持葉色。
+美女櫻|Glandularia × hybrida|1|F|3|15-30|K|P|cs|花朵聚成小傘，匍匐生長適合地被。
+細葉美女櫻|Glandularia tenera|1|F|4|15-32|K|P|c|葉片細裂，耐熱耐旱的地被花卉。
+蔓馬櫻丹|Lantana montevidensis|1|F|4|18-35|T|P|c|紫花蔓馬櫻丹，匍匐生長，耐旱。
+長穗木|Stachytarpheta jamaicensis|1|F|3|20-35|K|P|cs|藍紫色長穗花吸引蝴蝶。
+紫背鴨跖草|Tradescantia pallida|1|F|4|18-32|TI|P|c|紫色葉片耐旱好養，常用作地被或吊盆。
+吊竹草|Tradescantia zebrina|1|P|3|18-30|TI|P|c|葉片銀紫條紋，垂墜生長，適合吊盆。
+紅花鼠尾草|Salvia coccinea|1|F|3|18-32|K|A|s|紅色唇形花吸引蜂鳥與蝴蝶，耐熱。
+蘭花鼠尾草|Salvia 'Indigo Spires'|1|F|3|18-32|K|P|c|深藍紫花穗修長，全年開花。
+宿根福祿考|Phlox paniculata|2|F|2|10-26|K|P|cd|夏季花團錦簇，有香氣。
+芝櫻|Phlox subulata|1|F|3|8-24|K|P|cd|春季開花如地毯，日本賞花名景。
+福祿考|Phlox drummondii|1|F|3|12-26|K|A|s|一年生品種，花色豐富，冬春開花。
+金露花|Duranta erecta|1|F|3|20-35|T|P|cs|紫花與金黃果實並存，常修剪成綠籬，果實有毒。
+黃金露花|Duranta erecta 'Golden Leaves'|1|F|3|20-35|T|P|c|金黃色葉片，常修剪成造型綠籬。
+仙丹花|Ixora chinensis|1|F|3|20-35|K|P|cl|花球鮮紅，全年開花，喜高溫酸性土。
+矮仙丹|Ixora × williamsii|1|F|3|20-35|K|P|c|株形矮小，花期長，常做花壇綠籬。
+朱槿|Hibiscus rosa-sinensis|1|F|2|20-35|K|P|cg|大紅花，台灣常見綠籬，花期極長。
+重瓣朱槿|Hibiscus rosa-sinensis 'Double'|1|F|2|20-35|K|P|cg|重瓣品種花朵豐滿，色彩多樣。
+醉芙蓉|Hibiscus mutabilis|1|F|3|18-32|K|P|c|花朵早白午粉晚紅，一日三變。
+洛神葵|Hibiscus sabdariffa|1|F|3|20-32|EK|A|s|紅色花萼可製作洛神花茶與蜜餞。
+黃槿|Talipariti tiliaceum|1|F|3|20-35|K|P|cs|海岸常見樹種，葉片大可包粿。
+射干|Iris domestica|1|F|3|15-30|T|P|ds|橙色花朵帶紅斑，葉片扇形排列。
+鳶尾|Iris tectorum|1|F|2|10-25|T|P|d|藍紫色花朵優雅，春季開花。
+德國鳶尾|Iris germanica|2|F|3|10-25|T|P|d|花大色豔，有「彩虹女神」之稱。
+巴西鳶尾|Neomarica gracilis|1|P|2|18-30|K|P|d|白花藍紋，花莖頂端會長出小苗。

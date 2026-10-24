@@ -248,3 +248,29 @@ Deno.test("每塊裝置依指定植物的生長計畫切換門檻，且只能指
   await fails(as(db, null, () => db.query(`select effective_thresholds($1, $2)`, [A, tomato.id])), "anon 不能直接呼叫內部函式");
   await fails(as(db, B, () => db.query(`select effective_thresholds($1, $2)`, [A, tomato.id])), "B 不能查 A 的門檻");
 });
+
+Deno.test("裝置狀態與控制紀錄：回報繼電器狀態、記錄事件、只能看自己的", async () => {
+  const db = await setup();
+  const dev = await addDevice(db, A, "溫控節點");
+  const status = { node: "climate", rssi: -61, relays: { fan: 1, heater: 0 }, uptime: 120 }; // jsonb 的鍵順序
+  await as(db, null, () => db.query(`select device_sync(p_token => $1, p_temperature => 25, p_status => $2::jsonb, p_event => '開風扇（25°C > 18°C）')`,
+    [dev.token, JSON.stringify(status)]));
+  eq((await as(db, A, () => db.query("select status from devices"))).rows, [{ status }], "保存最近狀態");
+  eq((await as(db, A, () => db.query("select message from device_events"))).rows, [{ message: "開風扇（25°C > 18°C）" }], "記錄事件");
+
+  // 只回報狀態（沒有讀數）不會新增感測紀錄；過大或非物件的狀態會被忽略
+  await as(db, null, () => db.query(`select device_sync(p_token => $1, p_status => '"oops"'::jsonb, p_event => '  ')`, [dev.token]));
+  await as(db, null, () => db.query(`select device_sync(p_token => $1, p_status => $2::jsonb)`, [dev.token, JSON.stringify({ x: "y".repeat(2000) })]));
+  eq((await as(db, A, () => db.query("select status from devices"))).rows, [{ status }], "忽略不合法的狀態");
+  eq((await db.query("select count(*)::int as n from sensor_readings")).rows, [{ n: 1 }], "只回報狀態不新增讀數");
+  eq((await db.query("select count(*)::int as n from device_events")).rows, [{ n: 1 }], "空白事件不記錄");
+
+  for (let i = 0; i < 15; i++) await as(db, null, () => db.query(`select device_sync(p_token => $1, p_event => $2)`, [dev.token, `事件 ${i}`]));
+  eq((await db.query("select count(*)::int as n from device_events")).rows, [{ n: 10 }], "每分鐘最多 10 筆事件");
+  eq((await as(db, B, () => db.query("select * from device_events"))).rows, [], "B 看不到 A 的紀錄");
+  await fails(as(db, null, () => db.query("select * from device_events")), "anon 不能讀紀錄");
+  await fails(as(db, A, () => db.query(`insert into device_events (device_id, user_id, message) values ($1, $2, 'x')`, [dev.id, A])), "網站不能偽造紀錄");
+
+  await as(db, A, () => db.query("delete from devices where id = $1", [dev.id]));
+  eq((await db.query("select count(*)::int as n from device_events")).rows, [{ n: 0 }], "刪除裝置一併刪除紀錄");
+});

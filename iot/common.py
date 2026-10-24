@@ -1,5 +1,6 @@
-# 兩塊 ESP32 共用的函式：Wi-Fi、與 Supabase 同步（上傳數據＋取得門檻值）、選擇性備份到 ThingSpeak
+# 兩塊 ESP32 共用的函式：Wi-Fi、與 Supabase 同步（上傳數據、回報狀態＋取得門檻值）、選擇性備份到 ThingSpeak
 # MicroPython 不支援 f-string 的舊版韌體（v1.17 以前），因此一律使用 .format()
+import gc
 import time
 
 import network
@@ -9,6 +10,7 @@ import urequests
 import config
 
 THINGSPEAK_URL = "https://api.thingspeak.com/update"
+BOOT_MS = time.ticks_ms()
 STAGE_NAMES = {"planting": "種植期", "growing": "成長期", "flowering": "開花期", "fruiting": "結果期", "harvest": "收成期"}
 
 
@@ -38,12 +40,28 @@ def _headers():
     return headers
 
 
-def sync(current, soil=None, temperature=None, humidity=None):
+def status(node, relays):
+    """網站「裝置狀態」頁顯示的資訊：節點類型、繼電器狀態、Wi-Fi 訊號、IP、運作時間、可用記憶體。"""
+    wlan = network.WLAN(network.STA_IF)
+    info = {"node": node, "relays": relays,
+            "uptime": time.ticks_diff(time.ticks_ms(), BOOT_MS) // 1000, "mem": gc.mem_free()}
+    if wlan.isconnected():
+        info["ip"] = wlan.ifconfig()[0]
+        try:
+            info["rssi"] = wlan.status("rssi")
+        except Exception:
+            pass
+    return info
+
+
+def sync(current, soil=None, temperature=None, humidity=None, state=None, event=None):
     """上傳讀數（可只給部分欄位）到 Supabase，並取回這塊裝置的門檻值。
     網站上若指定由某株植物的生長計畫控制，會多一個 "plan" 說明，例如「番茄 開花期 第 24 天」。
+    state 是 status() 的結果；event 是繼電器動作的說明（會記錄在網站的控制紀錄）。
     失敗時沿用 current，讓裝置在斷網時仍能依上次的門檻運作。"""
     url = "{}/rest/v1/rpc/device_sync".format(config.SUPABASE_URL)
-    body = {"p_token": config.DEVICE_TOKEN, "p_soil": soil, "p_temperature": temperature, "p_humidity": humidity}
+    body = {"p_token": config.DEVICE_TOKEN, "p_soil": soil, "p_temperature": temperature, "p_humidity": humidity,
+            "p_status": state, "p_event": event}
     response = None
     try:
         response = urequests.post(url, data=ujson.dumps(body), headers=_headers())

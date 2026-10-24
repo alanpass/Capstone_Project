@@ -1,0 +1,101 @@
+# 水果與果樹
+草莓|Fragaria × ananassa|2|F|2|12-24|EK|P|os|秋季定植、冬春採收，以走莖繁殖，果實需防鳥與灰黴病。
+野草莓|Fragaria vesca|1|P|2|10-24|EK|P|os|果實小巧香甜，耐半陰，適合吊盆。
+藍莓|Vaccinium corymbosum|3|F|2|10-26|EK|P|c|需酸性土壤（pH 4.5–5.5），兩個品種混植結果較好。
+兔眼藍莓|Vaccinium virgatum|2|F|2|12-30|EK|P|c|比高叢藍莓耐熱，較適合台灣平地栽培。
+覆盆子|Rubus idaeus|2|F|2|10-25|EK|P|ds|莖有細刺，果實中空，採收期短需即時食用。
+黑莓|Rubus fruticosus|1|F|3|12-28|EK|P|lc|生長旺盛的蔓性莓果，成熟果實由紅轉黑。
+長果桑|Morus macroura|1|F|3|15-32|EK|P|c|果實細長可達 10 公分，甜度高、不易沾手。
+蔓越莓|Vaccinium macrocarpon|3|F|1|8-24|EK|P|c|需潮濕酸性土壤，台灣平地栽培不易。
+醋栗|Ribes uva-crispa|2|P|3|8-22|EK|P|c|需冷涼氣候，果實酸甜，可做果醬。
+枸杞|Lycium barbarum|1|F|4|12-30|EK|P|cs|枝條柔軟下垂，夏秋結出紅色漿果，嫩葉可煮湯。
+檸檬|Citrus × limon|2|F|3|18-32|ET|P|gc|四季開花結果，盆植也能收成，需注意潰瘍病。
+香水檸檬|Citrus × limon 'Eureka'|2|F|3|18-32|ET|P|g|果皮香氣特別濃郁，常用於飲品。
+萊姆|Citrus × aurantiifolia|2|F|3|20-32|ET|P|g|果實小而多汁，南洋料理常用。
+無籽檸檬|Citrus × latifolia|2|F|3|18-32|ET|P|g|大果萊姆，無籽多汁，台灣廣泛栽培。
+四季橘|Citrus × microcarpa|1|F|3|18-32|ET|P|gc|台灣常見盆栽，終年結果，果汁可調飲料。
+柳橙|Citrus × sinensis|2|F|3|15-32|ET|P|g|冬季採收的甜橙，需充足日照才會甜。
+椪柑|Citrus reticulata 'Ponkan'|2|F|3|15-32|ET|P|g|台灣代表柑橘，果皮易剝，冬季成熟。
+茂谷柑|Citrus reticulata × sinensis 'Murcott'|2|F|3|15-32|ET|P|g|甜度高、果汁多，農曆年前後上市。
+文旦|Citrus maxima 'Wentan'|2|F|3|18-32|ET|P|g|中秋節應景水果，果肉細緻多汁。
+葡萄柚|Citrus × paradisi|2|F|3|18-32|ET|P|g|果實成串生長，口味酸甜帶微苦。
+金棗|Citrus japonica 'Margarita'|1|F|3|15-30|ET|P|g|橢圓形金柑，可連皮食用，宜蘭特產。
+佛手柑|Citrus medica var. sarcodactylis|2|F|3|18-30|ET|P|gc|果實形如手指，香氣濃郁，多作擺飾或蜜餞。
+日本柚子|Citrus junos|2|F|3|10-28|ET|P|g|日式柚子醋原料，耐寒性較強。
+芒果|Mangifera indica|2|F|4|22-35|E|P|gs|喜高溫乾燥，開花期遇雨易落果，台南、屏東為主產區。
+愛文芒果|Mangifera indica 'Irwin'|2|F|4|22-35|E|P|g|果皮紅潤、香甜多汁，夏季最受歡迎的品種。
+荔枝|Litchi chinensis|2|F|3|18-32|EK|P|lg|需冬季低溫促進開花，夏季採收。
+龍眼|Dimocarpus longan|2|F|3|18-32|EK|P|lg|樹勢強健，夏末採收，可烘乾成桂圓。
+芭樂|Psidium guajava|1|F|3|18-35|EK|P|lgs|四季可結果，果實套袋可防果蠅，維生素 C 豐富。
+紅心芭樂|Psidium guajava 'Red'|1|F|3|18-35|EK|P|lg|果肉粉紅、香氣濃郁。
+蓮霧|Syzygium samarangense|2|F|2|22-32|EK|P|lg|屏東名產，果實鐘形清脆多汁，需大量水分。
+楊桃|Averrhoa carambola|1|F|3|20-32|E|P|g|切片呈星形，腎臟病患者應避免食用。
+草莓芭樂|Psidium cattleyanum|1|F|3|15-32|EK|P|s|小果芭樂帶草莓香，樹形小適合盆植。
+木瓜|Carica papaya|1|F|3|22-35|EK|P|s|生長快，種植後 8～10 個月即可結果，怕積水與颱風。
+香蕉|Musa acuminata (AAA Group)|1|F|2|22-35|EK|P|r|以吸芽繁殖，一株只結一串，採收後砍除母株。
+粉蕉|Musa × paradisiaca 'Pisang Awak'|1|F|2|20-35|EK|P|r|果實短胖、帶酸甜味，抗病性較強。
+鳳梨|Ananas comosus|1|F|4|20-32|EK|P|r|可用果實冠芽種植，約一年半後結果。
+酪梨|Persea americana|2|F|3|18-30|ET|P|gs|果實富含油脂，用種子種的實生苗需 5 年以上才結果。
+黃金百香果|Passiflora edulis f. flavicarpa|1|F|2|18-32|EK|P|cs|黃色果皮品種，香氣濃、酸度高，需棚架。
+釋迦|Annona squamosa|2|F|3|22-35|E|P|gs|台東名產，果肉綿密香甜，需人工授粉提高產量。
+鳳梨釋迦|Annona × atemoya|2|F|3|20-32|E|P|g|果肉帶鳳梨香、口感Q彈，比釋迦耐儲存。
+紅毛丹|Nephelium lappaceum|3|F|2|24-32|E|P|g|果皮長滿軟刺，需高溫多濕的熱帶氣候。
+山竹|Garcinia mangostana|3|P|2|25-32|E|P|s|水果皇后，對低溫敏感，台灣僅南部少量栽培。
+榴槤|Durio zibethinus|3|F|2|25-35|E|P|g|熱帶水果之王，需終年高溫，台灣栽培困難。
+波羅蜜|Artocarpus heterophyllus|2|F|3|22-35|EK|P|s|世界最大的樹生果實，果實直接長在樹幹上。
+麵包樹|Artocarpus altilis|2|F|3|22-35|E|P|r|原住民常見作物，果實煮熟口感似麵包。
+刺果番荔枝|Annona muricata|3|F|3|22-32|E|P|s|果皮有軟刺，果肉酸甜，又稱紅毛榴槤。
+人心果|Manilkara zapota|2|F|3|22-35|E|P|gs|果肉甜度高似黑糖，樹形優美、耐鹽。
+蛋黃果|Pouteria campechiana|1|F|3|20-32|E|P|s|果肉金黃鬆軟如蛋黃，耐旱好照顧。
+黃金果|Pouteria caimito|2|F|2|22-32|E|P|s|果肉透明似果凍，甜度高。
+嘉寶果|Plinia cauliflora|3|F|2|18-32|EK|P|sl|又稱樹葡萄，果實直接長在樹幹上，口感似葡萄。
+西印度櫻桃|Malpighia emarginata|1|F|3|20-32|EK|P|c|維生素 C 含量極高，一年多次開花結果。
+紅毛榴槤|Annona reticulata|2|F|3|22-32|E|P|s|牛心梨，果肉綿密甜美。
+羅望子|Tamarindus indica|1|F|4|22-35|EK|P|s|豆莢內果肉酸甜，常用於泰式料理。
+酸豆|Phyllanthus acidus|1|F|3|22-32|E|P|s|又稱西印度醋栗，果實酸，可醃漬。
+楊梅|Morella rubra|2|F|3|15-28|EK|P|g|果實紅紫多汁，酸甜可口，春末夏初成熟。
+枇杷|Eriobotrya japonica|1|F|3|12-28|ET|P|gs|冬季開花、春季結果，葉可入藥，種子有毒。
+李|Prunus salicina|2|F|3|10-28|ET|P|g|需冬季低溫才能正常開花，高海拔或中部栽培較佳。
+桃|Prunus persica|2|F|3|10-28|ET|P|g|春天開粉紅花，夏季果實成熟，需定期修剪。
+油桃|Prunus persica var. nucipersica|2|F|3|10-28|ET|P|g|果皮光滑無毛的桃子，需冷涼氣候。
+梅|Prunus mume|1|F|3|8-28|ET|P|gs|冬季開花、春季結果，青梅可醃漬或釀酒。
+櫻桃|Prunus avium|3|F|3|5-24|ET|P|g|需大量低溫，台灣僅高山地區能結果。
+杏|Prunus armeniaca|2|F|3|8-28|ET|P|g|春天開花，果實可鮮食或做杏桃乾。
+蘋果|Malus domestica|3|F|3|5-24|ET|P|g|需冬季低溫，台灣主要種在梨山等高海拔地區。
+梨|Pyrus pyrifolia|2|F|3|8-28|EK|P|g|台灣以高接梨技術栽培溫帶梨，果實清甜多汁。
+柿子|Diospyros kaki|1|F|3|12-30|EK|P|g|秋季果實轉橘紅，甜柿可脆食、澀柿需脫澀。
+石榴|Punica granatum|1|F|4|15-35|EK|P|cl|耐旱，橙紅花朵亮麗，果實內有晶瑩果粒。
+無花果|Ficus carica|1|F|3|15-32|ET|P|cl|扦插易活，盆植一年就能結果，乳汁可能引起過敏。
+奇異果|Actinidia deliciosa|3|F|2|10-26|EK|P|gc|雌雄異株需同時種植，需冷涼氣候與棚架。
+山葡萄|Vitis thunbergii|1|F|3|15-30|ET|P|c|台灣原生野葡萄，果實小，可做果醬。
+巨峰葡萄|Vitis × labruscana 'Kyoho'|2|F|3|15-30|ET|P|cg|台灣主要葡萄品種，果粒大、香氣濃，對狗有毒。
+西洋梨|Pyrus communis|3|F|3|5-24|EK|P|g|需冷涼氣候，採收後需後熟才軟化香甜。
+棗|Ziziphus jujuba|1|F|4|12-32|EK|P|gr|耐旱耐寒，鮮食或曬乾成紅棗。
+印度棗|Ziziphus mauritiana|1|F|3|18-35|EK|P|g|即台灣蜜棗，冬季採收，果實清脆。
+橄欖|Olea europaea|2|F|4|12-32|EK|P|c|耐旱，銀綠色葉片優雅，台灣平地結果較少。
+油柑|Phyllanthus emblica|1|F|4|18-35|EK|P|s|餘甘子，入口酸澀後回甘。
+祕魯蛋黃果|Pouteria lucuma|2|F|3|15-28|E|P|s|祕魯果樹，果肉金黃具楓糖風味。
+黃色火龍果|Selenicereus megalanthus|2|F|4|18-32|EK|P|c|果皮黃色帶刺，甜度極高。
+仙人掌果|Opuntia ficus-indica 'Fruit'|1|F|6|20-35|E|P|c|梨果仙人掌的果實，去刺後酸甜多汁。
+紫百香果|Passiflora edulis 'Purple'|1|F|2|18-30|EK|P|cs|紫皮品種，酸甜適中、香氣濃郁。
+甜百香果|Passiflora ligularis|2|P|2|15-25|EK|P|s|果肉甜而不酸，需冷涼山區栽培。
+小玉西瓜|Citrullus lanatus 'Mini'|2|F|3|20-32|EK|A|s|小型西瓜，適合吊網立體栽培。
+哈密瓜|Cucumis melo var. reticulatus|3|F|3|20-32|EK|A|s|果皮有網紋，需嚴格控水才會甜。
+洋香瓜|Cucumis melo var. inodorus|2|F|3|20-32|EK|A|s|果皮光滑，果肉清甜多汁。
+美濃瓜|Cucumis melo var. makuwa|2|F|3|20-32|EK|A|s|台灣春夏常見的小型香瓜，果肉脆甜。
+酸漿|Physalis peruviana|1|F|3|15-28|ET|P|s|燈籠果，果實包在紙狀花萼中，熟果可食，未熟有毒。
+台灣懸鉤子|Rubus formosensis|1|P|3|15-28|EK|P|c|台灣原生懸鉤子，春季結紅色聚合果。
+刺莓|Rubus rosifolius|1|P|3|15-30|EK|P|c|台灣低海拔常見，果實鮮紅可食。
+扁櫻桃|Eugenia uniflora|1|F|3|20-32|EK|P|s|又稱巴西櫻桃，果實呈南瓜狀稜紋，酸甜可口。
+泰國芭樂|Psidium guajava 'Thai'|1|F|3|18-35|EK|P|g|大果品種，果肉厚實清脆。
+腰果|Anacardium occidentale|2|F|4|22-35|E|P|s|果實下方的腰果需加熱處理才能食用。
+可可|Theobroma cacao|3|P|2|22-32|ET|P|s|巧克力原料，果實長在樹幹上，需高溫多濕與遮陰。
+咖啡|Coffea arabica|2|P|3|18-26|ET|P|sc|開白花、結紅果，咖啡豆對貓狗有毒，室內可盆栽觀葉。
+茶樹|Camellia sinensis|2|P|3|15-28|EK|P|cs|台灣烏龍茶原料，喜酸性排水良好土壤與多霧環境。
+夏威夷豆|Macadamia integrifolia|2|F|3|18-30|ET|P|g|堅果香脆，但對狗有毒，樹需數年才結果。
+栗子|Castanea mollissima|2|F|3|10-28|EK|P|g|秋季堅果成熟，外殼帶刺，需冷涼氣候。
+銀杏|Ginkgo biloba|1|F|3|8-30|ET|P|sg|活化石樹種，秋葉金黃，種子需煮熟少量食用。
+扁桃|Prunus amygdalus|2|F|4|10-30|ET|P|g|即杏仁，需地中海型乾燥氣候。
+開心果|Pistacia vera|3|F|5|15-35|E|P|g|雌雄異株，極耐旱，需炎熱乾燥夏季。
+椰子|Cocos nucifera|1|F|3|22-35|EK|P|s|海邊常見的熱帶果樹，耐鹽耐風。
+檳榔|Areca catechu|1|F|3|22-35|T|P|s|台灣常見棕櫚，不建議食用（致癌），可作景觀樹。

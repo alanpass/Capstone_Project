@@ -1,0 +1,95 @@
+# 室內觀葉植物
+白鶴芋|Spathiphyllum wallisii|1|H|3|18-28|TI|P|d|耐陰又會開白花，缺水時葉片下垂、澆水後恢復。
+大葉白鶴芋|Spathiphyllum 'Sensation'|1|H|3|18-28|TI|P|d|大型白鶴芋，葉片寬大有光澤。
+銀后粗肋草|Aglaonema 'Silver Queen'|1|H|3|18-30|TI|P|dc|銀綠斑葉，極耐陰，適合辦公室。
+紅粗肋草|Aglaonema 'Red Siam'|1|S|3|18-30|TI|P|dc|葉片紅綠相間，喜明亮散射光。
+廣東萬年青|Aglaonema modestum|1|H|3|15-30|TI|P|d|傳統耐陰盆栽，可水耕。
+黛粉葉|Dieffenbachia seguine|1|S|3|18-30|TI|P|c|大型斑葉觀葉植物，汁液有毒。
+心葉蔓綠絨|Philodendron hederaceum|1|H|3|18-30|TI|P|c|心形葉片垂吊生長，極易照顧。
+金鑽蔓綠絨|Philodendron 'Imperial Green'|1|S|3|18-30|TI|P|c|葉片寬大油亮，直立叢生。
+紅帝王蔓綠絨|Philodendron 'Rojo Congo'|1|S|3|18-30|TI|P|c|新葉紅紫色，逐漸轉為深綠。
+羽裂蔓綠絨|Thaumatophyllum bipinnatifidum|1|S|3|15-30|TI|P|s|大型羽裂葉片，熱帶風情濃厚。
+春雨蔓綠絨|Thaumatophyllum 'Xanadu'|1|S|3|15-30|TI|P|d|葉片深裂、株型緊湊，適合室內。
+銀葉蔓綠絨|Philodendron hastatum|2|S|3|18-30|TI|P|c|銀色金屬光澤的箭形葉片。
+斑葉龜背芋|Monstera deliciosa 'Thai Constellation'|2|S|3|18-30|TI|P|c|葉片有奶油色星點斑紋，生長穩定。
+窗孔龜背芋|Monstera adansonii|1|S|3|18-30|TI|P|c|葉片佈滿孔洞，蔓性可攀爬或垂吊。
+姬龜背|Rhaphidophora tetrasperma|1|S|3|18-30|TI|P|c|小型裂葉，生長快速，又稱迷你龜背芋。
+星點藤|Scindapsus pictus 'Argyraeus'|1|S|4|18-30|TI|P|c|葉片灰綠帶銀色斑點，垂吊美觀。
+銀葉黃金葛|Epipremnum pinnatum 'Cebu Blue'|1|S|3|18-30|TI|P|c|銀藍色葉片，成熟後會開裂。
+白金葛|Epipremnum aureum 'Marble Queen'|1|S|3|18-30|TI|P|c|白綠大理石斑紋的黃金葛。
+合果芋|Syngonium podophyllum|1|S|3|18-30|TI|P|c|箭形葉片會隨成長變化，可水耕。
+粉紅合果芋|Syngonium 'Neon Robusta'|1|S|3|18-30|TI|P|c|葉片粉紅色，室內明亮處顏色更美。
+觀音蓮|Alocasia × amazonica|2|S|3|20-30|TI|P|bd|箭形深綠葉片配白色葉脈，喜高濕。
+龍鱗觀音蓮|Alocasia baginda 'Dragon Scale'|2|S|3|20-30|TI|P|bd|葉面紋路如龍鱗，具金屬光澤。
+姑婆芋|Alocasia odora|1|H|2|18-32|TI|P|d|台灣原生大型觀葉，全株有毒，切勿誤食。
+彩葉芋|Caladium bicolor|2|S|2|20-30|TI|P|b|葉片色彩繽紛如畫，冬季休眠。
+火鶴花|Anthurium andraeanum|2|S|3|18-28|TI|P|d|心形紅色苞片亮麗持久，喜高濕。
+水晶花燭|Anthurium crystallinum|3|S|3|20-28|TI|P|d|絲絨深綠葉片配銀白葉脈，觀葉珍品。
+孔雀竹芋|Goeppertia makoyana|2|H|2|18-28|KI|P|d|葉片圖案如孔雀羽毛，夜晚葉片會收合。
+紅羽竹芋|Goeppertia ornata|2|H|2|18-28|KI|P|d|深綠葉片有粉紅色細線條。
+天鵝絨竹芋|Goeppertia zebrina|2|H|2|18-28|KI|P|d|葉片斑馬紋路且有絨毛質感。
+青蘋果竹芋|Goeppertia orbifolia|2|H|2|18-28|KI|P|d|圓形大葉帶銀色條紋，需高濕度。
+箭羽竹芋|Goeppertia lancifolia|1|H|2|18-28|KI|P|d|長葉片有深綠色斑紋，葉背紫紅。
+紅線竹芋|Maranta leuconeura var. erythroneura|2|H|2|18-28|KI|P|cd|葉脈鮮紅色，又稱祈禱草。
+錦竹芋|Ctenanthe burle-marxii|1|H|2|18-28|KI|P|d|葉片有魚骨狀斑紋，耐陰。
+虎斑木|Dracaena fragrans 'Massangeana'|1|S|4|18-30|TI|P|c|即巴西鐵樹，葉片中央有黃色條紋。
+香龍血樹|Dracaena fragrans|1|S|4|18-30|TI|P|c|常見的室內大型植物，耐陰耐旱。
+千年木|Dracaena marginata|1|S|4|18-30|TI|P|c|細長葉片邊緣紅色，株形挺拔。
+星點木|Dracaena surculosa|1|S|3|18-30|TI|P|c|葉片綴滿黃白色星點。
+萬年竹|Dracaena sanderiana|1|S|W|18-30|TI|P|c|俗稱開運竹，可水耕，常編成造型。
+朱蕉|Cordyline fruticosa|1|P|3|18-32|TI|P|c|葉片紅紫色，戶外室內皆宜。
+酒瓶椰子|Hyophorbe lagenicaulis|2|F|3|20-35|K|P|s|樹幹基部膨大如酒瓶，熱帶景觀樹。
+袖珍椰子|Chamaedorea elegans|1|H|3|18-28|KI|P|s|小型室內棕櫚，耐陰，對寵物安全。
+觀音棕竹|Rhapis excelsa|1|H|3|15-30|KI|P|d|掌狀葉片優雅，耐陰的室內棕櫚。
+黃椰子|Dypsis lutescens|1|S|2|18-32|KI|P|ds|散尾葵，羽狀葉片，室內加濕效果佳。
+叢立孔雀椰子|Caryota mitis|1|P|3|18-32|T|P|ds|葉片如魚尾，果實汁液刺激皮膚。
+馬拉巴栗|Pachira aquatica|1|S|4|18-32|KI|P|sc|俗稱發財樹，常編成辮子樹幹，耐陰。
+琴葉榕|Ficus lyrata|2|S|3|18-30|TI|P|cl|小提琴形大葉，喜明亮光線，忌頻繁移動。
+印度橡膠樹|Ficus elastica|1|S|4|18-32|TI|P|cl|葉片厚實油亮，新葉由紅色托葉包覆。
+黑金剛橡膠樹|Ficus elastica 'Black Prince'|1|S|4|18-32|TI|P|c|深黑綠色葉片，耐陰好養。
+垂榕|Ficus benjamina|2|S|3|18-30|TI|P|c|枝條下垂，環境變化時容易落葉。
+人參榕|Ficus microcarpa 'Ginseng'|1|S|3|18-32|TI|P|c|根部膨大如人參，常見小品盆景。
+愛心榕|Ficus umbellata|2|S|3|18-30|TI|P|c|心形大葉，熱帶風格觀葉樹。
+鵝掌藤|Heptapleurum arboricola|1|S|3|15-32|TI|P|c|掌狀複葉，極耐陰，有斑葉品種。
+圓葉福祿桐|Polyscias scutellaria|1|S|3|18-32|TI|P|c|圓形葉片，常作開運植物。
+澳洲鴨腳木|Heptapleurum actinophyllum|1|S|3|15-30|TI|P|cs|大型掌狀葉，生長快速。
+福木|Garcinia subelliptica|1|F|3|18-35|K|P|s|葉片厚革質，抗風耐鹽，常作防風林。
+白網紋草|Fittonia albivenis 'White'|2|S|2|18-28|KI|P|c|綠葉配白色網紋，需保持濕潤。
+嫣紅蔓|Hypoestes phyllostachya|1|S|2|18-28|KI|P|cs|葉片佈滿粉紅色斑點，摘心可保持株形。
+紫絨藤|Gynura aurantiaca|1|S|3|18-28|KI|P|c|葉片覆滿紫色絨毛，在光線下閃閃發亮。
+西瓜皮椒草|Peperomia argyreia|1|S|4|18-28|KI|P|e|葉片紋路如西瓜皮，葉插易繁殖。
+圓葉椒草|Peperomia obtusifolia|1|S|4|18-30|KI|P|ce|葉片肥厚油亮，耐旱好照顧。
+乒乓球草|Peperomia polybotrya|1|S|4|18-28|KI|P|c|圓形葉片如雨滴，有趣可愛。
+紅背椒草|Peperomia graveolens|1|S|5|18-30|KI|P|c|葉片內捲、背面紅色，像小船。
+垂椒草|Peperomia prostrata|2|S|4|18-28|KI|P|c|圓形小葉串成垂吊，又稱烏龜藤。
+鏡面草|Pilea peperomioides|1|S|4|15-28|KI|P|r|圓形葉片如錢幣，又稱金錢草，易長側芽。
+嬰兒淚|Soleirolia soleirolii|1|S|2|12-24|KI|P|d|細小圓葉密集如苔蘚，需保持濕潤。
+嬰兒草|Pilea glauca|1|S|3|15-28|KI|P|c|細小銀灰葉片垂吊生長。
+袖珍金錢|Dischidia nummularia|1|S|4|18-30|KI|P|c|圓形肉質小葉垂吊，附生性。
+百萬心|Dischidia ruscifolia|1|S|4|18-30|KI|P|c|心形小葉沿莖排列，適合吊盆。
+心葉毬蘭|Hoya kerrii|1|S|4|18-30|KI|P|ce|心形肉質葉片，常作情人節禮物。
+卷葉毬蘭|Hoya carnosa 'Compacta'|1|S|4|18-30|KI|P|c|葉片捲曲如繩索，開球形花。
+吊蘭|Chlorophytum comosum|1|S|3|12-28|KI|P|r|走莖會長出小吊蘭，淨化空氣效果佳。
+斑葉吊蘭|Chlorophytum comosum 'Vittatum'|1|S|3|12-28|KI|P|r|葉片中央有白色條紋，垂吊美觀。
+蜘蛛抱蛋|Aspidistra elatior|1|H|4|10-28|KI|P|d|極耐陰耐忽略，又稱一葉蘭。
+沿階草|Ophiopogon japonicus|1|H|3|10-30|K|P|d|細長葉片的地被，耐陰耐踩。
+玉龍草|Ophiopogon japonicus 'Nanus'|1|P|3|10-30|K|P|d|矮性沿階草，常用於庭園步道。
+斑葉蔓長春|Vinca major 'Variegata'|1|P|3|10-28|T|P|c|斑葉垂吊植物，開藍紫色花。
+斑葉薜荔|Ficus pumila 'Variegata'|1|S|3|15-28|TI|P|c|白斑小葉，適合吊盆與攀爬。
+金錢樹|Zamioculcas zamiifolia|1|H|5|18-30|TI|P|de|葉片油亮，地下塊莖儲水，極耐旱耐陰。
+黑金錢樹|Zamioculcas zamiifolia 'Raven'|1|H|5|18-30|TI|P|d|新葉轉為深黑色，造型時尚。
+翠玲瓏|Callisia repens|1|P|3|15-30|TI|P|c|小葉密集垂吊，紫色葉背。
+鐵十字秋海棠|Begonia masoniana|2|S|3|18-26|TI|P|e|葉面有深色十字斑紋，需高濕。
+蝴蝶秋海棠|Begonia 'Escargot'|2|S|3|18-26|TI|P|e|葉片螺旋狀花紋如蝸牛殼。
+竹節秋海棠|Begonia maculata|2|S|3|18-28|TI|P|c|葉面佈滿銀白圓點，葉背紅色。
+虎耳草|Saxifraga stolonifera|1|H|2|12-25|KI|P|o|葉片圓形有白色葉脈，走莖繁殖。
+黑魔術芋|Colocasia esculenta 'Black Magic'|1|F|1|20-32|T|P|d|葉片深黑紫色，可水邊或濕地栽種。
+黃金鋤頭|Alocasia cucullata|1|S|3|18-32|TI|P|d|佛手芋，葉片如佛手合掌。
+孔雀薑|Kaempferia pulchra|2|H|2|20-30|K|P|b|葉片圖紋如孔雀羽，開淡紫小花。
+斑葉竹柏|Nageia nagi 'Variegata'|1|S|3|15-30|K|P|c|葉片似竹，又帶柏樹氣質。
+羅漢松|Podocarpus macrophyllus|1|F|3|12-32|T|P|cs|常見庭園與盆景樹，果實像小羅漢。
+小葉黃楊|Buxus harlandii|1|F|3|12-32|T|P|c|小型葉片適合修剪造型，常作綠籬。
+雪花木|Breynia disticha 'Roseo-picta'|1|F|3|18-32|T|P|c|新葉帶粉白斑紋，如雪花點點。
+變葉木|Codiaeum variegatum|1|F|3|20-32|TI|P|c|葉色紅黃綠交錯，需充足光線維持色彩。
+紅邊竹蕉|Dracaena reflexa 'Song of India'|1|S|4|18-30|TI|P|c|黃綠鑲邊葉片，株形優雅。
+棕櫚竹|Rhapis humilis|1|H|3|15-30|KI|P|d|細葉棕竹，室內耐陰觀葉。

@@ -154,6 +154,7 @@ create table if not exists public.devices (
   token        uuid not null unique default gen_random_uuid(),
   plant_id     uuid references public.plants (id) on delete set null,
   last_seen_at timestamptz,
+  status       jsonb,          -- 裝置最近一次回報的狀態：繼電器、Wi-Fi 訊號、運作時間等
   created_at   timestamptz not null default now()
 );
 
@@ -163,6 +164,7 @@ alter table public.devices add column if not exists id uuid not null default gen
 alter table public.devices add column if not exists name text not null default 'ESP32';
 alter table public.devices add column if not exists plant_id uuid references public.plants (id) on delete set null;
 alter table public.devices add column if not exists last_seen_at timestamptz;
+alter table public.devices add column if not exists status jsonb;
 alter table public.devices alter column user_id set default auth.uid();
 alter table public.devices alter column user_id set not null;
 do $$
@@ -221,6 +223,16 @@ create index if not exists sensor_readings_user_idx on public.sensor_readings (u
 alter table public.sensor_readings add column if not exists device_id uuid references public.devices (id) on delete set null;
 create index if not exists sensor_readings_device_idx on public.sensor_readings (device_id, recorded_at desc);
 
+-- ---------- 控制紀錄（裝置啟動／關閉風扇、加熱、澆水時回報） ----------
+create table if not exists public.device_events (
+  id         bigint generated always as identity primary key,
+  device_id  uuid not null references public.devices (id) on delete cascade,
+  user_id    uuid not null references auth.users (id) on delete cascade,
+  created_at timestamptz not null default now(),
+  message    text not null check (char_length(message) between 1 and 120)
+);
+create index if not exists device_events_device_idx on public.device_events (device_id, created_at desc);
+
 -- =====================================================================
 -- Row Level Security
 -- =====================================================================
@@ -231,6 +243,7 @@ alter table public.ai_requests     enable row level security;
 alter table public.thresholds      enable row level security;
 alter table public.devices         enable row level security;
 alter table public.sensor_readings enable row level security;
+alter table public.device_events   enable row level security;
 
 drop policy if exists "own profile" on public.profiles;
 create policy "own profile" on public.profiles
@@ -295,6 +308,11 @@ create policy "read own readings" on public.sensor_readings
   for select to authenticated
   using (user_id = (select auth.uid()));
 
+drop policy if exists "read own events" on public.device_events;
+create policy "read own events" on public.device_events
+  for select to authenticated
+  using (user_id = (select auth.uid()));
+
 drop policy if exists "delete own readings" on public.sensor_readings;
 create policy "delete own readings" on public.sensor_readings
   for delete to authenticated
@@ -309,8 +327,9 @@ revoke all on public.devices from authenticated;
 grant select, delete on public.devices to authenticated;
 grant insert (name, plant_id), update (name, plant_id) on public.devices to authenticated;
 grant select, delete on public.sensor_readings to authenticated;
+grant select on public.device_events to authenticated;
 revoke all on public.profiles, public.plants, public.plant_guides, public.ai_requests,
-  public.thresholds, public.devices, public.sensor_readings from anon;
+  public.thresholds, public.devices, public.sensor_readings, public.device_events from anon;
 
 -- =====================================================================
 -- 函式
@@ -410,11 +429,16 @@ as $$
 $$;
 
 -- ESP32 每個週期呼叫一次：上傳數據（可只傳部分欄位）並取得這塊裝置的門檻值
+--   p_status：裝置目前狀態，例如 {"node":"climate","relays":{"fan":1,"heater":0},"rssi":-61,"uptime":3600,"ip":"192.168.1.20","mem":82000}
+--   p_event ：繼電器狀態改變時的說明，例如「開風扇（25.0°C > 18.0°C）」，記錄在控制紀錄
+drop function if exists public.device_sync(uuid, real, real, real);
 create or replace function public.device_sync(
   p_token uuid,
   p_soil real default null,
   p_temperature real default null,
-  p_humidity real default null
+  p_humidity real default null,
+  p_status jsonb default null,
+  p_event text default null
 )
 returns json
 language plpgsql
@@ -428,7 +452,13 @@ begin
   if not found then
     raise exception 'invalid device token' using errcode = '28000';
   end if;
-  update public.devices set last_seen_at = now() where id = d.id;
+
+  update public.devices
+  set last_seen_at = now(),
+      -- 只接受物件且限制大小，避免裝置程式錯誤塞爆資料庫
+      status = case when jsonb_typeof(p_status) = 'object' and length(p_status::text) <= 1000
+                    then p_status else status end
+  where id = d.id;
 
   if coalesce(p_soil, p_temperature, p_humidity) is not null then
     -- 防止裝置程式錯誤狂送資料：每塊裝置每分鐘最多 3 筆（正常是每分鐘 1 筆）
@@ -449,14 +479,23 @@ begin
     end if;
   end if;
 
+  if nullif(btrim(p_event), '') is not null and (
+    select count(*) from public.device_events
+    where device_id = d.id and created_at > now() - interval '1 minute'
+  ) < 10 then
+    insert into public.device_events (device_id, user_id, message)
+    values (d.id, d.user_id, left(btrim(p_event), 120));
+    delete from public.device_events where device_id = d.id and created_at < now() - interval '30 days';
+  end if;
+
   return public.effective_thresholds(d.user_id, d.plant_id)::json;
 end;
 $$;
 
 revoke all on function public.regenerate_device_token(uuid) from public, anon;
 grant execute on function public.regenerate_device_token(uuid) to authenticated;
-revoke all on function public.device_sync(uuid, real, real, real) from public;
-grant execute on function public.device_sync(uuid, real, real, real) to anon, authenticated;
+revoke all on function public.device_sync(uuid, real, real, real, jsonb, text) from public;
+grant execute on function public.device_sync(uuid, real, real, real, jsonb, text) to anon, authenticated;
 revoke all on function public.handle_new_user() from public, anon, authenticated;
 revoke all on function public.limit_devices() from public, anon, authenticated;
 revoke all on function public.effective_thresholds(uuid, uuid) from public, anon, authenticated;

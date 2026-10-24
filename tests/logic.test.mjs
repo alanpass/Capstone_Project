@@ -78,3 +78,30 @@ test("階段範圍、調整進度與門檻整理", async () => {
   assert.deepEqual(clean.planting, { tempMin: 20, tempMax: 30, humidMin: 70, humidMax: 71, soilMin: 100 });
   assert.deepEqual(Object.keys(clean), ["planting", "growing", "flowering", "fruiting", "harvest"]);
 });
+
+test("裝置狀態：連線判斷、相對時間、運作時間與訊號", async () => {
+  const { connectionOf, formatUptime, signalText, timeAgo } = await import("../frontend/assets/js/devices.js");
+  const now = Date.parse("2026-10-24T12:00:00Z");
+  const ago = (minutes) => new Date(now - minutes * 60000).toISOString();
+  assert.deepEqual([null, ago(1), ago(3), ago(5), ago(30)].map((t) => connectionOf(t, now)),
+    ["never", "online", "online", "unstable", "offline"]);
+  assert.deepEqual([ago(0.2), ago(5), ago(120)].map((t) => timeAgo(t, now)), ["剛剛", "5 分鐘前", "2 小時前"]);
+  assert.deepEqual([90, 4000, 200000].map(formatUptime), ["1 分鐘", "1 小時 6 分", "2 天 7 小時"]);
+  assert.equal(formatUptime(undefined), "—");
+  assert.deepEqual([-55, -65, -75, -90].map(signalText), ["強（-55 dBm）", "良好（-65 dBm）", "弱（-75 dBm）", "很弱（-90 dBm）"]);
+});
+
+test("植物百科：1000 種、id 不重複、分類與篩選欄位齊全", async () => {
+  const { CATEGORIES, QUICK_FILTERS } = await import("../frontend/assets/js/catalog.js");
+  const catalog = JSON.parse(await Deno.readTextFile(new URL("../frontend/data/plants-index.json", import.meta.url)));
+  assert.equal(catalog.length, 1000);
+  assert.equal(new Set(catalog.map((p) => p.id)).size, 1000, "id 不重複");
+  assert.equal(new Set(catalog.map((p) => p.name)).size, 1000, "名稱不重複");
+  const cats = new Set(CATEGORIES.map((c) => c.key));
+  assert.deepEqual(catalog.filter((p) => !cats.has(p.cat)).map((p) => p.name), [], "分類都有定義");
+  assert.ok(catalog.every((p) => p.name && p.desc), "名稱與簡介必填");
+  const newOnes = catalog.filter((p) => !p.detail);
+  assert.equal(newOnes.length, 900);
+  assert.ok(newOnes.every((p) => p.care && p.sun && p.water && p.temp?.[0] < p.temp?.[1]), "新增植物的照護欄位齊全");
+  for (const f of QUICK_FILTERS) assert.ok(catalog.some(f.test), `「${f.name}」至少有一種植物`);
+});

@@ -1,0 +1,76 @@
+# 庭園樹木、灌木、竹類與觀賞草
+楓香|Liquidambar formosana|1|F|3|10-32|K|P|s|台灣原生樹種，秋冬葉片轉紅黃，樹形高大。
+青楓|Acer serrulatum|1|F|3|10-30|K|P|s|台灣原生楓樹，嫩葉與秋葉皆美。
+雞爪槭|Acer palmatum|2|P|2|8-28|K|P|gs|日本楓，葉片掌狀深裂，秋季轉紅。
+台灣欒樹|Koelreuteria elegans subsp. formosana|1|F|3|15-35|K|P|s|秋季黃花轉紅色蒴果，一年四色。
+阿勃勒|Cassia fistula|1|F|4|20-35|T|P|s|初夏開滿金黃色花串，有黃金雨之稱。
+鳳凰木|Delonix regia|1|F|3|20-35|T|P|s|夏季開滿火紅花朵，畢業季的象徵。
+火焰木|Spathodea campanulata|1|F|3|20-35|K|P|s|橘紅色大花如火焰，花苞內含水。
+黃花風鈴木|Handroanthus chrysanthus|1|F|4|18-35|K|P|sg|春季先開滿黃花後長葉，花期短暫壯觀。
+洋紅風鈴木|Tabebuia rosea|1|F|3|18-35|K|P|s|粉紅色喇叭花滿樹，春季盛開。
+藍花楹|Jacaranda mimosifolia|1|F|3|15-35|K|P|s|初夏開滿藍紫色花朵，浪漫優雅。
+木棉|Bombax ceiba|1|F|4|18-35|K|P|s|春季先花後葉，橙紅大花，果實棉絮可做枕芯。
+美人樹|Ceiba speciosa|1|F|4|18-35|K|P|s|樹幹有瘤刺，秋季開粉紅花朵。
+苦楝|Melia azedarach|1|F|4|15-35|T|P|s|春季開淡紫色小花帶清香，果實有毒。
+樟樹|Camphora officinarum|1|F|3|15-32|K|P|s|台灣重要原生樹種，葉片揉碎有樟腦香。
+牛樟|Cinnamomum kanehirae|2|P|3|15-30|K|P|s|台灣特有珍貴樹種，牛樟芝的寄主。
+茄苳|Bischofia javanica|1|F|3|18-35|K|P|s|台灣常見老樹，三出複葉，常被奉為神木。
+榕樹|Ficus microcarpa|1|F|3|18-35|T|P|cl|氣根垂落、樹冠寬大，常見的遮蔭大樹。
+雀榕|Ficus subpisocarpa|1|F|3|18-35|K|P|c|一年數次換葉，新芽嫩紅，鳥類喜愛其果。
+菩提樹|Ficus religiosa|1|F|3|18-35|T|P|cs|心形葉片尾端細長，佛教聖樹。
+大葉欖仁|Terminalia catappa|1|F|3|20-35|K|P|s|冬季葉片轉紅後落葉，耐鹽抗風。
+小葉欖仁|Terminalia mantaly|1|F|3|20-35|K|P|s|枝條層層平展如傘，常見行道樹。
+水黃皮|Pongamia pinnata|1|F|3|20-35|T|P|s|耐鹽耐濕的海岸樹種，春季開淡紫花。
+台灣肖楠|Calocedrus formosana|2|F|3|10-28|K|P|s|台灣特有針葉樹，木材芳香。
+紅檜|Chamaecyparis formosensis|3|P|2|5-24|K|P|s|台灣巨木，主要分布於中高海拔霧林帶。
+台灣杉|Taiwania cryptomerioides|3|P|2|5-24|K|P|s|以台灣命名的珍貴樹種，樹形高聳。
+落羽松|Taxodium distichum|1|F|2|8-32|K|P|s|秋冬葉片轉紅褐後落葉，耐水濕。
+龍柏|Juniperus chinensis 'Kaizuka'|1|F|3|8-32|T|P|c|枝條旋轉向上如龍，常做庭園樹。
+側柏|Platycladus orientalis|1|F|3|5-32|T|P|s|鱗片狀葉片排成扁平枝，常作綠籬。
+竹柏|Nageia nagi|1|P|3|15-30|K|P|s|葉片似竹，台灣原生，耐陰。
+黃金榕|Ficus microcarpa 'Golden Leaves'|1|F|3|18-35|T|P|c|新葉金黃，常修剪成球形或綠籬。
+春不老|Ardisia squamulosa|1|F|3|18-32|K|P|s|四季常綠，紅色漿果，常作綠籬。
+硃砂根|Ardisia crenata|1|H|3|15-28|K|P|s|年節盆栽，紅色果實成串下垂。
+斑葉海桐|Pittosporum tobira 'Variegatum'|1|F|3|12-30|K|P|c|葉緣乳白色斑紋，耐鹽耐修剪。
+厚葉石斑木|Rhaphiolepis indica var. umbellata|1|F|3|12-32|K|P|s|葉片厚實，春季開白花，耐鹽。
+六月雪|Serissa japonica|2|F|3|15-30|K|P|c|小葉白花，常做盆景。
+小蠟樹|Ligustrum sinense|1|F|3|10-32|T|P|c|常見綠籬，耐修剪，春季開白花。
+南美朱槿|Malvaviscus arboreus|1|F|3|20-35|K|P|c|紅色花朵永不展開，又稱懸鈴花。
+立鶴花|Thunbergia erecta|1|F|3|20-35|K|P|c|深紫色花朵，灌木型鄧伯花。
+黃蝦花|Pachystachys lutea|1|P|3|20-32|K|P|c|金黃色苞片如蝦，全年開花。
+紅蝦花|Justicia brandegeeana|1|P|3|20-32|K|P|c|花苞紅褐色如蝦子，耐陰。
+金葉擬美花|Pseuderanthemum carruthersii 'Golden'|1|F|3|20-35|K|P|c|葉片金黃，常作綠籬。
+紫葉槿|Hibiscus acetosella|1|F|3|20-32|K|P|cs|紫紅色楓狀葉片，觀葉灌木。
+山芙蓉|Hibiscus taiwanensis|1|F|3|15-32|K|P|cs|台灣特有木槿，秋季開白粉花。
+杜虹花|Callicarpa formosana|1|F|3|15-32|K|P|cs|秋季結紫色小果如珍珠，吸引鳥類。
+朴樹|Celtis sinensis|1|F|3|10-32|K|P|s|樹形優美，果實鳥類喜食，常見老樹。
+光蠟樹|Fraxinus griffithii|1|F|3|15-32|K|P|s|樹皮光滑，羽狀複葉，獨角仙喜愛棲息。
+烏桕|Triadica sebifera|1|F|3|10-32|T|P|s|秋冬葉片轉紅，種子可製蠟。
+無患子|Sapindus mukorossi|1|F|3|15-32|K|P|s|果皮含皂素可洗滌，秋季葉片轉黃。
+相思樹|Acacia confusa|1|F|4|18-35|K|P|s|台灣低海拔常見樹種，春季開黃色毛球花。
+流蘇樹|Chionanthus retusus|1|F|3|10-30|K|P|sg|春季滿樹白花如雪，又稱四月雪。
+桃花心木|Swietenia macrophylla|1|F|3|20-35|K|P|s|名貴木材，種子帶翅如竹蜻蜓旋轉飄落。
+黑板樹|Alstonia scholaris|1|F|3|20-35|T|P|s|生長快速的行道樹，花有濃烈氣味。
+台灣海桐|Pittosporum pentandrum|1|F|3|18-32|K|P|s|秋冬果實橙黃開裂露出紅色種子。
+桂竹|Phyllostachys reticulata|1|F|3|12-32|EK|P|d|台灣常見竹種，竹筍可食，稈可做竹器。
+孟宗竹|Phyllostachys edulis|2|F|3|10-30|EK|P|d|冬筍與春筍的來源，竹林景觀優美。
+麻竹|Dendrocalamus latiflorus|1|F|3|18-35|EK|P|dc|台灣主要筍用竹，夏季產麻竹筍。
+綠竹|Bambusa oldhamii|1|F|2|18-35|EK|P|dc|夏季綠竹筍清甜，可做涼筍沙拉。
+金絲竹|Bambusa vulgaris 'Vittata'|1|F|3|18-35|K|P|d|竹稈金黃帶綠條紋，觀賞價值高。
+佛肚竹|Bambusa ventricosa|1|F|3|18-35|K|P|d|竹節膨大如佛肚，常作盆景。
+四方竹|Chimonobambusa quadrangularis|2|P|3|12-28|EK|P|d|竹稈呈四方形，秋季產筍。
+觀音竹|Bambusa multiplex 'Fernleaf'|1|F|3|15-32|K|P|d|細葉叢生，常作綠籬與盆栽。
+蒲葦|Cortaderia selloana|1|F|4|10-32|K|P|d|銀白色大型羽狀花穗，觀賞草代表。
+粉黛亂子草|Muhlenbergia capillaris|1|F|4|12-32|K|P|ds|秋季粉紅色花穗如雲霧，網美景點常見。
+紫葉狼尾草|Cenchrus setaceus 'Rubrum'|1|F|4|15-35|K|P|d|紫紅色葉片與毛茸茸花穗，耐旱。
+細葉芒|Miscanthus sinensis 'Gracillimus'|1|F|3|10-32|K|P|d|細長葉片優雅，秋季抽穗。
+台灣芒|Miscanthus sinensis|1|F|4|10-32|K|P|ds|秋冬山坡上銀白芒花一片，台灣常見。
+藍羊茅|Festuca glauca|2|F|4|5-25|K|P|d|藍灰色細葉叢生，怕悶熱。
+斑葉芒|Miscanthus sinensis 'Zebrinus'|1|F|3|10-32|K|P|d|葉片有黃色橫斑如斑馬紋。
+地毯草|Axonopus compressus|1|F|3|18-35|K|P|do|台灣常見草坪草，耐陰耐踩。
+百慕達草|Cynodon dactylon|1|F|3|18-38|K|P|do|生長快速的草坪草，耐熱耐踩。
+韓國草|Zoysia tenuifolia|1|F|3|15-35|K|P|do|細葉草坪，質地柔軟，生長緩慢。
+斑葉文殊蘭|Crinum asiaticum 'Variegatum'|1|F|3|20-35|T|P|r|葉片有白色條紋，庭園觀葉。
+日本女貞|Ligustrum japonicum|1|F|3|10-32|T|P|c|葉片光亮，耐修剪的綠籬樹種。
+花葉蘆竹|Arundo donax 'Versicolor'|1|F|1|12-35|K|P|d|葉片有白色縱紋的大型觀賞草，可種在水邊。
+紫御谷|Cenchrus americanus 'Purple Majesty'|1|F|3|20-35|K|A|s|紫黑色葉片與香腸狀花穗，夏季花壇亮點。

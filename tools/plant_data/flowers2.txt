@@ -1,0 +1,94 @@
+# 花卉：球根花卉、開花灌木與蔓藤
+風信子|Hyacinthus orientalis|2|F|3|5-20|T|P|b|球根需冷藏處理才會開花，可水耕，香氣濃郁。
+水仙|Narcissus tazetta|1|F|3|5-20|T|P|b|農曆年應景花卉，可水耕栽培，全株有毒。
+喇叭水仙|Narcissus pseudonarcissus|2|F|3|5-20|T|P|b|黃色喇叭狀副冠，需冷涼才能開花。
+春番紅花|Crocus vernus|2|F|3|3-18|T|P|b|早春開花的小型球根，需低溫。
+葡萄風信子|Muscari armeniacum|1|F|3|5-20|T|P|b|藍紫色小花如葡萄串，耐寒好種。
+小蒼蘭|Freesia refracta|2|F|3|8-20|K|P|b|花香清甜，冬季種植、春天開花。
+陸蓮花|Ranunculus asiaticus|2|F|3|8-20|T|P|b|花瓣層層疊疊如玫瑰，冬春開花。
+銀蓮花|Anemone coronaria|2|F|3|8-20|T|P|b|花色鮮艷、花心深色，冬春盆花。
+孤挺花|Hippeastrum hybrids|1|F|3|18-30|T|P|bd|春季抽出粗壯花莖開喇叭大花，球根有毒。
+白花孤挺花|Hippeastrum 'Christmas Gift'|1|F|3|18-30|T|P|b|純白大花品種，室內盆栽觀賞性高。
+劍蘭|Gladiolus × hortulanus|1|F|3|15-28|T|P|b|花穗挺拔，常用於切花，需支柱。
+百子蓮|Agapanthus praecox|1|F|3|15-30|T|P|d|藍紫色花球高雅，夏季開花，耐旱。
+文殊蘭|Crinum asiaticum|1|F|3|20-35|T|P|dr|白色花朵夜間散發香氣，耐鹽耐旱。
+蜘蛛百合|Hymenocallis littoralis|1|F|2|20-32|T|P|b|白花瓣細長如蜘蛛腳，夏季開花芳香。
+紅花石蒜|Lycoris radiata|1|P|3|15-28|T|P|b|彼岸花，秋季先開花後長葉，全株有毒。
+金花石蒜|Lycoris aurea|1|P|3|15-28|T|P|b|台灣原生石蒜，夏末開金黃色花。
+蔥蘭|Zephyranthes candida|1|F|3|18-32|T|P|bd|雨後常大量開出白花，又稱風雨蘭。
+韭蘭|Zephyranthes carinata|1|F|3|18-32|T|P|bd|粉紅色花朵，雨後盛開，葉似韭菜。
+火球花|Scadoxus multiflorus|2|P|3|20-30|T|P|b|紅色球形花序如煙火，夏季開花。
+晚香玉|Agave amica|1|F|2|20-32|K|P|b|夜晚香氣最濃，夏季開白花，常做切花。
+薑荷花|Curcuma alismatifolia|2|P|2|22-32|K|P|b|粉紅色苞片如荷花，夏季盆花。
+火炬薑|Etlingera elatior|2|P|2|22-32|EK|P|d|巨大紅色花序如火炬，花苞可食用。
+紅薑花|Alpinia purpurata|1|P|2|22-32|K|P|d|紅色苞片鮮豔持久，常用於插花。
+月桃|Alpinia zerumbet|1|P|2|18-32|EK|P|d|台灣原生，葉片可包粽子，花串如珍珠。
+閉鞘薑|Hellenia speciosa|1|P|2|20-32|K|P|dc|莖呈螺旋狀，白花紅苞，喜濕潤。
+大花蔥|Allium giganteum|2|F|3|8-24|T|P|b|巨大紫色球形花序，觀賞用蔥屬植物。
+大岩桐|Sinningia speciosa|2|S|3|18-28|KI|P|be|絨質大花色彩濃豔，怕葉面淋水。
+非洲堇|Saintpaulia ionantha|2|S|3|18-26|KI|P|ed|最受歡迎的室內開花植物，葉插即可繁殖。
+口紅花|Aeschynanthus radicans|2|S|3|18-28|KI|P|c|花朵從花萼伸出如口紅，適合吊盆。
+金魚花|Nematanthus gregarius|2|S|3|18-28|KI|P|c|橙色小花形似金魚，葉片油亮。
+鯨魚花|Columnea gloriosa|2|S|3|18-28|KI|P|c|吊盆垂枝開紅色長形花。
+袋鼠花|Nematanthus wettsteinii|2|S|3|18-28|KI|P|c|花形膨大如袋鼠育兒袋，適合室內吊盆。
+春鬱金|Curcuma aromatica|1|P|2|22-32|E|P|b|春季先開花後長葉，根莖可入藥。
+聖誕紅|Euphorbia pulcherrima|2|F|3|18-28|T|P|c|紅色苞片是聖誕節象徵，需短日照才會轉色。
+麒麟花|Euphorbia milii|1|F|5|18-35|T|P|c|莖佈滿尖刺，幾乎全年開花，耐旱。
+九重葛|Bougainvillea spectabilis|1|F|4|20-35|K|P|cl|需控水與強光才會開花，色彩為苞片。
+平戶杜鵑|Rhododendron × pulchrum|2|P|2|12-28|T|P|cl|台灣春季最常見的杜鵑，需酸性土壤。
+皋月杜鵑|Rhododendron indicum|2|P|2|12-28|T|P|c|花期較晚的杜鵑，常做盆景。
+梔子花|Gardenia jasminoides|2|F|2|18-30|T|P|c|白花香氣濃郁，喜酸性土壤，葉黃需補鐵。
+含笑花|Magnolia figo|1|P|3|15-30|K|P|cl|花朵如香蕉般甜香，四季常綠。
+夜來香|Cestrum nocturnum|1|F|3|20-35|T|P|c|夜晚散發濃烈香氣，全株有毒。
+七里香|Murraya paniculata|1|F|3|18-35|K|P|cs|白花芳香，常修剪成綠籬，紅色果實。
+樹蘭|Aglaia odorata|1|F|3|18-32|K|P|cl|黃色小花如米粒，香氣宜人。
+玉蘭花|Magnolia × alba|1|F|3|18-32|K|P|gl|白色花朵香氣濃郁，常見路邊販售。
+番茉莉|Brunfelsia uniflora|1|P|3|18-30|T|P|c|花色由紫轉白，又稱雙色茉莉，有毒。
+鴛鴦茉莉|Brunfelsia pauciflora|1|P|3|18-30|T|P|c|紫白雙色花朵同時開放，香氣淡雅。
+緬梔|Plumeria rubra|1|F|5|20-35|T|P|c|雞蛋花，花香濃郁，冬季落葉休眠。
+金絲桃|Hypericum monogynum|1|F|3|15-30|T|P|cd|金黃色花朵雄蕊細長如金絲。
+桃金孃|Rhodomyrtus tomentosa|1|F|3|18-32|EK|P|s|粉紅花朵、紫黑漿果可食，耐貧瘠。
+野牡丹|Melastoma malabathricum|1|F|2|18-32|K|P|cs|台灣原生，紫紅色大花，喜酸性土壤。
+巴西野牡丹|Pleroma semidecandrum|1|F|2|18-30|K|P|c|紫色大花絢麗，花期長。
+炮仗花|Pyrostegia venusta|1|F|3|20-32|K|P|cl|冬春橙紅色花串如鞭炮，攀爬性強。
+軟枝黃蟬|Allamanda cathartica|1|F|3|20-35|T|P|c|金黃色喇叭花，蔓性強，汁液有毒。
+大鄧伯花|Thunbergia grandiflora|1|F|2|20-35|K|P|c|淡藍紫色大花，生長旺盛，需大型棚架。
+黑眼蘇珊|Thunbergia alata|1|F|2|18-32|K|A|s|橙黃色花朵中心黑色，適合小型攀爬。
+蒜香藤|Mansoa alliacea|1|F|3|20-35|K|P|c|紫色花朵搓揉葉片有蒜味，秋冬盛開。
+使君子|Combretum indicum|1|F|3|20-35|T|P|cs|花色由白轉紅，夜間芳香，種子有毒。
+雲南黃馨|Jasminum mesnyi|1|F|3|12-28|K|P|cl|枝條下垂，冬末開黃花，又稱迎春花。
+多花素馨|Jasminum polyanthum|1|F|3|12-28|K|P|c|春季開滿白色小花，香氣濃郁。
+飄香藤|Mandevilla sanderi|1|F|3|20-32|T|P|c|粉紅喇叭花亮麗，適合攀爬或吊盆。
+牽牛花|Ipomoea nil|1|F|3|18-32|T|A|s|清晨開花，中午凋謝，種子有毒。
+槭葉牽牛|Ipomoea cairica|1|F|3|20-35|T|P|cs|五爪金龍，生長迅速的蔓藤。
+蔦蘿|Ipomoea quamoclit|1|F|3|20-32|T|A|s|羽狀細葉、紅色星形小花，適合小型攀架。
+珊瑚藤|Antigonon leptopus|1|F|4|20-35|K|P|cs|粉紅色花串如珊瑚，耐旱耐熱。
+金銀花|Lonicera japonica|1|F|3|12-30|T|P|cl|花色由白轉黃，可泡茶，蔓性強。
+凌霄花|Campsis grandiflora|1|F|3|15-32|T|P|cl|橙紅色喇叭花，攀附性強。
+鐵線蓮|Clematis × jackmanii|3|F|2|10-24|T|P|cl|藤本皇后，花朵大而華麗，喜根部涼爽。
+藍花西番蓮|Passiflora caerulea|1|F|3|15-30|T|P|cs|花朵構造奇特，觀賞用西番蓮。
+木香花|Rosa banksiae|1|F|3|12-30|K|P|cl|無刺藤本薔薇，春季開滿小花。
+迷你玫瑰|Rosa chinensis 'Minima'|2|F|2|15-28|K|P|c|小型盆栽玫瑰，適合陽台。
+藤本月季|Rosa 'Climbing'|2|F|2|15-28|K|P|c|可攀爬拱門或圍籬的玫瑰品種。
+茶梅|Camellia sasanqua|1|P|3|12-28|K|P|c|秋冬開花，花瓣散落如櫻，可做綠籬。
+山櫻花|Prunus campanulata|1|F|3|10-28|K|P|sg|台灣原生山櫻花，早春開桃紅色花。
+吉野櫻|Prunus × yedoensis|3|F|3|5-25|K|P|g|日本代表櫻花，需冷涼氣候。
+八重櫻|Prunus serrulata 'Kanzan'|2|F|3|8-26|K|P|g|重瓣櫻花，花朵豐滿。
+桃花|Prunus persica 'Ornamental'|2|F|3|10-28|T|P|g|觀賞用桃花，春節前後開花。
+臘梅|Chimonanthus praecox|1|F|3|5-28|T|P|sg|寒冬開黃色蠟質花朵，香氣清幽。
+連翹|Forsythia suspensa|1|F|3|8-28|K|P|cl|早春先開黃花後長葉。
+丁香花|Syringa vulgaris|3|F|3|5-24|K|P|cg|紫色花序香氣濃郁，需冷涼氣候。
+華北紫丁香|Syringa oblata|3|F|3|5-24|K|P|c|花序大而芳香，宜高冷地區。
+圓錐繡球|Hydrangea paniculata|2|F|2|10-28|T|P|c|圓錐形白色花序，比一般繡球耐日照。
+櫟葉繡球|Hydrangea quercifolia|2|P|2|10-28|T|P|c|葉片似橡樹葉，秋季轉紅。
+麻葉繡球|Spiraea cantoniensis|1|F|3|10-28|K|P|cd|白色小花成團，春季開滿枝頭。
+珍珠繡線菊|Spiraea thunbergii|1|F|3|8-28|K|P|c|細枝上開滿白花如珍珠。
+醉蝶花|Cleome hassleriana|1|F|3|18-32|K|A|s|花形如蝴蝶飛舞，夏季花壇常見。
+紫茉莉|Mirabilis jalapa|1|F|3|18-32|T|P|sb|傍晚開花，又稱煮飯花，種子有毒。
+蕾絲花|Orlaya grandiflora|1|F|3|10-24|K|A|s|白色蕾絲般花朵，適合自然風花園。
+星辰花|Limonium sinuatum|1|F|4|10-25|K|A|s|花萼色彩持久，是常見乾燥花。
+千鳥草|Consolida regalis|2|F|3|8-22|T|A|s|高挑藍紫花穗，冬春開花。
+紅花玉芙蓉|Leucophyllum frutescens|1|F|5|18-35|K|P|c|銀灰葉片配紫花，極耐旱，雨後開花。
+重瓣矮牽牛|Petunia × atkinsiana 'Double'|2|F|2|12-28|K|A|sc|重瓣花朵如玫瑰，怕雨淋。
+小花矮牽牛|Calibrachoa × hybrida|1|F|2|12-28|K|P|c|百萬小鈴，小花繁多，適合吊盆。
+天使花|Angelonia angustifolia|1|F|3|20-35|K|P|cs|夏季耐熱草花，花朵如小天使。
