@@ -115,7 +115,7 @@ flowchart LR
 
 | 節點 | 接線 |
 | --- | --- |
-| `climate_node` 溫控 | DHT22 DATA → GPIO23、風扇繼電器 IN → GPIO4、加熱（PTC）繼電器 IN → GPIO5 |
+| `climate_node` 溫控 | DHT22 DATA → GPIO23、風扇繼電器 IN → GPIO5、加熱（PTC）繼電器 IN → GPIO4 |
 | `soil_node` 澆水 | 土壤感測器 AOUT → GPIO34、水泵繼電器 IN → GPIO26 |
 
 繼電器模組若是低電位觸發，把 `main.py` 的 `RELAY_ON` 改成 `0`。

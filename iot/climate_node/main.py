@@ -1,5 +1,5 @@
 # ESP32 #1：DHT22 溫濕度 + 風扇、加熱兩組繼電器
-# 接線：DHT22 DATA → GPIO23；風扇繼電器 IN → GPIO4；加熱（PTC）繼電器 IN → GPIO5
+# 接線：DHT22 DATA → GPIO23；風扇繼電器 IN → GPIO5；加熱（PTC）繼電器 IN → GPIO4
 # 每分鐘把氣溫、空氣濕度同步到 Supabase，並取回這塊裝置的門檻值（網站「自動控制」可指定由哪一株植物的生長計畫控制）
 import time
 
@@ -9,8 +9,8 @@ import machine
 import common
 
 DHT_PIN = 23
-FAN_PIN = 4
-HEATER_PIN = 5
+FAN_PIN = 5
+HEATER_PIN = 4
 RELAY_ON = 1                # 高電位觸發的繼電器模組；若是低電位觸發（IN 接 GND 才動作）改成 0
 READ_INTERVAL = 60          # 秒：讀取感測器、同步、控制
 
