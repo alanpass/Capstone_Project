@@ -399,3 +399,4 @@ table.stages .stage-name small { display: block; color: var(--muted); font-weigh
 .related-card img { aspect-ratio: 4 / 3; object-fit: cover; width: 100%; }
 .related-card span { display: grid; padding: 10px 14px; }
 .related-card small { color: var(--muted); }
+.grid-3 > .card .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
