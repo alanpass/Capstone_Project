@@ -3,6 +3,7 @@
 //   - 生長計畫門檻：每株植物 5 個生長階段的門檻（plants.stage_thresholds）
 //   - 手動門檻：沒指定植物的裝置使用（thresholds 資料表）
 // 每塊裝置實際套用哪一組由資料庫的 effective_thresholds() 決定，ESP32 與本頁看到的一定相同。
+import { CONNECTION_TEXT, connectionOf, timeAgo } from "../devices.js";
 import { listPlants, saveStageThresholds, suggestStageThresholds } from "../garden.js";
 import { STAGES, stageKeyFor, stageName, stageRange } from "../growth.js";
 import { requireUser } from "../session.js";
@@ -35,11 +36,8 @@ function plantOptions(selectedId) {
 }
 
 function seenText(iso) {
-  if (!iso) return `<span class="badge">尚未連線</span>`;
-  const minutes = Math.round((Date.now() - new Date(iso)) / 60000);
-  if (minutes <= 3) return `<span class="badge live">連線中</span>`;
-  const ago = minutes < 60 ? `${minutes} 分鐘前` : minutes < 1440 ? `${Math.round(minutes / 60)} 小時前` : new Date(iso).toLocaleDateString("zh-TW");
-  return `<span class="seen">上次同步：${ago}</span>`;
+  const state = connectionOf(iso);
+  return `<span class="conn ${state}">${CONNECTION_TEXT[state]}</span>${iso ? `<span class="seen">上次同步：${timeAgo(iso)}</span>` : ""}`;
 }
 
 function appliedText(e) {
@@ -64,7 +62,7 @@ function renderDevices() {
   }
   box.innerHTML = `<div class="device-list">${devices.map((d) => `
     <div class="device-item" data-id="${esc(d.id)}">
-      <div class="head"><strong><i class="fa-solid fa-microchip"></i> ${esc(d.name)}</strong>${seenText(d.last_seen_at)}<span class="spacer"></span>
+      <div class="head"><h3><i class="fa-solid fa-microchip"></i> ${esc(d.name)}</h3>${seenText(d.last_seen_at)}<span class="spacer"></span>
         <button class="btn ghost sm" data-action="rename">改名</button>
         <button class="btn ghost sm" data-action="token"><i class="fa-solid fa-key"></i> 權杖</button>
         <button class="btn sm danger icon-btn" data-action="delete" aria-label="刪除 ${esc(d.name)}"><i class="fa-solid fa-trash"></i></button></div>

@@ -12,7 +12,7 @@ const PRIVATE_NAV = [
   { label: "智慧設備", icon: "fa-microchip", items: [
     { href: "status.html", label: "裝置狀態", desc: "是否在線、風扇／加熱／水泵運轉情形", icon: "fa-tower-broadcast" },
     { href: "sensors.html", label: "環境數據", desc: "溫度、濕度、土壤濕度圖表", icon: "fa-chart-line" },
-    { href: "device.html", label: "自動控制設定", desc: "裝置管理哪株植物、門檻值", icon: "fa-sliders" },
+    { href: "device.html", label: "自動控制", desc: "裝置管理哪株植物、門檻值", icon: "fa-sliders" },
   ] },
   { href: "plants.html", label: "植物百科", icon: "fa-book-open", also: ["plant.html"] },
   { label: "帳號", icon: "fa-circle-user", items: [

@@ -89,12 +89,13 @@ async function load() {
   try {
     const { devices, events } = await loadDeviceOverview();
     if (!devices.length) {
-      $("summary").innerHTML = "";
+      $("summaryCard").classList.add("hidden");
       $("devices").innerHTML = `<section class="card">${emptyHtml("fa-microchip", "還沒有登記裝置",
         `<a class="btn" href="device.html" style="margin-top:12px"><i class="fa-solid fa-plus"></i> 到自動控制新增裝置</a>`)}</section>`;
       $("events").innerHTML = "";
       return;
     }
+    $("summaryCard").classList.remove("hidden");
     const online = devices.filter((d) => d.connection === "online").length;
     const running = devices.flatMap((d) => (d.connection === "online" ? Object.entries(d.status?.relays ?? {}) : []))
       .filter(([, on]) => on).map(([key]) => RELAY_LABELS[key]?.[1] ?? key);

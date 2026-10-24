@@ -234,7 +234,7 @@ main { flex: 1; width: 100%; max-width: 1200px; margin: 0 auto; padding: 32px 24
 .cat-chip:hover, .quick-chip:hover { border-color: var(--sage); }
 .cat-chip.active { background: var(--green-700); border-color: var(--green-700); color: #fff; }
 .cat-chip.active i, .cat-chip.active small { color: #fff; }
-.quick-chip { font-size: 0.85rem; padding: 6px 12px; background: var(--paper); }
+.quick-chip { font-size: 0.85rem; padding: 6px 12px; background: var(--paper); border-color: transparent; }
 .quick-chip.active { background: var(--ok-bg); border-color: var(--green-700); color: var(--green-900); font-weight: 500; }
 .cat-desc { color: var(--green-900); font-size: 0.92rem; margin-bottom: 6px; min-height: 0; }
 .cat-desc:empty { display: none; }
@@ -319,15 +319,16 @@ table.data th { color: var(--muted); font-weight: 500; }
 
 /* ---------- Auto control ---------- */
 .device-list { display: grid; gap: 12px; }
-.device-item { border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 14px 16px; }
+.device-item { background: var(--paper); border-radius: var(--radius-sm); padding: 16px 18px; }
+.device-item h3 { font-size: 1.05rem; margin: 0; }
 .device-item .head { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; }
-.device-item .seen { color: var(--muted); font-size: 0.85rem; }
+.device-item .seen, .device-item .conn + .seen { color: var(--muted); font-size: 0.85rem; }
 .device-item .controls { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 10px; align-items: end; margin-top: 12px; }
 .device-item .applied { margin-top: 10px; font-size: 0.92rem; }
 .device-item .token { margin-top: 10px; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
-.device-item .token code { background: var(--paper); padding: 6px 10px; border-radius: 8px; word-break: break-all; }
+.device-item .token code { background: var(--card); padding: 6px 10px; border-radius: 8px; word-break: break-all; }
 .device-add { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0 12px; align-items: end;
-  border: 1px dashed var(--line); border-radius: var(--radius-sm); padding: 14px 16px; margin-bottom: 12px; }
+  background: var(--ok-bg); border-radius: var(--radius-sm); padding: 16px 18px; margin-bottom: 12px; }
 .device-add .row { margin-bottom: 18px; }
 @media (max-width: 560px) { .device-item .controls { grid-template-columns: 1fr; } }
 table.stages { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
@@ -341,17 +342,17 @@ table.stages .stage-name small { display: block; color: var(--muted); font-weigh
 .muted-note { color: var(--muted); font-size: 0.85rem; margin-top: 8px; }
 .device-status h3 { font-size: 1rem; margin-bottom: 10px; }
 .device-status.offline, .device-status.never { opacity: 0.85; }
-.conn { display: inline-flex; align-items: center; gap: 6px; font-size: 0.85rem; font-weight: 500; padding: 3px 10px; border-radius: 999px; }
+.conn { display: inline-flex; align-items: center; gap: 6px; font-size: 0.8rem; font-weight: 500; padding: 4px 10px; border-radius: 999px; }
 .conn::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: currentColor; }
 .conn.online { background: var(--ok-bg); color: #2f7a43; }
 .conn.online::before { animation: pulse 1.6s infinite; }
 .conn.unstable { background: var(--warn-bg); color: var(--warn); }
 .conn.offline, .conn.never { background: var(--danger-bg); color: var(--danger); }
 .relays { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
-.relay { display: flex; align-items: center; gap: 10px; padding: 14px 16px; border-radius: var(--radius-sm); background: var(--paper); border: 1px solid var(--line); }
+.relay { display: flex; align-items: center; gap: 10px; padding: 14px 16px; border-radius: var(--radius-sm); background: var(--paper); }
 .relay i { font-size: 1.4rem; color: var(--muted); width: 1.5em; text-align: center; }
-.relay strong { margin-left: auto; font-size: 0.9rem; color: var(--muted); }
-.relay.on { background: var(--ok-bg); border-color: var(--sage); }
+.relay strong { margin-left: auto; font-size: 0.85rem; font-weight: 500; color: var(--muted); padding: 2px 10px; border-radius: 999px; background: var(--card); }
+.relay.on { background: var(--ok-bg); box-shadow: inset 0 0 0 1px var(--sage); }
 .relay.on i, .relay.on strong { color: var(--green-700); }
 .relay.on.stale { filter: grayscale(0.7); }
 .applied-box { background: var(--paper); border-radius: var(--radius-sm); padding: 10px 14px; font-size: 0.92rem; display: grid; gap: 4px; margin-bottom: 12px; }
@@ -387,9 +388,6 @@ table.stages .stage-name small { display: block; color: var(--muted); font-weigh
 .device-mini small { grid-column: 2; color: var(--muted); font-size: 0.82rem; }
 
 /* ---------- 植物詳細頁 ---------- */
-.crumbs { font-size: 0.88rem; color: var(--muted); margin-bottom: 14px; }
-.crumbs a { color: var(--green-700); text-decoration: none; }
-.crumbs a:hover { text-decoration: underline; }
 .img-credit { font-size: 0.78rem; color: var(--muted); margin-top: 6px; }
 .img-credit a { color: inherit; }
 .hero-placeholder { aspect-ratio: 4 / 3; border-radius: var(--radius-sm); background: var(--sage-100); display: grid; place-items: center; font-size: 4rem; color: var(--sage); }
@@ -404,3 +402,5 @@ table.stages .stage-name small { display: block; color: var(--muted); font-weigh
   .cat-chips { flex-wrap: nowrap; overflow-x: auto; margin: 0 -16px 14px; padding: 0 16px 6px; scrollbar-width: none; }
   .cat-chip { flex-shrink: 0; }
 }
+.badge-link { text-decoration: none; }
+.badge-link:hover { background: var(--green-700); color: #fff; }

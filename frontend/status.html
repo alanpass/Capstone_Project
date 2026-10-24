@@ -16,11 +16,11 @@
 <main>
   <div class="page-head row"><div><h1>裝置狀態</h1><p>查看每塊 ESP32 是否在線、風扇／加熱／水泵目前有沒有運轉，以及最近做了哪些動作。</p></div><span class="spacer"></span>
     <button class="btn secondary" id="refresh"><i class="fa-solid fa-rotate"></i> 重新整理</button></div>
-  <div class="stats" id="summary" style="margin-bottom:20px"></div>
+  <section class="card" id="summaryCard" style="margin-bottom:20px"><h2><i class="fa-solid fa-gauge-high"></i> 總覽 <span class="badge live">Live</span></h2><div class="stats" id="summary"></div></section>
   <div class="stack" id="devices"></div>
   <section class="card" style="margin-top:20px">
     <div class="row" style="margin-bottom:12px"><h2 style="margin:0"><i class="fa-solid fa-clock-rotate-left"></i> 控制紀錄</h2><span class="spacer"></span>
-      <a class="btn ghost sm" href="device.html"><i class="fa-solid fa-sliders"></i> 調整門檻與裝置</a></div>
+      <a class="btn ghost sm" href="device.html"><i class="fa-solid fa-sliders"></i> 前往自動控制</a></div>
     <div id="events"></div>
   </section>
   <p class="muted-note" id="updated" style="margin-top:12px"></p>

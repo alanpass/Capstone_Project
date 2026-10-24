@@ -98,12 +98,11 @@ try {
     const related = catalog.filter((p) => p.cat === plant.cat && p.id !== plant.id && p.img)
       .sort(() => Math.random() - 0.5).slice(0, 4);
     content.innerHTML = `
-      <nav class="crumbs"><a href="plants.html">植物百科</a> › <a href="plants.html?cat=${cat.key}">${esc(cat.name)}</a> › ${esc(plant.name)}</nav>
       <section class="card detail-hero" style="margin-bottom:20px">
         <div>${plant.img ? `<img src="${esc(plant.img)}" alt="${esc(plant.name)}" referrerpolicy="no-referrer">` : `<div class="hero-placeholder"><i class="fa-solid ${cat.icon}"></i></div>`}
           ${imageCredit(plant)}</div>
         <div class="stack">
-          <div><span class="badge"><i class="fa-solid ${cat.icon}"></i> ${esc(cat.name)}</span></div>
+          <div><a class="badge badge-link" href="plants.html?cat=${cat.key}"><i class="fa-solid ${cat.icon}"></i> ${esc(cat.name)}</a></div>
           <h1 style="font-family:var(--serif);color:var(--green-900);font-size:2rem">${esc(plant.name)}</h1>
           ${plant.sci ? `<p class="sci" style="font-style:italic;color:var(--muted);margin-top:-8px">${esc(plant.sci)}</p>` : ""}
           <div class="row" style="gap:6px">
