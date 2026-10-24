@@ -26,11 +26,9 @@
     </form>
   </div>
   <div class="card" style="max-width:640px;margin-top:20px">
-    <h2><i class="fa-solid fa-microchip"></i> 裝置權杖</h2>
-    <p style="color:var(--muted)">把這組權杖填到 ESP32 的 <code>config.py</code>（<code>DEVICE_TOKEN</code>），裝置就能上傳數據並讀取你在「自動控制」頁設定的門檻值。權杖外洩時請重新產生，舊權杖會立即失效。</p>
-    <div class="row" style="margin-top:12px"><code id="token" style="background:var(--paper);padding:8px 12px;border-radius:8px;word-break:break-all">—</code>
-      <button class="btn secondary sm" id="copyToken"><i class="fa-regular fa-copy"></i> 複製</button>
-      <button class="btn ghost sm" id="newToken"><i class="fa-solid fa-rotate"></i> 重新產生</button></div>
+    <h2><i class="fa-solid fa-microchip"></i> ESP32 裝置</h2>
+    <p style="color:var(--muted)">每塊 ESP32 有各自的裝置權杖，並可指定要管理哪一株植物。請到「自動控制」頁的「我的裝置」新增或管理。</p>
+    <a class="btn secondary sm" href="device.html" style="margin-top:12px"><i class="fa-solid fa-sliders"></i> 前往自動控制</a>
   </div>
 </main>
 <script type="module" src="assets/js/pages/profile.js"></script>

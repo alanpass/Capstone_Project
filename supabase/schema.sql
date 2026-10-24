@@ -3,7 +3,7 @@
 -- 使用方式：Supabase Dashboard → SQL Editor → 貼上整份檔案 → Run
 -- 可重複執行（會先移除舊的同名物件）。
 -- 所有資料表都啟用 Row Level Security：使用者只能存取自己的資料。
--- ESP32 不登入，而是用「裝置權杖」呼叫 device_sync() 上傳數據並取得門檻值。
+-- ESP32 不登入，而是用各自的「裝置權杖」呼叫 device_sync() 上傳數據並取得該裝置的門檻值。
 -- =====================================================================
 
 -- ---------- 使用者資料 ----------
@@ -145,18 +145,68 @@ create table if not exists public.thresholds (
   check (soil_min between 0 and 100)
 );
 
--- 控制模式：manual = 使用上面的手動門檻；plan = 依指定植物目前的生長階段，自動套用該階段門檻
-alter table public.thresholds add column if not exists mode text not null default 'manual';
-alter table public.thresholds add column if not exists plant_id uuid references public.plants (id) on delete set null;
-alter table public.thresholds drop constraint if exists thresholds_mode_check;
-alter table public.thresholds add constraint thresholds_mode_check check (mode in ('manual', 'plan'));
-
--- ---------- 裝置權杖（每位使用者一組，可重新產生） ----------
+-- ---------- 裝置（每塊 ESP32 一組權杖，可各自指定由哪一株植物的生長計畫控制） ----------
+--   plant_id 為 null → 使用上面的手動門檻；指定植物 → 依該植物目前的生長階段套用 plants.stage_thresholds
 create table if not exists public.devices (
-  user_id    uuid primary key default auth.uid() references auth.users (id) on delete cascade,
-  token      uuid not null unique default gen_random_uuid(),
-  created_at timestamptz not null default now()
+  id           uuid primary key default gen_random_uuid(),
+  user_id      uuid not null default auth.uid() references auth.users (id) on delete cascade,
+  name         text not null default 'ESP32' check (char_length(name) between 1 and 30),
+  token        uuid not null unique default gen_random_uuid(),
+  plant_id     uuid references public.plants (id) on delete set null,
+  last_seen_at timestamptz,
+  created_at   timestamptz not null default now()
 );
+
+-- 舊版升級：原本每位使用者只有一組權杖（以 user_id 為主鍵），控制模式存在 thresholds。
+-- 保留原權杖（已燒進 ESP32 的 config.py 不用改），並把「依生長計畫」的設定搬到該裝置上。
+alter table public.devices add column if not exists id uuid not null default gen_random_uuid();
+alter table public.devices add column if not exists name text not null default 'ESP32';
+alter table public.devices add column if not exists plant_id uuid references public.plants (id) on delete set null;
+alter table public.devices add column if not exists last_seen_at timestamptz;
+alter table public.devices alter column user_id set default auth.uid();
+alter table public.devices alter column user_id set not null;
+do $$
+begin
+  if exists (
+    select 1 from pg_constraint c join pg_attribute a on a.attrelid = c.conrelid and a.attnum = any (c.conkey)
+    where c.conrelid = 'public.devices'::regclass and c.contype = 'p' and a.attname = 'user_id'
+  ) then
+    alter table public.devices drop constraint devices_pkey;
+    alter table public.devices add primary key (id);
+    alter table public.devices add constraint devices_name_check check (char_length(name) between 1 and 30);
+    update public.devices set name = '溫控節點';
+  end if;
+  if exists (select 1 from information_schema.columns
+             where table_schema = 'public' and table_name = 'thresholds' and column_name = 'plant_id') then
+    execute $m$
+      update public.devices d set plant_id = t.plant_id
+      from public.thresholds t
+      where t.user_id = d.user_id and t.mode = 'plan' and d.plant_id is null
+    $m$;
+    drop policy if exists "own thresholds" on public.thresholds;
+    alter table public.thresholds drop column plant_id, drop column mode;
+  end if;
+end;
+$$;
+create index if not exists devices_user_idx on public.devices (user_id, created_at);
+
+create or replace function public.limit_devices()
+returns trigger
+language plpgsql
+security definer
+set search_path = ''
+as $$
+begin
+  if (select count(*) from public.devices where user_id = new.user_id) >= 10 then
+    raise exception '每個帳號最多 10 塊裝置' using errcode = '54000';
+  end if;
+  return new;
+end;
+$$;
+drop trigger if exists limit_devices on public.devices;
+create trigger limit_devices
+  before insert on public.devices
+  for each row execute function public.limit_devices();
 
 -- ---------- 感測數據 ----------
 create table if not exists public.sensor_readings (
@@ -168,6 +218,8 @@ create table if not exists public.sensor_readings (
   humidity    real check (humidity between 0 and 100)
 );
 create index if not exists sensor_readings_user_idx on public.sensor_readings (user_id, recorded_at desc);
+alter table public.sensor_readings add column if not exists device_id uuid references public.devices (id) on delete set null;
+create index if not exists sensor_readings_device_idx on public.sensor_readings (device_id, recorded_at desc);
 
 -- =====================================================================
 -- Row Level Security
@@ -207,16 +259,35 @@ create policy "own ai requests" on public.ai_requests
 drop policy if exists "own thresholds" on public.thresholds;
 create policy "own thresholds" on public.thresholds
   for all to authenticated
-  using (user_id = (select auth.uid()))
+  using (user_id = (select auth.uid())) with check (user_id = (select auth.uid()));
+
+drop policy if exists "read own device" on public.devices;
+drop policy if exists "read own devices" on public.devices;
+create policy "read own devices" on public.devices
+  for select to authenticated
+  using (user_id = (select auth.uid()));
+
+-- 新增裝置：只能指定自己的植物（每人最多 10 塊由 limit_devices 觸發器檢查）
+drop policy if exists "add own devices" on public.devices;
+create policy "add own devices" on public.devices
+  for insert to authenticated
   with check (
     user_id = (select auth.uid())
-    -- 只能指定自己的植物來控制裝置
     and (plant_id is null or exists (select 1 from public.plants p where p.id = plant_id and p.user_id = (select auth.uid())))
   );
 
-drop policy if exists "read own device" on public.devices;
-create policy "read own device" on public.devices
-  for select to authenticated
+drop policy if exists "edit own devices" on public.devices;
+create policy "edit own devices" on public.devices
+  for update to authenticated
+  using (user_id = (select auth.uid()))
+  with check (
+    user_id = (select auth.uid())
+    and (plant_id is null or exists (select 1 from public.plants p where p.id = plant_id and p.user_id = (select auth.uid())))
+  );
+
+drop policy if exists "delete own devices" on public.devices;
+create policy "delete own devices" on public.devices
+  for delete to authenticated
   using (user_id = (select auth.uid()));
 
 drop policy if exists "read own readings" on public.sensor_readings;
@@ -233,7 +304,10 @@ create policy "delete own readings" on public.sensor_readings
 grant usage on schema public to anon, authenticated;
 grant select, insert, update, delete on public.profiles, public.plants, public.plant_guides,
   public.ai_requests, public.thresholds to authenticated;
-grant select on public.devices to authenticated;
+revoke all on public.devices from authenticated;
+-- 權杖由資料庫產生，網站只能改名稱與控制的植物（重新產生權杖請用 regenerate_device_token）
+grant select, delete on public.devices to authenticated;
+grant insert (name, plant_id), update (name, plant_id) on public.devices to authenticated;
 grant select, delete on public.sensor_readings to authenticated;
 revoke all on public.profiles, public.plants, public.plant_guides, public.ai_requests,
   public.thresholds, public.devices, public.sensor_readings from anon;
@@ -242,33 +316,36 @@ revoke all on public.profiles, public.plants, public.plant_guides, public.ai_req
 -- 函式
 -- =====================================================================
 
--- 取得（或重新產生）目前使用者的裝置權杖，填到 ESP32 的 config.py
-create or replace function public.device_token(regenerate boolean default false)
+
+-- 舊版函式（每人一組權杖、單一控制模式），已由下方的裝置函式取代
+drop function if exists public.device_token(boolean);
+drop function if exists public.my_effective_thresholds();
+drop function if exists public.effective_thresholds(uuid);
+
+-- 重新產生某塊裝置的權杖（權杖外洩時使用，舊權杖立即失效）
+create or replace function public.regenerate_device_token(p_device uuid)
 returns uuid
 language plpgsql
 security definer
 set search_path = ''
 as $$
 declare
-  uid uuid := auth.uid();
   result uuid;
 begin
-  if uid is null then
-    raise exception 'not signed in' using errcode = '28000';
+  update public.devices set token = gen_random_uuid()
+  where id = p_device and user_id = auth.uid()
+  returning token into result;
+  if result is null then
+    raise exception 'device not found' using errcode = 'P0002';
   end if;
-  insert into public.devices (user_id) values (uid) on conflict (user_id) do nothing;
-  if regenerate then
-    update public.devices set token = gen_random_uuid(), created_at = now() where user_id = uid;
-  end if;
-  select token into result from public.devices where user_id = uid;
   return result;
 end;
 $$;
 
--- 計算某位使用者「此刻」應套用的門檻（內部使用，不開放直接呼叫）：
---   plan 模式且指定的植物有該階段門檻 → 用生長計畫的門檻；否則用手動門檻；都沒有則用預設值
-create or replace function public.effective_thresholds(uid uuid)
-returns json
+-- 計算某塊裝置「此刻」應套用的門檻（內部使用，不開放直接呼叫）：
+--   裝置指定的植物有該階段門檻 → 用生長計畫的門檻；否則用手動門檻；都沒有則用預設值
+create or replace function public.effective_thresholds(uid uuid, p_plant uuid)
+returns jsonb
 language plpgsql
 stable
 security definer
@@ -281,17 +358,15 @@ declare
   stage text;
   s jsonb;
 begin
-  select * into t from public.thresholds where user_id = uid;
-
-  if t.mode = 'plan' and t.plant_id is not null then
-    select * into p from public.plants where id = t.plant_id and user_id = uid;
+  if p_plant is not null then
+    select * into p from public.plants where id = p_plant and user_id = uid;
     if found then
       -- 以台灣日期計算第幾天，與網站顯示一致
       day := (now() at time zone 'Asia/Taipei')::date - p.start_date + 1;
       stage := public.growth_stage(day, p.total_days);
       s := p.stage_thresholds -> stage;
       if s is not null then
-        return json_build_object(
+        return jsonb_build_object(
           'tempMin',  (s ->> 'tempMin')::real,
           'tempMax',  (s ->> 'tempMax')::real,
           'humidMin', (s ->> 'humidMin')::real,
@@ -307,7 +382,8 @@ begin
     end if;
   end if;
 
-  return json_build_object(
+  select * into t from public.thresholds where user_id = uid;
+  return jsonb_build_object(
     'tempMin',  coalesce(t.temp_min, 20),
     'tempMax',  coalesce(t.temp_max, 30),
     'humidMin', coalesce(t.humid_min, 40),
@@ -318,18 +394,22 @@ begin
 end;
 $$;
 
--- 網站顯示「裝置目前套用的門檻」
-create or replace function public.my_effective_thresholds()
-returns json
+-- 網站顯示「每塊裝置目前套用的門檻」，與 ESP32 拿到的一定相同
+create or replace function public.my_device_thresholds()
+returns jsonb
 language sql
 stable
 security definer
 set search_path = ''
 as $$
-  select public.effective_thresholds(auth.uid())
+  select coalesce(jsonb_agg(
+    public.effective_thresholds(d.user_id, d.plant_id) || jsonb_build_object('deviceId', d.id)
+    order by d.created_at), '[]'::jsonb)
+  from public.devices d
+  where d.user_id = auth.uid()
 $$;
 
--- ESP32 每個週期呼叫一次：上傳數據（可只傳部分欄位）並取得門檻值
+-- ESP32 每個週期呼叫一次：上傳數據（可只傳部分欄位）並取得這塊裝置的門檻值
 create or replace function public.device_sync(
   p_token uuid,
   p_soil real default null,
@@ -342,40 +422,43 @@ security definer
 set search_path = ''
 as $$
 declare
-  uid uuid;
+  d public.devices;
 begin
-  select user_id into uid from public.devices where token = p_token;
-  if uid is null then
+  select * into d from public.devices where token = p_token;
+  if not found then
     raise exception 'invalid device token' using errcode = '28000';
   end if;
+  update public.devices set last_seen_at = now() where id = d.id;
 
   if coalesce(p_soil, p_temperature, p_humidity) is not null then
-    -- 防止裝置程式錯誤狂送資料：同一使用者每分鐘最多 6 筆（兩塊 ESP32 各每分鐘 1 筆綽綽有餘）
+    -- 防止裝置程式錯誤狂送資料：每塊裝置每分鐘最多 3 筆（正常是每分鐘 1 筆）
     if (
       select count(*) from public.sensor_readings
-      where user_id = uid and recorded_at > now() - interval '1 minute'
-    ) < 6 then
-      insert into public.sensor_readings (user_id, soil, temperature, humidity)
+      where device_id = d.id and recorded_at > now() - interval '1 minute'
+    ) < 3 then
+      insert into public.sensor_readings (user_id, device_id, soil, temperature, humidity)
       values (
-        uid,
+        d.user_id,
+        d.id,
         case when p_soil between 0 and 100 then p_soil end,
         case when p_temperature between -40 and 80 then p_temperature end,
         case when p_humidity between 0 and 100 then p_humidity end
       );
       -- 只保留 90 天，免費方案的空間就夠用
-      delete from public.sensor_readings where user_id = uid and recorded_at < now() - interval '90 days';
+      delete from public.sensor_readings where user_id = d.user_id and recorded_at < now() - interval '90 days';
     end if;
   end if;
 
-  return public.effective_thresholds(uid);
+  return public.effective_thresholds(d.user_id, d.plant_id)::json;
 end;
 $$;
 
-revoke all on function public.device_token(boolean) from public, anon;
-grant execute on function public.device_token(boolean) to authenticated;
+revoke all on function public.regenerate_device_token(uuid) from public, anon;
+grant execute on function public.regenerate_device_token(uuid) to authenticated;
 revoke all on function public.device_sync(uuid, real, real, real) from public;
 grant execute on function public.device_sync(uuid, real, real, real) to anon, authenticated;
 revoke all on function public.handle_new_user() from public, anon, authenticated;
-revoke all on function public.effective_thresholds(uuid) from public, anon, authenticated;
-revoke all on function public.my_effective_thresholds() from public, anon;
-grant execute on function public.my_effective_thresholds() to authenticated;
+revoke all on function public.limit_devices() from public, anon, authenticated;
+revoke all on function public.effective_thresholds(uuid, uuid) from public, anon, authenticated;
+revoke all on function public.my_device_thresholds() from public, anon;
+grant execute on function public.my_device_thresholds() to authenticated;

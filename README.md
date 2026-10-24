@@ -16,7 +16,7 @@
 | AI 種植規劃 | Gemini 驗證植物名稱並估算生長週期，建立種植專案；可查看今日或任一天的照護指南（結果會快取） |
 | 我的花園 | 同時管理多個種植專案，顯示天數、生長階段與進度；可手動「調整進度」到實際的生長階段或天數 |
 | IoT 監測 | ESP32 每分鐘上傳土壤濕度、氣溫、空氣濕度，網站自動更新數值、折線圖與紀錄 |
-| 自動控制 | 兩種模式：**手動門檻**，或**依生長計畫自動調整**——AI 為每株植物建議 5 個生長階段（種植／成長／開花／結果／收成）的溫度、濕度與澆水門檻，資料庫每天依植物目前階段自動切換，ESP32 下一次同步就套用 |
+| 自動控制 | 可登記多塊 ESP32，**分別指定每塊裝置管理哪一株植物**（或使用手動門檻）。AI 為每株植物建議 5 個生長階段（種植／成長／開花／結果／收成）的溫度、濕度與澆水門檻，資料庫每天依植物目前階段自動切換，ESP32 下一次同步就套用：過熱開風扇、過冷開加熱、土壤太乾澆水 |
 
 ## 系統架構
 
@@ -34,7 +34,7 @@ flowchart LR
   end
   Gemini["Google Gemini"]
   OM["Open-Meteo 天氣"]
-  ESP1["ESP32 #1<br/>DHT22 + 控溫繼電器"]
+  ESP1["ESP32 #1<br/>DHT22 + 風扇／加熱繼電器"]
   ESP2["ESP32 #2<br/>土壤濕度 + 水泵"]
   TS[("ThingSpeak<br/>選擇性備份／示範資料")]
 
@@ -109,9 +109,16 @@ flowchart LR
 
 ### 5. ESP32
 1. 燒錄 [MicroPython 韌體](https://micropython.org/download/ESP32_GENERIC/)。
-2. 登入網站 → 個人資料 → 複製「裝置權杖」。
+2. 登入網站 → 自動控制 →「新增裝置」，選擇這塊 ESP32 要管理哪一株植物，複製它的權杖（每塊 ESP32 各用一組）。
 3. 把 `iot/config.example.py` 複製成 `config.py`，填入 Wi-Fi、Supabase 網址與 Publishable key、裝置權杖。
 4. 用 Thonny 上傳 `common.py`、`config.py`，以及節點的 `main.py`（`climate_node/` 或 `soil_node/`）。
+
+| 節點 | 接線 |
+| --- | --- |
+| `climate_node` 溫控 | DHT22 DATA → GPIO23、風扇繼電器 IN → GPIO4、加熱（PTC）繼電器 IN → GPIO5 |
+| `soil_node` 澆水 | 土壤感測器 AOUT → GPIO34、水泵繼電器 IN → GPIO26 |
+
+繼電器模組若是低電位觸發，把 `main.py` 的 `RELAY_ON` 改成 `0`。
 
 ### 6. ThingSpeak（選擇）
 - 網站在使用者還沒有裝置數據時，會顯示 ThingSpeak 頻道 `3018608` 作為示範：到頻道 **Sharing** 選「Share channel view with everyone」即可讀取。
@@ -121,7 +128,7 @@ flowchart LR
 
 ```bash
 python -m http.server 5500 --directory frontend   # 開啟 http://localhost:5500
-deno task test                                     # 前端邏輯 + Edge Function + 資料庫 RLS，共 22 項
+deno task test                                     # 前端邏輯 + Edge Function + 資料庫 RLS，共 23 項
 ```
 
 ## 重構重點
@@ -131,4 +138,4 @@ deno task test                                     # 前端邏輯 + Edge Functio
 - **IoT**：感測數據存在自己的資料庫，網站自行繪製折線圖；土壤濕度在裝置端換算成百分比，與網站門檻意義一致；資料保留 90 天並有防洪限制。
 - **修正**：種植天數依使用者當地日期計算；土壤濕度原始值原本一律被截成 100%；註冊地址欄位原本讀不到；部分損毀的植物圖片。
 - **效能**：同一天的 AI 指南會快取；圖片由 13 MB 壓縮為約 2.5 MB（WebP）；植物百科為靜態 JSON。
-- **品質**：22 項自動化測試（含在 PostgreSQL 中實際驗證 RLS），GitHub Actions 每次推送自動執行。
+- **品質**：23 項自動化測試（含在 PostgreSQL 中實際驗證 RLS），GitHub Actions 每次推送自動執行。

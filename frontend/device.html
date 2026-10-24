@@ -14,36 +14,32 @@
 </head>
 <body>
 <main>
-  <div class="page-head"><h1>自動控制</h1><p>ESP32 每分鐘同步一次：溫度超出範圍時啟動控溫繼電器，土壤濕度低於下限時自動澆水。門檻可以手動設定，或交給生長計畫依植物目前的階段自動調整。</p></div>
+  <div class="page-head"><h1>自動控制</h1><p>每塊 ESP32 每分鐘同步一次：溫度過高開風扇、過低開加熱，土壤濕度低於門檻自動澆水。你可以為每塊裝置指定要管理哪一株植物，門檻就會隨那株植物的生長階段自動切換；沒指定植物的裝置使用手動門檻。</p></div>
   <div id="msg" class="hidden" role="alert"></div>
 
   <section class="card" style="margin-bottom:20px">
-    <h2><i class="fa-solid fa-microchip"></i> 裝置目前套用</h2>
-    <div id="effective"></div>
-  </section>
-
-  <section class="card" style="margin-bottom:20px">
-    <h2><i class="fa-solid fa-route"></i> 控制模式</h2>
-    <div class="mode-options">
-      <label class="mode-option"><input type="radio" name="mode" value="manual"> <span><strong>手動設定</strong><br><small>固定使用下方的門檻</small></span></label>
-      <label class="mode-option"><input type="radio" name="mode" value="plan"> <span><strong>依生長計畫自動調整</strong><br><small>隨植物的生長階段自動切換門檻</small></span></label>
-    </div>
-    <div class="field hidden" id="plantField" style="margin-top:14px;max-width:420px">
-      <label for="plantSelect">由哪一株植物的生長計畫控制裝置</label>
-      <select class="input" id="plantSelect"></select>
-    </div>
-    <button class="btn" id="saveMode" style="margin-top:6px"><i class="fa-solid fa-floppy-disk"></i> 套用模式</button>
+    <div class="row" style="margin-bottom:12px"><h2 style="margin:0"><i class="fa-solid fa-microchip"></i> 我的裝置</h2><span class="spacer"></span>
+      <button class="btn secondary sm" id="addToggle"><i class="fa-solid fa-plus"></i> 新增裝置</button></div>
+    <form id="addForm" class="hidden device-add" novalidate>
+      <div class="field"><label for="newName">裝置名稱</label><input class="input" id="newName" maxlength="30" placeholder="例如：溫室溫控節點" required></div>
+      <div class="field"><label for="newPlant">管理哪一株植物</label><select class="input plant-options" id="newPlant"></select></div>
+      <div class="row"><button class="btn" id="addSubmit" type="submit"><i class="fa-solid fa-check"></i> 新增</button>
+        <button class="btn ghost" type="button" id="addCancel">取消</button></div>
+    </form>
+    <div id="devices"></div>
   </section>
 
   <section class="card" id="planCard" style="margin-bottom:20px">
-    <div class="row" style="margin-bottom:12px"><h2 style="margin:0"><i class="fa-solid fa-seedling"></i> <span id="planTitle">生長計畫門檻</span></h2><span class="spacer"></span>
+    <div class="row" style="margin-bottom:12px"><h2 style="margin:0"><i class="fa-solid fa-seedling"></i> 生長計畫門檻</h2><span class="spacer"></span>
+      <select class="input" id="plantSelect" aria-label="選擇植物" style="width:auto"></select>
       <button class="btn secondary sm" id="aiSuggest"><i class="fa-solid fa-wand-magic-sparkles"></i> AI 重新建議</button></div>
-    <p style="color:var(--muted);font-size:.9rem;margin-bottom:12px">每個階段的門檻都可以修改；目前所在的階段會標示出來。要更改植物目前的階段，請到「我的花園」按「調整進度」。</p>
+    <p style="color:var(--muted);font-size:.9rem;margin-bottom:12px">管理這株植物的裝置會依它目前的階段套用對應的門檻。每個階段都可以修改；目前所在的階段會標示出來。要更改植物目前的階段，請到「我的花園」按「調整進度」。</p>
     <div id="planBody"></div>
   </section>
 
   <section class="card" id="manualCard">
     <h2><i class="fa-solid fa-hand"></i> 手動門檻</h2>
+    <p style="color:var(--muted);font-size:.9rem;margin-bottom:12px">沒有指定植物的裝置，以及植物還沒有階段門檻時，使用這組門檻。</p>
     <form id="form" novalidate>
       <h3 style="margin-bottom:12px"><i class="fa-solid fa-temperature-half"></i> 空氣溫度（°C）</h3>
       <div class="grid grid-2" style="gap:12px">

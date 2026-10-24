@@ -24,7 +24,7 @@ function adjustForm(p) {
         <select class="input" name="stage">${options}</select></div>
       <div class="field" style="margin-bottom:10px"><label>或指定今天是第幾天</label>
         <input class="input" name="day" type="number" min="1" max="400" value="${esc(p.current_day)}"></div>
-      <p style="color:var(--muted);font-size:.85rem;margin-bottom:10px">若自動控制設為「依生長計畫」，裝置會在下一次同步時改用新階段的門檻。</p>
+      <p style="color:var(--muted);font-size:.85rem;margin-bottom:10px">管理這株植物的 ESP32 會在下一次同步時改用新階段的門檻。</p>
       <div class="row"><button class="btn sm" type="submit"><i class="fa-solid fa-check"></i> 儲存進度</button>
         <button class="btn ghost sm" type="button" data-cancel>取消</button></div>
     </form>`;

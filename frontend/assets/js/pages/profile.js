@@ -1,6 +1,5 @@
 import { getProfile, requireUser, saveProfile } from "../session.js";
-import { supabase, unwrap } from "../supabase.js";
-import { busy, mountShell, showAlert, toast } from "../ui.js";
+import { busy, mountShell, showAlert } from "../ui.js";
 
 await mountShell();
 const user = await requireUser();
@@ -31,29 +30,3 @@ $("form").addEventListener("submit", async (e) => {
     done();
   }
 });
-
-// ---- 裝置權杖 ----
-async function loadToken(regenerate = false) {
-  try {
-    $("token").textContent = unwrap(await supabase.rpc("device_token", { regenerate }));
-  } catch (err) {
-    $("token").textContent = `無法取得權杖：${err.message}`;
-  }
-}
-
-$("copyToken").addEventListener("click", async () => {
-  try {
-    await navigator.clipboard.writeText($("token").textContent);
-    toast("已複製裝置權杖");
-  } catch {
-    toast("無法存取剪貼簿，請手動選取複製", "error");
-  }
-});
-
-$("newToken").addEventListener("click", async () => {
-  if (!confirm("重新產生後，舊權杖會立即失效，需要更新 ESP32 的設定。確定嗎？")) return;
-  await loadToken(true);
-  toast("已產生新的裝置權杖");
-});
-
-loadToken();

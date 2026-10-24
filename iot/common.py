@@ -9,6 +9,7 @@ import urequests
 import config
 
 THINGSPEAK_URL = "https://api.thingspeak.com/update"
+STAGE_NAMES = {"planting": "種植期", "growing": "成長期", "flowering": "開花期", "fruiting": "結果期", "harvest": "收成期"}
 
 
 def connect_wifi(timeout=20):
@@ -38,7 +39,8 @@ def _headers():
 
 
 def sync(current, soil=None, temperature=None, humidity=None):
-    """上傳讀數（可只給部分欄位）到 Supabase，並取回使用者在網站設定的門檻值。
+    """上傳讀數（可只給部分欄位）到 Supabase，並取回這塊裝置的門檻值。
+    網站上若指定由某株植物的生長計畫控制，會多一個 "plan" 說明，例如「番茄 開花期 第 24 天」。
     失敗時沿用 current，讓裝置在斷網時仍能依上次的門檻運作。"""
     url = "{}/rest/v1/rpc/device_sync".format(config.SUPABASE_URL)
     body = {"p_token": config.DEVICE_TOKEN, "p_soil": soil, "p_temperature": temperature, "p_humidity": humidity}
@@ -49,7 +51,11 @@ def sync(current, soil=None, temperature=None, humidity=None):
             data = response.json()
             updated = {}
             for key in current:
-                updated[key] = float(data.get(key, current[key]))
+                if key != "plan":
+                    updated[key] = float(data.get(key, current[key]))
+            if data.get("source") == "plan":
+                updated["plan"] = "{} {} 第 {} 天".format(
+                    data.get("plantName"), STAGE_NAMES.get(data.get("stage"), ""), data.get("day"))
             print("同步成功，門檻值：{}".format(updated))
             return updated
         print("同步失敗（HTTP {}）：{}".format(response.status_code, response.text[:120]))
